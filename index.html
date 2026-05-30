@@ -142,8 +142,9 @@
       font-size:clamp(.92rem,2vw,1.05rem);color:var(--hero-m);
       max-width:480px;margin:0 auto 28px;line-height:1.65;
     }
-    .hero-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-    .hero-actions .btn{padding:12px 22px;font-size:.9rem}
+    .hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:520px;margin:0 auto}
+    .hero-actions .btn{padding:14px 18px;font-size:.9rem;justify-content:center;text-align:center}
+    .hero-actions .btn span{line-height:1.3}
     .btn-tertiary{
       background:rgba(255,255,255,.06);color:#e2e8f0;
       border:1px solid rgba(255,255,255,.12);
@@ -161,7 +162,8 @@
       .hero-text{min-width:100%}
       .hero-img-wrap{order:-1}
       .hero h1 .buddha-inline{width:56px;height:56px;margin-left:6px}
-      .hero-actions .btn{padding:10px 16px;font-size:.85rem}
+      .hero-actions{grid-template-columns:1fr 1fr;gap:10px;max-width:100%}
+      .hero-actions .btn{padding:12px 10px;font-size:.82rem}
     }
     .btn{
       display:inline-flex;align-items:center;gap:8px;
@@ -704,37 +706,35 @@
       <div class="hero-text">
         <div class="hero-badge" style="background:rgba(251,191,36,.2);border-color:rgba(251,191,36,.3);color:#fcd34d">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          学术公益项目 · 永久免费 · 无隐形费用
+          帮你解决：访问不了学术网站 / 玩游戏延迟高 / 找不到免费稳定工具
         </div>
         <h1><span class="big-zero">0</span><img src="img/buddha.jpg" alt="佛系上网" class="buddha-inline" loading="lazy" /></h1>
-        <div class="tagline">零元起步 · 学术上网</div>
-        <p>下载即用，不花一分钱。学生专享网络优化方案，访问谷歌学术、国际数据库、前沿开源项目，该看的都能看。</p>
+        <div class="tagline">零元起步 · 学术上网 · 永久免费</div>
+        <p style="max-width:480px;margin-left:auto;margin-right:auto">国内学生专用，无需付费。下载即用，访问谷歌学术、GitHub、国际数据库，还能替代加速器玩游戏——全部不收钱，还送 AI Pro 福利。</p>
 
         <div class="hero-actions">
           <a href="#downloads" class="btn btn-primary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            免费下载软件
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;flex-shrink:0"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>免费下载软件</span>
           </a>
           <a href="#nodes" class="btn btn-secondary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
-            免费获取节点
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;flex-shrink:0"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+            <span>免费获取节点</span>
           </a>
-        </div>
-        <div class="hero-actions" style="margin-top:8px">
           <a href="#guide" class="btn btn-tertiary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="10"/></svg>
-            点击观看教程
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;flex-shrink:0"><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="10"/></svg>
+            <span>点击观看教程</span>
           </a>
           <a href="https://web.tabbit-ai.com/invite/F5EB5A55" target="_blank" rel="noopener" class="btn btn-gift">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 2.5 2.5V8"/><path d="M16.5 8v-2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1-2.5 2.5H16.5"/></svg>
-            领取限量PRO账号
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;flex-shrink:0"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 2.5 2.5V8"/><path d="M16.5 8v-2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1-2.5 2.5H16.5"/></svg>
+            <span>AI全自动浏览器PRO账号限时限量注册免费领取</span>
           </a>
         </div>
 
-        <div style="margin-top:18px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+        <div style="margin-top:20px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
           <span class="price-badge lg">🎓 学生专享福利</span>
           <span style="color:var(--hero-m);font-size:.82rem;display:flex;align-items:center;gap:4px">
-            <span style="font-size:1rem">💡</span> 可替代付费游戏加速器，一省再省
+            <span style="font-size:1rem">💡</span> 可替代付费加速器，一年省下 ¥200~500
           </span>
         </div>
       </div>
@@ -745,10 +745,10 @@
 <!-- ===== Value Props ===== -->
 <section class="section" style="padding-bottom:48px">
   <div class="container">
-    <div class="section-header" style="margin-bottom:28px">
-      <div class="section-label">为什么选择我们</div>
-      <h2 class="section-title">零成本零元起步 · 双重使用价值</h2>
-      <p class="section-desc">一个工具，同时满足学术研究与游戏娱乐需求，永久免费。</p>
+      <div class="section-header" style="margin-bottom:28px">
+      <div class="section-label">为你解决</div>
+      <h2 class="section-title">我们能为你解决什么问题</h2>
+      <p class="section-desc">不用花钱，不用折腾，一个工具搞定你上网的核心痛点。</p>
     </div>
 
     <div class="value-grid">
@@ -756,12 +756,12 @@
         <div class="vc-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
         </div>
-        <h3>📚 学术研究</h3>
+        <h3>📚 学术研究受阻？</h3>
         <ul>
-          <li>访问 Google Scholar、Semantic Scholar 等国际学术搜索引擎</li>
-          <li>获取联合国、WHO、世界银行等国际组织公开数据</li>
-          <li>浏览 GitHub、Hugging Face 等前沿开源项目</li>
-          <li>查阅数字经济、跨境数据治理等英文文献与政策文件</li>
+          <li>Google Scholar、Semantic Scholar 打不开 → 现在顺畅访问</li>
+          <li>GitHub、Hugging Face 加载慢 → 稳定连接前沿开源资源</li>
+          <li>找不到英文文献和公开数据 → 国际组织数据库随查随用</li>
+          <li>知网论文下载贵 → 关注公众号免费获取下载账号</li>
         </ul>
         <div class="value-save">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -772,12 +772,12 @@
         <div class="vc-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4m-2-2v4"/><path d="M15 11h.01M17 13h.01"/></svg>
         </div>
-        <h3>🎮 游戏娱乐</h3>
+        <h3>🎮 玩游戏延迟高、加速器贵？</h3>
         <ul>
-          <li>替代付费游戏加速器，畅玩国外热门游戏</li>
-          <li>降低联机延迟，稳定加速</li>
-          <li>无需每月续费，省下加速器年费 ¥200~500</li>
-          <li>一个工具覆盖所有设备：手机、电脑全平台支持</li>
+          <li>国外游戏联机卡顿、掉线 → 低延迟稳定加速</li>
+          <li>加速器每月续费 ¥30~50 → 完全免费替代</li>
+          <li>手机、电脑需要分开买加速 → 一个工具全平台覆盖</li>
+          <li>怕麻烦不会配置 → 3 步搞定，有视频教程照着做</li>
         </ul>
         <div class="value-save" style="background:#fff7ed;color:#ea580c">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -852,7 +852,8 @@
             <h3 style="font-size:1.15rem;font-weight:700;color:#fff;margin:0">限时福利 · 限量18个内测名额</h3>
             <span style="font-size:.72rem;color:#fef08a;background:rgba(254,240,138,.15);padding:2px 10px;border-radius:100px;font-weight:700;border:1px solid rgba(254,240,138,.25)">🔥 仅剩少量</span>
           </div>
-          <p style="font-size:.9rem;color:#ddd6fe;line-height:1.6;margin:0 0 14px">注册即送 <strong style="color:#fef08a">美团AI全自动浏览器 Pro 账号</strong>，无需写代码，AI 自动帮你操作浏览器完成任务。限量 18 个名额，领完即止。</p>
+          <p style="font-size:.9rem;color:#ddd6fe;line-height:1.6;margin:0 0 10px"><strong style="color:#fef08a">一键手机验证注册，即可免费领取 AI 全自动浏览器 Pro 账号</strong>。不用写代码，AI 自动帮你操作浏览器完成任务。</p>
+          <p style="font-size:.85rem;color:#c4b5fd;line-height:1.6;margin:0 0 14px">电脑下载软件马上体验 Pro 全自动红利，详情可查看下方视频教程。限量 18 个名额，领完即止。</p>
 
           <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
             <!-- 隐藏文本用于复制 -->
