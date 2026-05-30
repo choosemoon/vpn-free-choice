@@ -5,609 +5,846 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>学术科研网络助手 — 软件 · 节点 · 一站搞定</title>
   <style>
+    /* ===== Design Tokens ===== */
     :root {
-      --primary: #6366f1;
-      --primary-dark: #4f46e5;
-      --primary-light: #e0e7ff;
-      --bg: #f8fafc;
-      --card: #ffffff;
-      --text: #1e293b;
-      --muted: #64748b;
-      --border: #e2e8f0;
-      --shadow-hover: 0 4px 12px rgba(99,102,241,.25);
-      --radius: 16px;
+      --bg:       #fafafa;
+      --surface:  #ffffff;
+      --text:     #171717;
+      --text-2:   #525252;
+      --muted:    #a3a3a3;
+      --border:   #e5e5e5;
+      --border-h: #d4d4d4;
+      --accent:   #4338ca;
+      --accent-l: #eef2ff;
+      --accent-h: #3730a3;
+      --hero:     #0f172a;
+      --hero-t:   #f1f5f9;
+      --hero-m:   #94a3b8;
+      --green:    #16a34a;
+      --green-l:  #dcfce7;
+      --amber:    #d97706;
+      --amber-l:  #fffbeb;
+      --radius:   8px;
+      --radius-l: 12px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.04);
+      --shadow-md: 0 4px 12px rgba(0,0,0,.06);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,.08);
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-      background: var(--bg); color: var(--text); min-height: 100vh;
+
+    /* ===== Reset & Base ===== */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text',
+                   'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: var(--bg); color: var(--text); line-height:1.6;
+      -webkit-font-smoothing: antialiased;
     }
-    header {
-      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
-      padding: 60px 24px 48px; text-align: center; color: #fff;
-      position: relative; overflow: hidden;
+    a{color:var(--accent);text-decoration:none}
+    a:hover{color:var(--accent-h)}
+    code{
+      font-family:'SF Mono','Cascadia Code','Consolas',monospace;
+      font-size:.85em; background:#f4f4f5; padding:2px 6px; border-radius:4px;
     }
-    header::before {
-      content: ''; position: absolute; inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
+
+    /* ===== Nav ===== */
+    .nav{
+      position:sticky;top:0;z-index:100;
+      background:rgba(255,255,255,.82); backdrop-filter:blur(16px) saturate(180%);
+      border-bottom:1px solid var(--border);
     }
-    .logo-wrap {
-      width: 72px; height: 72px; background: rgba(255,255,255,.2);
-      border-radius: 20px; display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 20px; font-size: 36px; backdrop-filter: blur(8px);
+    .nav-inner{
+      max-width:1040px;margin:0 auto;padding:0 24px;
+      display:flex;align-items:center;justify-content:space-between;height:56px;
     }
-    header h1 { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; }
-    header p { margin-top: 10px; font-size: 1.05rem; opacity: .85; }
-    .badge-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px; }
-    .badge {
-      background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3);
-      border-radius: 100px; padding: 5px 16px; font-size: .85rem; font-weight: 600;
-      letter-spacing: .3px; backdrop-filter: blur(4px);
+    .nav-brand{
+      font-weight:700;font-size:1rem;color:var(--text);
+      display:flex;align-items:center;gap:8px;
     }
-    main { max-width: 960px; margin: 0 auto; padding: 48px 24px 80px; }
-    .section-title {
-      font-size: 1.3rem; font-weight: 700; color: var(--text);
-      margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+    .nav-brand svg{width:22px;height:22px;flex-shrink:0}
+    .nav-links{display:flex;gap:4px}
+    .nav-links a{
+      padding:6px 14px;border-radius:6px;font-size:.875rem;font-weight:500;
+      color:var(--text-2);transition:all .15s;
     }
-    .section-title .icon {
-      width: 36px; height: 36px; background: var(--primary-light);
-      border-radius: 10px; display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
+    .nav-links a:hover{background:#f4f4f5;color:var(--text)}
+    @media(max-width:640px){
+      .nav-links a{font-size:.8rem;padding:5px 8px}
+      .nav-brand span{display:none}
     }
-    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-    .tab-btn {
-      padding: 8px 20px; border-radius: 100px; border: 2px solid var(--border);
-      background: var(--card); color: var(--muted); font-size: .9rem; font-weight: 600;
-      cursor: pointer; transition: all .2s;
+
+    /* ===== Hero ===== */
+    .hero{
+      background:var(--hero);color:var(--hero-t);padding:80px 24px 72px;
+      text-align:center;position:relative;overflow:hidden;
     }
-    .tab-btn:hover { border-color: var(--primary); color: var(--primary); }
-    .tab-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
-    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-    .card {
-      background: var(--card); border: 1.5px solid var(--border);
-      border-radius: var(--radius); padding: 24px;
-      display: flex; flex-direction: column; gap: 12px; transition: all .22s;
+    .hero::before{
+      content:'';position:absolute;inset:0;
+      background-image:radial-gradient(circle at 20% 50%, rgba(99,102,241,.15) 0%, transparent 50%),
+                       radial-gradient(circle at 80% 20%, rgba(56,189,248,.1) 0%, transparent 50%),
+                       radial-gradient(circle at 50% 80%, rgba(129,140,248,.08) 0%, transparent 50%);
+      pointer-events:none;
     }
-    .card:hover { border-color: var(--primary); box-shadow: var(--shadow-hover); transform: translateY(-2px); }
-    .card-header { display: flex; align-items: center; gap: 12px; }
-    .card-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
-    .card-icon.win   { background: #dbeafe; }
-    .card-icon.mac   { background: #f3f4f6; }
-    .card-icon.android { background: #dcfce7; }
-    .card-icon.linux { background: #fef3c7; }
-    .card-icon.src   { background: #fce7f3; }
-    .card-title { font-weight: 700; font-size: 1rem; color: var(--text); }
-    .card-sub   { font-size: .82rem; color: var(--muted); margin-top: 2px; }
-    .card-meta  { display: flex; gap: 8px; flex-wrap: wrap; }
-    .tag { background: var(--primary-light); color: var(--primary-dark); border-radius: 6px; padding: 2px 10px; font-size: .78rem; font-weight: 600; }
-    .tag.size { background: #f1f5f9; color: var(--muted); }
-    .dl-btn {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      background: var(--primary); color: #fff; border: none; border-radius: 10px;
-      padding: 12px 20px; font-size: .95rem; font-weight: 700;
-      cursor: pointer; text-decoration: none; transition: background .2s, transform .1s; margin-top: auto;
+    .hero::after{
+      content:'';position:absolute;inset:0;opacity:.03;
+      background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='white'/%3E%3C/svg%3E");
+      pointer-events:none;
     }
-    .dl-btn:hover { background: var(--primary-dark); transform: scale(1.02); }
-    .dl-btn svg { width: 16px; height: 16px; fill: #fff; }
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
-    .version-bar {
-      background: linear-gradient(90deg, var(--primary-light), #f0fdf4);
-      border: 1px solid #c7d2fe; border-radius: 12px; padding: 14px 20px;
-      margin-bottom: 32px; display: flex; align-items: center; gap: 12px;
-      font-size: .9rem; color: var(--primary-dark); font-weight: 600;
+    .hero-inner{position:relative;z-index:1;max-width:720px;margin:0 auto}
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:6px;
+      background:rgba(99,102,241,.2);border:1px solid rgba(99,102,241,.3);
+      border-radius:100px;padding:4px 16px;font-size:.8rem;font-weight:500;
+      color:#a5b4fc;margin-bottom:24px;
     }
-    .version-bar .v { font-size: 1.1rem; font-weight: 800; }
-    .video-placeholder {
-      display: flex; align-items: center; justify-content: center;
-      background: #0f172a; color: #64748b; flex-direction: column; gap: 12px;
-      border-radius: var(--radius); aspect-ratio: 16/9; margin-top: 16px;
+    .hero h1{
+      font-size:clamp(2rem,5vw,3.2rem);font-weight:800;
+      letter-spacing:-.03em;line-height:1.15;margin-bottom:16px;
     }
-    .video-placeholder .icon { font-size: 48px; opacity: .4; }
-    .video-placeholder p { font-size: .95rem; }
-    .video-placeholder .sub { font-size: .82rem; max-width: 400px; text-align: center; line-height: 1.6; }
-    footer { text-align: center; padding: 32px 24px; font-size: .85rem; color: var(--muted); border-top: 1px solid var(--border); }
-    footer a { color: var(--primary); text-decoration: none; }
-    .sep { height: 48px; }
-    /* ---- 节点专区 ---- */
-    .node-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 20px; }
-    .node-card {
-      background: var(--card); border: 1.5px solid var(--border);
-      border-radius: var(--radius); padding: 28px; transition: all .22s;
+    .hero h1 span{color:#818cf8}
+    .hero p{
+      font-size:clamp(.95rem,2vw,1.1rem);color:var(--hero-m);
+      max-width:520px;margin:0 auto 36px;line-height:1.65;
     }
-    .node-card:hover { border-color: #06b6d4; box-shadow: 0 4px 16px rgba(6,182,212,.15); }
-    .node-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-    .node-num {
-      width: 48px; height: 48px; border-radius: 12px;
-      background: linear-gradient(135deg, #06b6d4, #6366f1);
-      color: #fff; display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: 1.05rem; flex-shrink: 0;
+    .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:12px 28px;border-radius:8px;font-size:.95rem;font-weight:600;
+      cursor:pointer;transition:all .18s;border:none;text-decoration:none;
+      font-family:inherit;white-space:nowrap;
     }
-    .node-name { font-weight: 700; font-size: 1.05rem; }
-    .node-tag { font-size: .78rem; color: var(--muted); margin-top: 2px; }
-    .node-url-box {
-      background: #f1f5f9; border: 1px solid var(--border);
-      border-radius: 10px; padding: 12px 14px; margin-bottom: 16px;
-      font-size: .8rem; color: var(--muted);
-      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Consolas', monospace;
-      line-height: 1.5; max-height: 48px; overflow: hidden; position: relative;
-      word-break: break-all; user-select: all;
+    .btn-primary{
+      background:var(--accent);color:#fff;
+      box-shadow:0 1px 3px rgba(67,56,202,.3),0 0 0 1px rgba(67,56,202,.2);
     }
-    .node-url-box::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 20px;
-      background: linear-gradient(transparent, #f1f5f9); pointer-events: none;
+    .btn-primary:hover{background:var(--accent-h);color:#fff;transform:translateY(-1px);
+      box-shadow:0 4px 12px rgba(67,56,202,.35),0 0 0 1px rgba(67,56,202,.3)}
+    .btn-secondary{
+      background:rgba(255,255,255,.08);color:#e2e8f0;
+      border:1px solid rgba(255,255,255,.15);
     }
-    .node-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-    .copy-btn {
-      display: flex; align-items: center; gap: 6px;
-      padding: 10px 18px; border-radius: 10px; border: 1.5px solid var(--border);
-      background: var(--card); color: var(--text); font-size: .88rem; font-weight: 600;
-      cursor: pointer; transition: all .2s; font-family: inherit;
+    .btn-secondary:hover{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.25)}
+    .btn svg{width:18px;height:18px;flex-shrink:0}
+
+    /* ===== Container ===== */
+    .container{max-width:1040px;margin:0 auto;padding:0 24px}
+
+    /* ===== Section ===== */
+    .section{padding:80px 0}
+    .section-header{margin-bottom:40px}
+    .section-label{
+      font-size:.8rem;font-weight:700;text-transform:uppercase;
+      letter-spacing:.06em;color:var(--accent);margin-bottom:8px;
     }
-    .copy-btn:hover { border-color: var(--primary); color: var(--primary); }
-    .copy-btn.copied { background: #dcfce7; border-color: #22c55e; color: #16a34a; }
-    .copy-btn.copied svg { fill: #16a34a; }
-    .copy-btn.primary-copy {
-      background: linear-gradient(135deg, #06b6d4, #6366f1); color: #fff; border: none; flex: 1; justify-content: center;
+    .section-title{
+      font-size:clamp(1.25rem,3vw,1.75rem);font-weight:700;
+      letter-spacing:-.02em;color:var(--text);margin-bottom:8px;
     }
-    .copy-btn.primary-copy:hover { opacity: .92; transform: scale(1.02); color: #fff; }
-    .toast {
-      position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-      background: #1e293b; color: #fff; padding: 12px 28px; border-radius: 10px;
-      font-size: .9rem; font-weight: 600; z-index: 9999; box-shadow: 0 4px 20px rgba(0,0,0,.25);
-      opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s;
-      transform: translateX(-50%) translateY(10px);
+    .section-desc{font-size:.95rem;color:var(--text-2);max-width:560px;line-height:1.65}
+
+    /* ===== Cards ===== */
+    .grid{display:grid;gap:16px}
+    .grid-2{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+    .grid-3{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+    .grid-4{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+
+    .card{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius-l);padding:24px;
+      transition:all .2s;
     }
-    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-    .node-tip-box {
-      background: linear-gradient(135deg, #fffbeb, #fef3c7);
-      border: 1px solid #f59e0b; border-radius: 12px; padding: 18px 22px;
-      margin-top: 24px; font-size: .9rem; line-height: 1.7; color: #92400e;
+    .card:hover{border-color:var(--border-h);box-shadow:var(--shadow-md)}
+
+    /* ===== Download Cards ===== */
+    .dl-card-inner{display:flex;flex-direction:column;gap:14px;height:100%}
+    .dl-card-top{display:flex;align-items:flex-start;gap:14px}
+    .dl-icon{
+      width:42px;height:42px;border-radius:var(--radius);display:flex;
+      align-items:center;justify-content:center;flex-shrink:0;
     }
-    .node-tip-box strong { color: #d97706; }
-    .node-tip-box .acct {
-      background: #fef3c7; padding: 2px 8px; border-radius: 4px; font-weight: 700;
-      white-space: nowrap;
+    .dl-icon svg{width:20px;height:20px}
+    .dl-icon.win{background:#eff6ff;color:#2563eb}
+    .dl-icon.mac{background:#f9fafb;color:#374151}
+    .dl-icon.droid{background:#f0fdf4;color:#16a34a}
+    .dl-icon.linux{background:#fefce8;color:#ca8a04}
+    .dl-icon.src{background:#fdf2f8;color:#db2777}
+    .dl-name{font-weight:600;font-size:.95rem;color:var(--text)}
+    .dl-sub{font-size:.8rem;color:var(--muted);margin-top:2px}
+    .dl-meta{display:flex;gap:6px;flex-wrap:wrap}
+    .dl-tag{
+      font-size:.75rem;font-weight:500;padding:3px 10px;
+      border-radius:5px;background:#f4f4f5;color:var(--text-2);
     }
-    /* ---- 合规声明 ---- */
-    .disclaimer-box {
-      background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
-      border: 1px solid #86efac; border-radius: var(--radius); padding: 28px;
-      line-height: 1.85;
+    .dl-tag.rec{background:var(--accent-l);color:var(--accent)}
+    .dl-btn{
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      margin-top:auto;padding:10px 20px;border-radius:var(--radius);
+      font-size:.875rem;font-weight:600;cursor:pointer;transition:all .15s;
+      border:none;color:#fff;background:var(--text);text-decoration:none;
     }
-    .disclaimer-box h3 {
-      font-size: 1.05rem; font-weight: 700; color: #166534; margin-bottom: 14px;
-      display: flex; align-items: center; gap: 8px;
+    .dl-btn:hover{background:#404040;color:#fff;transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+    .dl-btn svg{width:16px;height:16px;fill:currentColor}
+
+    /* ===== Tabs ===== */
+    .tabs{display:flex;gap:4px;margin-bottom:28px;background:#f4f4f5;border-radius:8px;padding:4px;width:fit-content}
+    .tab-btn{
+      padding:8px 20px;border-radius:6px;border:none;background:transparent;
+      color:var(--text-2);font-size:.875rem;font-weight:500;cursor:pointer;
+      transition:all .15s;font-family:inherit;white-space:nowrap;
     }
-    .disclaimer-box p { font-size: .9rem; color: #374151; margin-bottom: 10px; }
-    .disclaimer-box .highlight { background: #dcfce7; padding: 2px 6px; border-radius: 4px; font-weight: 600; color: #166534; }
-    .disclaimer-box .divider {
-      border: none; border-top: 1px dashed #bbf7d0; margin: 16px 0;
+    .tab-btn:hover{color:var(--text)}
+    .tab-btn.active{background:var(--surface);color:var(--text);font-weight:600;box-shadow:var(--shadow-sm)}
+    .tab-panel{display:none}
+    .tab-panel.active{display:block}
+
+    /* ===== Node Cards ===== */
+    .node-card{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius-l);padding:28px;transition:all .2s;
     }
-    .disclaimer-box .legal-note {
-      font-size: .82rem; color: #6b7280; margin-top: 12px; line-height: 1.6;
+    .node-card:hover{border-color:var(--border-h);box-shadow:var(--shadow-md)}
+    .node-header{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+    .node-num{
+      width:44px;height:44px;border-radius:var(--radius);display:flex;
+      align-items:center;justify-content:center;font-weight:700;font-size:.95rem;
+      background:var(--accent-l);color:var(--accent);flex-shrink:0;
     }
-    .admin-link {
-      display: inline-flex; align-items: center; gap: 4px;
-      color: #94a3b8; text-decoration: none; font-size: .78rem;
-      transition: color .2s; margin-left: 12px;
+    .node-title{font-weight:600;font-size:.975rem}
+    .node-sub{font-size:.8rem;color:var(--muted);margin-top:2px}
+    .node-url{
+      background:#f9fafb;border:1px solid var(--border);border-radius:var(--radius);
+      padding:12px 14px;margin-bottom:16px;font-size:.8rem;color:var(--muted);
+      font-family:'SF Mono','Cascadia Code','Consolas',monospace;
+      line-height:1.5;max-height:44px;overflow:hidden;position:relative;
+      word-break:break-all;user-select:all;
     }
-    .admin-link:hover { color: var(--primary); }
-    @media (max-width: 600px) {
-      header h1 { font-size: 1.8rem; }
-      .cards-grid { grid-template-columns: 1fr; }
-      .node-grid { grid-template-columns: 1fr; }
+    .node-url::after{
+      content:'';position:absolute;bottom:0;left:0;right:0;height:16px;
+      background:linear-gradient(transparent,#f9fafb);pointer-events:none;
+    }
+    .node-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .copy-btn{
+      display:flex;align-items:center;gap:6px;padding:8px 16px;
+      border-radius:var(--radius);border:1px solid var(--border);
+      background:var(--surface);color:var(--text-2);font-size:.85rem;
+      font-weight:500;cursor:pointer;transition:all .15s;font-family:inherit;
+    }
+    .copy-btn:hover{border-color:var(--border-h);color:var(--text)}
+    .copy-btn.copied{background:var(--green-l);border-color:var(--green);color:var(--green)}
+    .copy-btn.copied svg{stroke:var(--green)}
+    .copy-btn.primary-copy{
+      background:var(--text);color:#fff;border-color:var(--text);flex:1;justify-content:center;
+    }
+    .copy-btn.primary-copy:hover{background:#404040;color:#fff}
+
+    /* ===== Toast ===== */
+    .toast{
+      position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(12px);
+      background:#171717;color:#fff;padding:12px 24px;border-radius:8px;
+      font-size:.85rem;font-weight:500;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,.2);
+      opacity:0;pointer-events:none;transition:all .25s;
+    }
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    /* ===== Info Box ===== */
+    .info-box{
+      background:var(--amber-l);border:1px solid #fde68a;
+      border-radius:var(--radius-l);padding:18px 22px;margin-top:24px;
+      font-size:.875rem;line-height:1.7;color:#92400e;
+    }
+    .info-box strong{color:#b45309}
+    .info-box .accent-tag{
+      background:#fef3c7;padding:2px 8px;border-radius:4px;font-weight:600;white-space:nowrap;
+    }
+
+    /* ===== Disclaimer ===== */
+    .disclaimer{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius-l);overflow:hidden;
+    }
+    .disclaimer-header{
+      padding:20px 28px;display:flex;align-items:center;justify-content:space-between;
+      cursor:pointer;user-select:none;
+    }
+    .disclaimer-header:hover{background:#fafafa}
+    .disclaimer-header-left{display:flex;align-items:center;gap:10px}
+    .disclaimer-dot{
+      width:8px;height:8px;border-radius:50%;background:var(--accent);
+    }
+    .disclaimer-header h3{font-size:.95rem;font-weight:600;color:var(--text)}
+    .disclaimer-arrow{font-size:.9rem;color:var(--muted);transition:transform .2s}
+    .disclaimer.open .disclaimer-arrow{transform:rotate(180deg)}
+    .disclaimer-body{display:none;padding:0 28px 24px;font-size:.875rem;color:var(--text-2);line-height:1.8}
+    .disclaimer.open .disclaimer-body{display:block}
+    .disclaimer-body .hl{
+      background:var(--accent-l);padding:2px 6px;border-radius:3px;font-weight:600;
+      color:var(--accent);
+    }
+    .disclaimer-body hr{border:none;border-top:1px solid var(--border);margin:16px 0}
+    .disclaimer-body .legal{
+      font-size:.8rem;color:var(--muted);line-height:1.7;
+    }
+
+    /* ===== Version Bar ===== */
+    .version-bar{
+      display:flex;align-items:center;gap:12px;padding:14px 20px;
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius-l);margin-bottom:32px;font-size:.875rem;color:var(--text-2);
+    }
+    .version-bar strong{font-weight:700;color:var(--text)}
+
+    /* ===== Video ===== */
+    .video-box{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius-l);padding:24px;
+    }
+    .video-placeholder{
+      display:flex;align-items:center;justify-content:center;
+      background:#0f172a;border-radius:var(--radius);aspect-ratio:16/9;
+      flex-direction:column;gap:12px;margin-top:16px;
+    }
+    .video-placeholder svg{opacity:.25}
+    .video-placeholder p{color:#64748b;font-size:.9rem}
+    .video-placeholder .vp-sub{color:#475569;font-size:.8rem;max-width:360px;text-align:center;line-height:1.5}
+
+    /* ===== Install Tips ===== */
+    .tips-card{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius-l);padding:8px 24px;
+    }
+    .tips-card details{padding:16px 0}
+    .tips-card details+details{border-top:1px solid var(--border)}
+    .tips-card summary{
+      font-weight:600;font-size:.925rem;cursor:pointer;
+      list-style:none;display:flex;justify-content:space-between;align-items:center;
+    }
+    .tips-card summary::-webkit-details-marker{display:none}
+    .tips-card .tip-content{
+      margin-top:10px;font-size:.875rem;color:var(--text-2);line-height:1.8;
+    }
+    .tips-card .tip-arrow{font-size:.85rem;color:var(--muted);transition:transform .15s}
+    .tips-card details[open] .tip-arrow{transform:rotate(180deg)}
+
+    /* ===== Footer ===== */
+    .footer{
+      border-top:1px solid var(--border);padding:40px 24px;
+      background:var(--surface);
+    }
+    .footer-inner{
+      max-width:1040px;margin:0 auto;display:flex;
+      justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+    }
+    .footer-left{font-size:.85rem;color:var(--text-2)}
+    .footer-left strong{color:var(--text)}
+    .footer-right{display:flex;gap:16px;align-items:center}
+    .footer-right a{font-size:.85rem;color:var(--muted)}
+    .footer-right a:hover{color:var(--text)}
+    .admin-link{font-size:.8rem;color:#d4d4d8!important}
+    .admin-link:hover{color:var(--muted)!important}
+
+    /* ===== Responsive ===== */
+    @media(max-width:640px){
+      .hero{padding:56px 20px 48px}
+      .section{padding:56px 0}
+      .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+      .tabs{flex-wrap:wrap;width:100%}
+      .footer-inner{flex-direction:column;text-align:center}
     }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="logo-wrap">🎓</div>
-  <h1>学术科研网络助手</h1>
-  <p>软件下载 · 免费节点 · 合规科研上网一站式解决</p>
-  <div class="badge-row">
-    <span class="badge">📦 Karing v1.2.19.2209</span>
-    <span class="badge">🔗 免费节点</span>
-    <span class="badge">📜 学术合规</span>
-    <span class="badge">🌐 多平台支持</span>
-  </div>
-</header>
-
-<main>
-
-  <!-- 合规声明（前置） -->
-  <div class="section-title">
-    <div class="icon">📜</div>
-    学术用途声明
-  </div>
-  <div class="disclaimer-box">
-    <h3>🎓 学术科研 · 正当使用</h3>
-    <p>
-      本平台的核心定位是<span class="highlight">服务学术科研需求</span>。在数字经济与人工智能快速发展的时代，研究者需要畅通地获取全球学术资源与前沿技术成果，这是开展高质量研究的必要条件。
-    </p>
-    <hr class="divider" />
-    <p><strong>正当学术需求包括但不限于：</strong></p>
-    <p>
-      📖 <span class="highlight">访问国际学术搜索引擎</span> — Google Scholar（谷歌学术）、Semantic Scholar、BASE 等，检索全球同行评审文献，撰写文献综述与学术论文。
-    </p>
-    <p>
-      🌐 <span class="highlight">获取国际权威数据源</span> — 联合国统计司 (UNSD)、世界卫生组织 (WHO)、美国疾控中心 (CDC)、世界银行开放数据、OECD 数据库等国际组织的公开统计数据与研究公报。
-    </p>
-    <p>
-      💻 <span class="highlight">学习前沿开源项目</span> — GitHub、Hugging Face、Papers with Code 等平台上全球研究者分享的开源代码、预训练模型与复现实验，站在巨人的肩膀上推进自己的研究。
-    </p>
-    <p>
-      📊 <span class="highlight">数字经济专业研究</span> — 本人研究方向为数字经济，日常需要查阅国际数字贸易规则、跨境数据流动治理、平台经济监管比较等领域的英文文献与政策文件。
-    </p>
-    <hr class="divider" />
-    <div class="legal-note">
-      <p>⚠️ <strong>使用声明：</strong>本平台所提供的仅为网络连接优化服务，旨在帮助研究者更高效地获取合法的国际学术与公共信息资源。用户应严格遵守《中华人民共和国网络安全法》《中华人民共和国数据安全法》及相关法律法规。</p>
-      <p>🚫 <strong>严禁用途：</strong>禁止利用本工具访问国家法律法规明令禁止的网站或内容，禁止从事任何危害国家安全、传播违法信息、侵犯他人合法权益的活动。使用者须自行承担因违规使用而产生的一切法律后果。</p>
-      <p>📌 本工具仅供学习、科研、交流使用，请勿用于任何商业或非法目的。如涉及版权问题，请联系我们处理。</p>
+<!-- ===== Nav ===== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#4338ca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+        <path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/>
+      </svg>
+      <span>学术科研网络助手</span>
+    </a>
+    <div class="nav-links">
+      <a href="#downloads">下载</a>
+      <a href="#nodes">节点</a>
+      <a href="#guide">指南</a>
     </div>
   </div>
+</nav>
 
-  <div class="sep"></div>
-  <div class="version-bar">
-    <span>📦</span>
-    <span>当前最新版本：<span class="v">v1.2.19.2209</span> &nbsp;· 请根据你的设备选择对应安装包</span>
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      合规科研上网工具
+    </div>
+    <h1>软件<span>·</span>节点<span>·</span>一站搞定</h1>
+    <p>为研究者和学生提供畅通的全球学术资源访问——Google Scholar、GitHub、联合国数据库，以及更多国际权威数据源。</p>
+    <div class="hero-actions">
+      <a href="#downloads" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        下载软件
+      </a>
+      <a href="#nodes" class="btn btn-secondary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+        获取节点
+      </a>
+    </div>
   </div>
+</section>
 
-  <div class="section-title">
-    <div class="icon">⬇️</div>
-    选择你的平台下载
-  </div>
+<!-- ===== Downloads ===== -->
+<section class="section" id="downloads">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Downloads</div>
+      <h2 class="section-title">下载 Karing 客户端</h2>
+      <p class="section-desc">选择你的设备平台，下载对应的安装包。当前版本 v1.2.19.2209</p>
+    </div>
 
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('windows', this)">🪟 Windows</button>
-    <button class="tab-btn" onclick="switchTab('macos', this)">🍎 macOS</button>
-    <button class="tab-btn" onclick="switchTab('android', this)">🤖 Android</button>
-    <button class="tab-btn" onclick="switchTab('linux', this)">🐧 Linux</button>
-    <button class="tab-btn" onclick="switchTab('source', this)">📦 源码</button>
-  </div>
+    <div class="version-bar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span>最新版本 <strong>v1.2.19.2209</strong> — 请根据你的设备选择对应安装包</span>
+    </div>
 
-  <!-- Windows -->
-  <div id="tab-windows" class="tab-panel active">
-    <div class="cards-grid">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon win">🪟</div>
-          <div>
-            <div class="card-title">Windows 安装版</div>
-            <div class="card-sub">推荐大多数用户使用</div>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('windows',this)">Windows</button>
+      <button class="tab-btn" onclick="switchTab('macos',this)">macOS</button>
+      <button class="tab-btn" onclick="switchTab('android',this)">Android</button>
+      <button class="tab-btn" onclick="switchTab('linux',this)">Linux</button>
+      <button class="tab-btn" onclick="switchTab('source',this)">源码</button>
+    </div>
+
+    <!-- Windows -->
+    <div id="tab-windows" class="tab-panel active">
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="dl-card-inner">
+            <div class="dl-card-top">
+              <div class="dl-icon win">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 12V6.5l8-1.1v6.6H3zm0 5.5v-5.5h8v6.6l-8-1.1zM13 5.2L21 4v8h-8V5.2zm0 14.6V13h8v7l-8-1.1z"/></svg>
+              </div>
+              <div>
+                <div class="dl-name">Windows 安装版</div>
+                <div class="dl-sub">推荐大多数用户使用 · x64 · .exe</div>
+              </div>
+            </div>
+            <div class="dl-meta">
+              <span class="dl-tag rec">推荐</span>
+              <span class="dl-tag">43 MB</span>
+            </div>
+            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_windows_x64.exe" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+              下载 .exe
+            </a>
           </div>
         </div>
-        <div class="card-meta">
-          <span class="tag">x64</span>
-          <span class="tag">.exe</span>
-          <span class="tag size">43 MB</span>
+        <div class="card">
+          <div class="dl-card-inner">
+            <div class="dl-card-top">
+              <div class="dl-icon win">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 12V6.5l8-1.1v6.6H3zm0 5.5v-5.5h8v6.6l-8-1.1zM13 5.2L21 4v8h-8V5.2zm0 14.6V13h8v7l-8-1.1z"/></svg>
+              </div>
+              <div>
+                <div class="dl-name">Windows 便携版</div>
+                <div class="dl-sub">免安装，解压即用 · x64 · .zip</div>
+              </div>
+            </div>
+            <div class="dl-meta">
+              <span class="dl-tag">62 MB</span>
+            </div>
+            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_windows_x64.zip" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+              下载 .zip
+            </a>
+          </div>
         </div>
-        <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_windows_x64.exe" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
-          立即下载</a>
       </div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon win">📦</div>
-          <div>
-            <div class="card-title">Windows 便携版</div>
-            <div class="card-sub">免安装，解压即用</div>
+    </div>
+
+    <!-- macOS -->
+    <div id="tab-macos" class="tab-panel">
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="dl-card-inner">
+            <div class="dl-card-top">
+              <div class="dl-icon mac">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              </div>
+              <div>
+                <div class="dl-name">macOS 通用版</div>
+                <div class="dl-sub">Intel + Apple Silicon · Universal · .dmg</div>
+              </div>
+            </div>
+            <div class="dl-meta">
+              <span class="dl-tag rec">推荐</span>
+              <span class="dl-tag">91 MB</span>
+            </div>
+            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_macos_universal.dmg" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+              下载 .dmg
+            </a>
           </div>
         </div>
-        <div class="card-meta">
-          <span class="tag">x64</span>
-          <span class="tag">.zip</span>
-          <span class="tag size">62 MB</span>
+      </div>
+    </div>
+
+    <!-- Android -->
+    <div id="tab-android" class="tab-panel">
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="dl-card-inner">
+            <div class="dl-card-top">
+              <div class="dl-icon droid">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18c0 .55.45 1 1 1h1v3.5a1.5 1.5 0 0 0 3 0V19h2v3.5a1.5 1.5 0 0 0 3 0V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48A5.96 5.96 0 0 0 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31A5.983 5.983 0 0 0 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg>
+              </div>
+              <div>
+                <div class="dl-name">Android ARM64</div>
+                <div class="dl-sub">主流手机 · arm64-v8a · .apk</div>
+              </div>
+            </div>
+            <div class="dl-meta">
+              <span class="dl-tag rec">推荐</span>
+              <span class="dl-tag">50 MB</span>
+            </div>
+            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_android_arm64-v8a.apk" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+              下载 .apk
+            </a>
+          </div>
         </div>
-        <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_windows_x64.zip" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
-          立即下载</a>
+        <div class="card">
+          <div class="dl-card-inner">
+            <div class="dl-card-top">
+              <div class="dl-icon droid">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18c0 .55.45 1 1 1h1v3.5a1.5 1.5 0 0 0 3 0V19h2v3.5a1.5 1.5 0 0 0 3 0V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48A5.96 5.96 0 0 0 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31A5.983 5.983 0 0 0 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg>
+              </div>
+              <div>
+                <div class="dl-name">Android ARM</div>
+                <div class="dl-sub">兼容更多设备 · arm · .apk</div>
+              </div>
+            </div>
+            <div class="dl-meta">
+              <span class="dl-tag">86 MB</span>
+            </div>
+            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_android_arm.apk" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+              下载 .apk
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="dl-card-inner">
+            <div class="dl-card-top">
+              <div class="dl-icon droid">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18c0 .55.45 1 1 1h1v3.5a1.5 1.5 0 0 0 3 0V19h2v3.5a1.5 1.5 0 0 0 3 0V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48A5.96 5.96 0 0 0 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31A5.983 5.983 0 0 0 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg>
+              </div>
+              <div>
+                <div class="dl-name">Android ARMv7</div>
+                <div class="dl-sub">旧款 32 位设备 · armeabi-v7a · .apk</div>
+              </div>
+            </div>
+            <div class="dl-meta">
+              <span class="dl-tag">50 MB</span>
+            </div>
+            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_android_armeabi-v7a.apk" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+              下载 .apk
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Linux -->
+    <div id="tab-linux" class="tab-panel">
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="dl-card-inner">
+            <div class="dl-card-top">
+              <div class="dl-icon linux">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.5.75C8.92.75 6.02 3.65 6.02 7.23c0 1.36.41 2.61 1.12 3.64-.88.34-1.7.82-2.41 1.42-.65.55-1.22 1.18-1.69 1.89-.19.28-.36.58-.49.88l-.01.03-.72-.26c-.51-.17-1.04-.26-1.57-.26-1.38 0-2.5 1.12-2.5 2.5 0 1.06.66 1.96 1.59 2.33l.01.09c.03.22.07.43.13.64 0 0-1.4.27-2.23.92C.83 21.5 0 22.35 0 23.25h4.78c.18-.51.65-1.09 1.44-1.44.88-.4 2.01-.56 3.07-.56s2.19.16 3.07.56 1.26.93 1.44 1.44h9.41c-.02-.77-.36-1.5-1.04-2.11-.78-.72-1.88-1.18-3.02-1.42.1-.21.18-.43.24-.65l.02-.09c.93-.37 1.59-1.27 1.59-2.33 0-1.38-1.12-2.5-2.5-2.5-.54 0-1.06.09-1.57.26l-.73.26-.01-.03c-.14-.3-.3-.6-.49-.88-.48-.71-1.05-1.34-1.69-1.89-.72-.6-1.53-1.08-2.41-1.42.71-1.03 1.12-2.28 1.12-3.64 0-3.58-2.9-6.48-6.48-6.48z"/></svg>
+              </div>
+              <div>
+                <div class="dl-name">Linux AppImage</div>
+                <div class="dl-sub">所有发行版通用 · amd64</div>
+              </div>
+            </div>
+            <div class="dl-meta">
+              <span class="dl-tag rec">推荐</span>
+              <span class="dl-tag">70 MB</span>
+            </div>
+            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_linux_amd64.AppImage" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+              下载 .AppImage
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="dl-card-inner">
+            <div class="dl-card-top">
+              <div class="dl-icon linux">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.5.75C8.92.75 6.02 3.65 6.02 7.23c0 1.36.41 2.61 1.12 3.64-.88.34-1.7.82-2.41 1.42-.65.55-1.22 1.18-1.69 1.89-.19.28-.36.58-.49.88l-.01.03-.72-.26c-.51-.17-1.04-.26-1.57-.26-1.38 0-2.5 1.12-2.5 2.5 0 1.06.66 1.96 1.59 2.33l.01.09c.03.22.07.43.13.64 0 0-1.4.27-2.23.92C.83 21.5 0 22.35 0 23.25h4.78c.18-.51.65-1.09 1.44-1.44.88-.4 2.01-.56 3.07-.56s2.19.16 3.07.56 1.26.93 1.44 1.44h9.41c-.02-.77-.36-1.5-1.04-2.11-.78-.72-1.88-1.18-3.02-1.42.1-.21.18-.43.24-.65l.02-.09c.93-.37 1.59-1.27 1.59-2.33 0-1.38-1.12-2.5-2.5-2.5-.54 0-1.06.09-1.57.26l-.73.26-.01-.03c-.14-.3-.3-.6-.49-.88-.48-.71-1.05-1.34-1.69-1.89-.72-.6-1.53-1.08-2.41-1.42.71-1.03 1.12-2.28 1.12-3.64 0-3.58-2.9-6.48-6.48-6.48z"/></svg>
+              </div>
+              <div>
+                <div class="dl-name">Linux DEB</div>
+                <div class="dl-sub">Ubuntu / Debian · amd64</div>
+              </div>
+            </div>
+            <div class="dl-meta">
+              <span class="dl-tag">48 MB</span>
+            </div>
+            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_linux_amd64.deb" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+              下载 .deb
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="dl-card-inner">
+            <div class="dl-card-top">
+              <div class="dl-icon linux">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.5.75C8.92.75 6.02 3.65 6.02 7.23c0 1.36.41 2.61 1.12 3.64-.88.34-1.7.82-2.41 1.42-.65.55-1.22 1.18-1.69 1.89-.19.28-.36.58-.49.88l-.01.03-.72-.26c-.51-.17-1.04-.26-1.57-.26-1.38 0-2.5 1.12-2.5 2.5 0 1.06.66 1.96 1.59 2.33l.01.09c.03.22.07.43.13.64 0 0-1.4.27-2.23.92C.83 21.5 0 22.35 0 23.25h4.78c.18-.51.65-1.09 1.44-1.44.88-.4 2.01-.56 3.07-.56s2.19.16 3.07.56 1.26.93 1.44 1.44h9.41c-.02-.77-.36-1.5-1.04-2.11-.78-.72-1.88-1.18-3.02-1.42.1-.21.18-.43.24-.65l.02-.09c.93-.37 1.59-1.27 1.59-2.33 0-1.38-1.12-2.5-2.5-2.5-.54 0-1.06.09-1.57.26l-.73.26-.01-.03c-.14-.3-.3-.6-.49-.88-.48-.71-1.05-1.34-1.69-1.89-.72-.6-1.53-1.08-2.41-1.42.71-1.03 1.12-2.28 1.12-3.64 0-3.58-2.9-6.48-6.48-6.48z"/></svg>
+              </div>
+              <div>
+                <div class="dl-name">Linux RPM</div>
+                <div class="dl-sub">Fedora / CentOS / RHEL · amd64</div>
+              </div>
+            </div>
+            <div class="dl-meta">
+              <span class="dl-tag">52 MB</span>
+            </div>
+            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_linux_amd64.rpm" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+              下载 .rpm
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Source -->
+    <div id="tab-source" class="tab-panel">
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="dl-card-inner">
+            <div class="dl-card-top">
+              <div class="dl-icon src">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <div>
+                <div class="dl-name">源码包 tar.gz</div>
+                <div class="dl-sub">Linux / macOS 常用格式</div>
+              </div>
+            </div>
+            <div class="dl-meta">
+              <span class="dl-tag">21 MB</span>
+            </div>
+            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing-1.2.19.2209.tar.gz" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+              下载 .tar.gz
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="dl-card-inner">
+            <div class="dl-card-top">
+              <div class="dl-icon src">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <div>
+                <div class="dl-name">源码包 zip</div>
+                <div class="dl-sub">Windows 通用压缩格式</div>
+              </div>
+            </div>
+            <div class="dl-meta">
+              <span class="dl-tag">22 MB</span>
+            </div>
+            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing-1.2.19.2209.zip" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+              下载 .zip
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- macOS -->
-  <div id="tab-macos" class="tab-panel">
-    <div class="cards-grid">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon mac">🍎</div>
+<!-- ===== Nodes ===== -->
+<section class="section" id="nodes" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Nodes</div>
+      <h2 class="section-title">免费订阅节点</h2>
+      <p class="section-desc">可直接导入 Karing 使用。如需获取最新节点或更多线路，请关注公众号 <strong>鸡血青年冀文辉</strong>，回复「微信」联系我。</p>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="node-card">
+        <div class="node-header">
+          <div class="node-num">01</div>
           <div>
-            <div class="card-title">macOS 通用版</div>
-            <div class="card-sub">同时支持 Intel 和 Apple Silicon</div>
+            <div class="node-title">标准订阅节点</div>
+            <div class="node-sub">通用线路 · 适合日常使用</div>
           </div>
         </div>
-        <div class="card-meta">
-          <span class="tag">Universal</span>
-          <span class="tag">.dmg</span>
-          <span class="tag size">91 MB</span>
+        <div class="node-url">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be</div>
+        <div class="node-actions">
+          <button class="copy-btn" onclick="copyText('node01-name')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            复制名称
+          </button>
+          <button class="copy-btn primary-copy" onclick="copyText('node01-url')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            一键复制链接
+          </button>
         </div>
-        <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_macos_universal.dmg" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
-          立即下载</a>
+        <span id="node01-name" style="display:none">01节点</span>
+        <span id="node01-url" style="display:none">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be</span>
+      </div>
+      <div class="node-card">
+        <div class="node-header">
+          <div class="node-num">02</div>
+          <div>
+            <div class="node-title">Base64 订阅节点</div>
+            <div class="node-sub">兼容模式 · 部分客户端推荐</div>
+          </div>
+        </div>
+        <div class="node-url">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be&amp;b64</div>
+        <div class="node-actions">
+          <button class="copy-btn" onclick="copyText('node02-name')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            复制名称
+          </button>
+          <button class="copy-btn primary-copy" onclick="copyText('node02-url')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            一键复制链接
+          </button>
+        </div>
+        <span id="node02-name" style="display:none">02节点</span>
+        <span id="node02-url" style="display:none">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be&amp;b64</span>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>需要更多节点？</strong>关注公众号 <span class="accent-tag">鸡血青年冀文辉</span>，回复「<strong>微信</strong>」联系我获取最新节点。
+      <span style="font-size:.8rem;opacity:.7;display:block;margin-top:2px">节点由后台管理（仅博主本人可操作），保证稳定可用。</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Disclaimer ===== -->
+<section class="section" id="guide">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Compliance</div>
+      <h2 class="section-title">学术用途声明</h2>
+      <p class="section-desc">本平台定位为学术科研辅助工具，请在合法合规的前提下使用。</p>
+    </div>
+
+    <div class="disclaimer" id="disclaimer-box">
+      <div class="disclaimer-header" onclick="toggleDisclaimer()">
+        <div class="disclaimer-header-left">
+          <div class="disclaimer-dot"></div>
+          <h3>学术科研 · 正当使用说明</h3>
+        </div>
+        <span class="disclaimer-arrow">▾</span>
+      </div>
+      <div class="disclaimer-body">
+        <p>本平台的核心定位是<span class="hl">服务学术科研需求</span>。在数字经济与人工智能快速发展的时代，研究者需要畅通地获取全球学术资源与前沿技术成果，这是开展高质量研究的必要条件。</p>
+        <p style="margin-top:12px"><strong>正当学术需求包括但不限于：</strong></p>
+        <p><span class="hl">访问国际学术搜索引擎</span> — Google Scholar（谷歌学术）、Semantic Scholar、BASE 等，检索全球同行评审文献，撰写文献综述与学术论文。</p>
+        <p><span class="hl">获取国际权威数据源</span> — 联合国统计司 (UNSD)、世界卫生组织 (WHO)、美国疾控中心 (CDC)、世界银行开放数据、OECD 数据库等国际组织的公开统计数据与研究公报。</p>
+        <p><span class="hl">学习前沿开源项目</span> — GitHub、Hugging Face、Papers with Code 等平台上全球研究者分享的开源代码、预训练模型与复现实验。</p>
+        <p><span class="hl">数字经济专业研究</span> — 本人研究方向为数字经济，日常需要查阅国际数字贸易规则、跨境数据流动治理、平台经济监管比较等领域的英文文献与政策文件。</p>
+        <hr />
+        <div class="legal">
+          <p><strong>使用声明：</strong>本平台所提供的仅为网络连接优化服务，旨在帮助研究者更高效地获取合法的国际学术与公共信息资源。用户应严格遵守《中华人民共和国网络安全法》《中华人民共和国数据安全法》及相关法律法规。</p>
+          <p style="margin-top:8px"><strong>严禁用途：</strong>禁止利用本工具访问国家法律法规明令禁止的网站或内容，禁止从事任何危害国家安全、传播违法信息、侵犯他人合法权益的活动。使用者须自行承担因违规使用而产生的一切法律后果。</p>
+          <p style="margin-top:8px">本工具仅供学习、科研、交流使用，请勿用于任何商业或非法目的。如涉及版权问题，请联系我们处理。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video -->
+    <div style="margin-top:48px">
+      <div style="margin-bottom:24px">
+        <div class="section-label">Guide</div>
+        <h3 style="font-size:1.25rem;font-weight:700;letter-spacing:-.02em">操作演示视频</h3>
+      </div>
+      <div class="video-box">
+        <p style="color:var(--text-2);font-size:.875rem">演示视频即将上线，将展示 Karing 的完整配置流程</p>
+        <div class="video-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="8 5 19 12 8 19 8 5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="10" stroke="currentColor"/></svg>
+          <p>演示视频即将上线</p>
+          <p class="vp-sub">视频上传后将直接在此处播放，展示 Karing 的完整配置流程</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Install Tips -->
+    <div style="margin-top:48px">
+      <div style="margin-bottom:24px">
+        <div class="section-label">Help</div>
+        <h3 style="font-size:1.25rem;font-weight:700;letter-spacing:-.02em">安装提示</h3>
+      </div>
+      <div class="tips-card">
+        <details>
+          <summary>
+            Windows 安装提示
+            <span class="tip-arrow">▾</span>
+          </summary>
+          <div class="tip-content">
+            <p>1. 下载 <code>.exe</code> 安装包，双击运行</p>
+            <p>2. 如弹出 "Windows 已保护你的电脑" 提示，点击「更多信息」→「仍要运行」</p>
+            <p>3. 按向导完成安装即可</p>
+          </div>
+        </details>
+        <details>
+          <summary>
+            macOS 安装提示
+            <span class="tip-arrow">▾</span>
+          </summary>
+          <div class="tip-content">
+            <p>1. 下载 <code>.dmg</code> 文件，双击打开</p>
+            <p>2. 将 Karing 图标拖入 Applications 文件夹</p>
+            <p>3. 首次运行时，前往「系统设置 → 安全性」点击「仍要打开」</p>
+            <p>4. 或在终端执行：<code>xattr -cr /Applications/Karing.app</code></p>
+          </div>
+        </details>
+        <details>
+          <summary>
+            Android 安装提示
+            <span class="tip-arrow">▾</span>
+          </summary>
+          <div class="tip-content">
+            <p>1. 下载 <code>.apk</code> 文件到手机</p>
+            <p>2. 安装前需在「设置」中允许安装未知来源应用</p>
+            <p>3. 不确定选哪个版本？优先选择 <strong>ARM64</strong>（2019年后的主流手机）</p>
+          </div>
+        </details>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- Android -->
-  <div id="tab-android" class="tab-panel">
-    <div class="cards-grid">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon android">🤖</div>
-          <div>
-            <div class="card-title">Android ARM64</div>
-            <div class="card-sub">2019年以后的主流手机</div>
-          </div>
-        </div>
-        <div class="card-meta">
-          <span class="tag">推荐</span>
-          <span class="tag">arm64-v8a</span>
-          <span class="tag">.apk</span>
-          <span class="tag size">50 MB</span>
-        </div>
-        <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_android_arm64-v8a.apk" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
-          立即下载</a>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon android">🤖</div>
-          <div>
-            <div class="card-title">Android ARM</div>
-            <div class="card-sub">兼容包，支持更多设备</div>
-          </div>
-        </div>
-        <div class="card-meta">
-          <span class="tag">arm</span>
-          <span class="tag">.apk</span>
-          <span class="tag size">86 MB</span>
-        </div>
-        <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_android_arm.apk" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
-          立即下载</a>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon android">🤖</div>
-          <div>
-            <div class="card-title">Android ARMv7</div>
-            <div class="card-sub">旧款 32 位 Android 设备</div>
-          </div>
-        </div>
-        <div class="card-meta">
-          <span class="tag">armeabi-v7a</span>
-          <span class="tag">.apk</span>
-          <span class="tag size">50 MB</span>
-        </div>
-        <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_android_armeabi-v7a.apk" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
-          立即下载</a>
-      </div>
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <strong>学术科研网络助手</strong> · v1.2.19.2209
+    </div>
+    <div class="footer-right">
+      <a href="https://github.com/KaringX/karing" target="_blank">GitHub 项目</a>
+      <a href="https://520snoopy.ccwu.cc/admin" class="admin-link">管理入口</a>
     </div>
   </div>
-
-  <!-- Linux -->
-  <div id="tab-linux" class="tab-panel">
-    <div class="cards-grid">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon linux">🐧</div>
-          <div>
-            <div class="card-title">Linux AppImage</div>
-            <div class="card-sub">免安装，所有发行版通用</div>
-          </div>
-        </div>
-        <div class="card-meta">
-          <span class="tag">推荐</span>
-          <span class="tag">amd64</span>
-          <span class="tag">.AppImage</span>
-          <span class="tag size">70 MB</span>
-        </div>
-        <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_linux_amd64.AppImage" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
-          立即下载</a>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon linux">📦</div>
-          <div>
-            <div class="card-title">Linux DEB</div>
-            <div class="card-sub">Ubuntu / Debian 及衍生版</div>
-          </div>
-        </div>
-        <div class="card-meta">
-          <span class="tag">amd64</span>
-          <span class="tag">.deb</span>
-          <span class="tag size">48 MB</span>
-        </div>
-        <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_linux_amd64.deb" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
-          立即下载</a>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon linux">📦</div>
-          <div>
-            <div class="card-title">Linux RPM</div>
-            <div class="card-sub">Fedora / CentOS / RHEL</div>
-          </div>
-        </div>
-        <div class="card-meta">
-          <span class="tag">amd64</span>
-          <span class="tag">.rpm</span>
-          <span class="tag size">52 MB</span>
-        </div>
-        <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_linux_amd64.rpm" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
-          立即下载</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Source -->
-  <div id="tab-source" class="tab-panel">
-    <div class="cards-grid">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon src">📦</div>
-          <div>
-            <div class="card-title">源码包（tar.gz）</div>
-            <div class="card-sub">Linux/macOS 常用压缩格式</div>
-          </div>
-        </div>
-        <div class="card-meta">
-          <span class="tag">源码</span>
-          <span class="tag">.tar.gz</span>
-          <span class="tag size">21 MB</span>
-        </div>
-        <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing-1.2.19.2209.tar.gz" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
-          立即下载</a>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon src">📦</div>
-          <div>
-            <div class="card-title">源码包（zip）</div>
-            <div class="card-sub">Windows 通用压缩格式</div>
-          </div>
-        </div>
-        <div class="card-meta">
-          <span class="tag">源码</span>
-          <span class="tag">.zip</span>
-          <span class="tag size">22 MB</span>
-        </div>
-        <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing-1.2.19.2209.zip" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
-          立即下载</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- 免费节点 -->
-  <div class="sep"></div>
-  <div class="section-title">
-    <div class="icon">🔗</div>
-    免费节点
-  </div>
-  <p style="color:var(--muted); font-size:.9rem; margin-bottom:20px; line-height:1.6;">
-    以下为免费公用节点，可直接导入 Karing 使用。如需获取最新节点或更多线路，请关注公众号 <span class="acct" style="background:#fef3c7;padding:2px 8px;border-radius:4px;font-weight:700;">鸡血青年冀文辉</span>，回复「<strong>微信</strong>」联系我。
-  </p>
-  <div class="node-grid">
-    <!-- 01节点 -->
-    <div class="node-card">
-      <div class="node-card-header">
-        <div class="node-num">01</div>
-        <div>
-          <div class="node-name">标准订阅节点</div>
-          <div class="node-tag">通用线路 · 适合日常使用</div>
-        </div>
-      </div>
-      <div class="node-url-box">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be</div>
-      <div class="node-actions">
-        <button class="copy-btn" onclick="copyText('node01-name')" title="复制节点名称"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> 复制名称</button>
-        <button class="copy-btn primary-copy" onclick="copyText('node01-url')" title="一键复制订阅链接"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> 一键复制链接</button>
-      </div>
-      <span id="node01-name" style="display:none;">01节点</span>
-      <span id="node01-url" style="display:none;">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be</span>
-    </div>
-    <!-- 02节点 -->
-    <div class="node-card">
-      <div class="node-card-header">
-        <div class="node-num">02</div>
-        <div>
-          <div class="node-name">Base64 订阅节点</div>
-          <div class="node-tag">兼容模式 · 部分客户端推荐</div>
-        </div>
-      </div>
-      <div class="node-url-box">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be&amp;b64</div>
-      <div class="node-actions">
-        <button class="copy-btn" onclick="copyText('node02-name')" title="复制节点名称"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> 复制名称</button>
-        <button class="copy-btn primary-copy" onclick="copyText('node02-url')" title="一键复制订阅链接"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> 一键复制链接</button>
-      </div>
-      <span id="node02-name" style="display:none;">02节点</span>
-      <span id="node02-url" style="display:none;">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be&amp;b64</span>
-    </div>
-  </div>
-  <div class="node-tip-box">
-    💡 <strong>需要更多节点？</strong>关注公众号 <span class="acct">鸡血青年冀文辉</span>，回复「<strong>微信</strong>」联系我获取最新节点。<br>
-    <span style="font-size:.82rem;opacity:.75;">节点由后台管理（仅博主本人可操作），保证稳定可用。</span>
-  </div>
-
-  <!-- Video placeholder -->
-  <div class="sep"></div>
-  <div class="section-title">
-    <div class="icon">🎬</div>
-    操作演示视频
-  </div>
-  <div style="background:var(--card); border:1.5px solid var(--border); border-radius:var(--radius); padding:24px;">
-    <p style="color:var(--muted); font-size:.9rem; margin-bottom:16px;">
-      📹 演示视频即将上线，将展示 Karing 的完整配置流程
-    </p>
-    <div class="video-placeholder">
-      <div class="icon">🎬</div>
-      <p>演示视频即将上线，敬请期待</p>
-      <p class="sub">视频上传后将直接在此处播放，展示 Karing 的完整配置流程</p>
-    </div>
-  </div>
-
-  <!-- Install Tips -->
-  <div class="sep"></div>
-  <div class="section-title">
-    <div class="icon">💡</div>
-    安装提示
-  </div>
-  <div style="background:var(--card); border:1.5px solid var(--border); border-radius:var(--radius); padding:24px; display:flex; flex-direction:column; gap:16px;">
-    <details style="cursor:pointer;">
-      <summary style="font-weight:700; font-size:.95rem; list-style:none; display:flex; justify-content:space-between; align-items:center;">
-        🪟 Windows 安装提示
-        <span style="color:var(--muted); font-size:.85rem;">点击展开 ▾</span>
-      </summary>
-      <div style="margin-top:12px; color:var(--muted); font-size:.9rem; line-height:1.8;">
-        <p>1. 下载 <code>.exe</code> 安装包，双击运行</p>
-        <p>2. 如弹出 "Windows 已保护你的电脑" 提示，点击「更多信息」→「仍要运行」</p>
-        <p>3. 按向导完成安装即可</p>
-      </div>
-    </details>
-    <hr style="border:none; border-top:1px solid var(--border);" />
-    <details style="cursor:pointer;">
-      <summary style="font-weight:700; font-size:.95rem; list-style:none; display:flex; justify-content:space-between; align-items:center;">
-        🍎 macOS 安装提示
-        <span style="color:var(--muted); font-size:.85rem;">点击展开 ▾</span>
-      </summary>
-      <div style="margin-top:12px; color:var(--muted); font-size:.9rem; line-height:1.8;">
-        <p>1. 下载 <code>.dmg</code> 文件，双击打开</p>
-        <p>2. 将 Karing 图标拖入 Applications 文件夹</p>
-        <p>3. 首次运行时，前往「系统设置 → 安全性」点击「仍要打开」</p>
-        <p>4. 或在终端执行：<code>xattr -cr /Applications/Karing.app</code></p>
-      </div>
-    </details>
-    <hr style="border:none; border-top:1px solid var(--border);" />
-    <details style="cursor:pointer;">
-      <summary style="font-weight:700; font-size:.95rem; list-style:none; display:flex; justify-content:space-between; align-items:center;">
-        🤖 Android 安装提示
-        <span style="color:var(--muted); font-size:.85rem;">点击展开 ▾</span>
-      </summary>
-      <div style="margin-top:12px; color:var(--muted); font-size:.9rem; line-height:1.8;">
-        <p>1. 下载 <code>.apk</code> 文件到手机</p>
-        <p>2. 安装前需在「设置」中允许安装未知来源应用</p>
-        <p>3. 不确定选哪个版本？优先选择 <strong>ARM64</strong>（2019年后的主流手机）</p>
-      </div>
-    </details>
-  </div>
-
-</main>
-
-<footer>
-  <p>
-    学术科研网络助手 · v1.2.19.2209
-    <a href="https://520snoopy.ccwu.cc/admin" class="admin-link" title="管理员入口">🔑 管理</a>
-  </p>
-  <p style="margin-top:6px;">遇到问题？<a href="https://github.com/KaringX/karing" target="_blank">访问 GitHub 项目</a></p>
 </footer>
+
+<!-- Toast -->
+<div id="copy-toast" class="toast"></div>
 
 <script>
   function switchTab(name, btn) {
@@ -617,48 +854,41 @@
     btn.classList.add('active');
   }
 
+  function toggleDisclaimer() {
+    document.getElementById('disclaimer-box').classList.toggle('open');
+  }
+
   function copyText(elemId) {
     const el = document.getElementById(elemId);
     if (!el) return;
     const text = el.textContent.trim();
 
-    // 使用 Clipboard API
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(() => showToast('已复制: ' + (text.length > 50 ? text.slice(0, 50) + '...' : text)));
+      navigator.clipboard.writeText(text).then(() => showToast('已复制'));
     } else {
-      // 降级方案
       const ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.position = 'fixed'; ta.style.left = '-9999px';
-      document.body.appendChild(ta);
-      ta.select();
-      try { document.execCommand('copy'); showToast('已复制!'); } catch (e) { alert('复制失败，请手动复制'); }
+      ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); showToast('已复制'); } catch (e) { alert('复制失败，请手动复制'); }
       document.body.removeChild(ta);
     }
 
-    // 按钮视觉反馈
-    const btn = document.querySelector(`[onclick="copyText('${elemId}')"]`);
+    const btn = document.querySelector('[onclick="copyText(\'' + elemId + '\')"]');
     if (btn) {
       btn.classList.add('copied');
-      const origHTML = btn.innerHTML;
-      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 已复制';
-      setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = origHTML; }, 1500);
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> 已复制';
+      setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 1500);
     }
   }
 
   let toastTimer;
   function showToast(msg) {
-    let toast = document.getElementById('copy-toast');
-    if (!toast) {
-      toast = document.createElement('div');
-      toast.id = 'copy-toast';
-      toast.className = 'toast';
-      document.body.appendChild(toast);
-    }
+    const toast = document.getElementById('copy-toast');
     toast.textContent = msg;
     toast.classList.add('show');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
   }
 </script>
 
