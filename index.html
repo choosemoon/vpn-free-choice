@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karing 下载中心</title>
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --primary-light: #e0e7ff;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --shadow-hover: 0 4px 12px rgba(99,102,241,.25);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: var(--bg); color: var(--text); min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
+      padding: 60px 24px 48px; text-align: center; color: #fff;
+      position: relative; overflow: hidden;
+    }
+    header::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .logo-wrap {
+      width: 72px; height: 72px; background: rgba(255,255,255,.2);
+      border-radius: 20px; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px; font-size: 36px; backdrop-filter: blur(8px);
+    }
+    header h1 { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.5px; }
+    header p { margin-top: 10px; font-size: 1.05rem; opacity: .85; }
+    .badge-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px; }
+    .badge {
+      background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3);
+      border-radius: 100px; padding: 5px 16px; font-size: .85rem; font-weight: 600;
+      letter-spacing: .3px; backdrop-filter: blur(4px);
+    }
+    main { max-width: 960px; margin: 0 auto; padding: 48px 24px 80px; }
+    .section-title {
+      font-size: 1.3rem; font-weight: 700; color: var(--text);
+      margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+    }
+    .section-title .icon {
+      width: 36px; height: 36px; background: var(--primary-light);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .tab-btn {
+      padding: 8px 20px; border-radius: 100px; border: 2px solid var(--border);
+      background: var(--card); color: var(--muted); font-size: .9rem; font-weight: 600;
+      cursor: pointer; transition: all .2s;
+    }
+    .tab-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .tab-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+    .card {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      display: flex; flex-direction: column; gap: 12px; transition: all .22s;
+    }
+    .card:hover { border-color: var(--primary); box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+    .card-header { display: flex; align-items: center; gap: 12px; }
+    .card-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+    .card-icon.win   { background: #dbeafe; }
+    .card-icon.mac   { background: #f3f4f6; }
+    .card-icon.android { background: #dcfce7; }
+    .card-icon.linux { background: #fef3c7; }
+    .card-icon.src   { background: #fce7f3; }
+    .card-title { font-weight: 700; font-size: 1rem; color: var(--text); }
+    .card-sub   { font-size: .82rem; color: var(--muted); margin-top: 2px; }
+    .card-meta  { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tag { background: var(--primary-light); color: var(--primary-dark); border-radius: 6px; padding: 2px 10px; font-size: .78rem; font-weight: 600; }
+    .tag.size { background: #f1f5f9; color: var(--muted); }
+    .dl-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--primary); color: #fff; border: none; border-radius: 10px;
+      padding: 12px 20px; font-size: .95rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; transition: background .2s, transform .1s; margin-top: auto;
+    }
+    .dl-btn:hover { background: var(--primary-dark); transform: scale(1.02); }
+    .dl-btn svg { width: 16px; height: 16px; fill: #fff; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .version-bar {
+      background: linear-gradient(90deg, var(--primary-light), #f0fdf4);
+      border: 1px solid #c7d2fe; border-radius: 12px; padding: 14px 20px;
+      margin-bottom: 32px; display: flex; align-items: center; gap: 12px;
+      font-size: .9rem; color: var(--primary-dark); font-weight: 600;
+    }
+    .version-bar .v { font-size: 1.1rem; font-weight: 800; }
+    .video-placeholder {
+      display: flex; align-items: center; justify-content: center;
+      background: #0f172a; color: #64748b; flex-direction: column; gap: 12px;
+      border-radius: var(--radius); aspect-ratio: 16/9; margin-top: 16px;
+    }
+    .video-placeholder .icon { font-size: 48px; opacity: .4; }
+    .video-placeholder p { font-size: .95rem; }
+    .video-placeholder .sub { font-size: .82rem; max-width: 400px; text-align: center; line-height: 1.6; }
+    footer { text-align: center; padding: 32px 24px; font-size: .85rem; color: var(--muted); border-top: 1px solid var(--border); }
+    footer a { color: var(--primary); text-decoration: none; }
+    .sep { height: 48px; }
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.8rem; }
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">🚀</div>
+  <h1>Karing 下载中心</h1>
+  <p>简单 · 快速 · 多平台支持</p>
+  <div class="badge-row">
+    <span class="badge">v1.2.19.2209</span>
+    <span class="badge">✅ Windows</span>
+    <span class="badge">✅ macOS</span>
+    <span class="badge">✅ Android</span>
+    <span class="badge">✅ Linux</span>
+  </div>
+</header>
+
+<main>
+  <div class="version-bar">
+    <span>📦</span>
+    <span>当前最新版本：<span class="v">v1.2.19.2209</span> &nbsp;· 请根据你的设备选择对应安装包</span>
+  </div>
+
+  <div class="section-title">
+    <div class="icon">⬇️</div>
+    选择你的平台下载
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('windows', this)">🪟 Windows</button>
+    <button class="tab-btn" onclick="switchTab('macos', this)">🍎 macOS</button>
+    <button class="tab-btn" onclick="switchTab('android', this)">🤖 Android</button>
+    <button class="tab-btn" onclick="switchTab('linux', this)">🐧 Linux</button>
+    <button class="tab-btn" onclick="switchTab('source', this)">📦 源码</button>
+  </div>
+
+  <!-- Windows -->
+  <div id="tab-windows" class="tab-panel active">
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon win">🪟</div>
+          <div>
+            <div class="card-title">Windows 安装版</div>
+            <div class="card-sub">推荐大多数用户使用</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="tag">x64</span>
+          <span class="tag">.exe</span>
+          <span class="tag size">43 MB</span>
+        </div>
+        <a class="dl-btn" href="https://1drv.ms/u/c/7665efd0f04ebf8a/IQDVfbsRFtWjT5dzNt3fnyuTAVzhG5VUPN6Dn9O4rRtbUGc?download=1" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+          立即下载</a>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon win">📦</div>
+          <div>
+            <div class="card-title">Windows 便携版</div>
+            <div class="card-sub">免安装，解压即用</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="tag">x64</span>
+          <span class="tag">.zip</span>
+          <span class="tag size">62 MB</span>
+        </div>
+        <a class="dl-btn" href="https://1drv.ms/u/c/7665efd0f04ebf8a/IQBf0hRveATiQaeOXRdeDg2MAXiojl4cs1nRd4ew4jo7tAc?download=1" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+          立即下载</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- macOS -->
+  <div id="tab-macos" class="tab-panel">
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon mac">🍎</div>
+          <div>
+            <div class="card-title">macOS 通用版</div>
+            <div class="card-sub">同时支持 Intel 和 Apple Silicon</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="tag">Universal</span>
+          <span class="tag">.dmg</span>
+          <span class="tag size">91 MB</span>
+        </div>
+        <a class="dl-btn" href="https://1drv.ms/u/c/7665efd0f04ebf8a/IQBDPBMFgdreQqCx1LxbS6puATEoyJMcdqHlLhw75VFPzCk?download=1" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+          立即下载</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Android -->
+  <div id="tab-android" class="tab-panel">
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon android">🤖</div>
+          <div>
+            <div class="card-title">Android ARM64</div>
+            <div class="card-sub">2019年以后的主流手机</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="tag">推荐</span>
+          <span class="tag">arm64-v8a</span>
+          <span class="tag">.apk</span>
+          <span class="tag size">50 MB</span>
+        </div>
+        <a class="dl-btn" href="https://1drv.ms/u/c/7665efd0f04ebf8a/IQDTPUmbEIKPSLJzKksHFyCRAWLi87a_1lEg7Bs9ZIlY53U?download=1" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+          立即下载</a>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon android">🤖</div>
+          <div>
+            <div class="card-title">Android ARM</div>
+            <div class="card-sub">兼容包，支持更多设备</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="tag">arm</span>
+          <span class="tag">.apk</span>
+          <span class="tag size">86 MB</span>
+        </div>
+        <a class="dl-btn" href="https://1drv.ms/u/c/7665efd0f04ebf8a/IQBoEMPScL9gRZLDwf3CD-NvAeT-4Sgzdwqepwc3XBT-1oo?download=1" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+          立即下载</a>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon android">🤖</div>
+          <div>
+            <div class="card-title">Android ARMv7</div>
+            <div class="card-sub">旧款 32 位 Android 设备</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="tag">armeabi-v7a</span>
+          <span class="tag">.apk</span>
+          <span class="tag size">50 MB</span>
+        </div>
+        <a class="dl-btn" href="https://1drv.ms/u/c/7665efd0f04ebf8a/IQBRU8p3lZJXQrPNfGM_ku8NAVPEv99PimGWtYMf59XcA8Q?download=1" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+          立即下载</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Linux -->
+  <div id="tab-linux" class="tab-panel">
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon linux">🐧</div>
+          <div>
+            <div class="card-title">Linux AppImage</div>
+            <div class="card-sub">免安装，所有发行版通用</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="tag">推荐</span>
+          <span class="tag">amd64</span>
+          <span class="tag">.AppImage</span>
+          <span class="tag size">70 MB</span>
+        </div>
+        <a class="dl-btn" href="https://1drv.ms/u/c/7665efd0f04ebf8a/IQADPYQBVE44TqfSxI9JPYJsAYgGbHH2K19Neweb1f3zjEA?download=1" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+          立即下载</a>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon linux">📦</div>
+          <div>
+            <div class="card-title">Linux DEB</div>
+            <div class="card-sub">Ubuntu / Debian 及衍生版</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="tag">amd64</span>
+          <span class="tag">.deb</span>
+          <span class="tag size">48 MB</span>
+        </div>
+        <a class="dl-btn" href="https://1drv.ms/u/c/7665efd0f04ebf8a/IQAo7ZFv4DMiTa2pN4g5cHREAci88prmYHxLC4qham4VEP0?download=1" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+          立即下载</a>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon linux">📦</div>
+          <div>
+            <div class="card-title">Linux RPM</div>
+            <div class="card-sub">Fedora / CentOS / RHEL</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="tag">amd64</span>
+          <span class="tag">.rpm</span>
+          <span class="tag size">52 MB</span>
+        </div>
+        <a class="dl-btn" href="https://1drv.ms/u/c/7665efd0f04ebf8a/IQChJo7ugB26Qp1V5ri2gT_bAbBBFrHye8NMfqne_4fGXMU?download=1" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+          立即下载</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Source -->
+  <div id="tab-source" class="tab-panel">
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon src">📦</div>
+          <div>
+            <div class="card-title">源码包（tar.gz）</div>
+            <div class="card-sub">Linux/macOS 常用压缩格式</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="tag">源码</span>
+          <span class="tag">.tar.gz</span>
+          <span class="tag size">21 MB</span>
+        </div>
+        <a class="dl-btn" href="https://1drv.ms/u/c/7665efd0f04ebf8a/IQBoYsfq4V7FT6CbKmQ7W6tAAbkowCWuBz7A-r_2tRyKV0k?download=1" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+          立即下载</a>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon src">📦</div>
+          <div>
+            <div class="card-title">源码包（zip）</div>
+            <div class="card-sub">Windows 通用压缩格式</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="tag">源码</span>
+          <span class="tag">.zip</span>
+          <span class="tag size">22 MB</span>
+        </div>
+        <a class="dl-btn" href="https://1drv.ms/u/c/7665efd0f04ebf8a/IQDfI3mIQAqFS59ijMgN-cw-ATuRr4wBgP_fP1LZXfR78og?download=1" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+          立即下载</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video placeholder -->
+  <div class="sep"></div>
+  <div class="section-title">
+    <div class="icon">🎬</div>
+    操作演示视频
+  </div>
+  <div style="background:var(--card); border:1.5px solid var(--border); border-radius:var(--radius); padding:24px;">
+    <p style="color:var(--muted); font-size:.9rem; margin-bottom:16px;">
+      📹 演示视频即将上线，将展示 Karing 的完整配置流程
+    </p>
+    <div class="video-placeholder">
+      <div class="icon">🎬</div>
+      <p>演示视频即将上线，敬请期待</p>
+      <p class="sub">视频上传后将直接在此处播放，展示 Karing 的完整配置流程</p>
+    </div>
+  </div>
+
+  <!-- Install Tips -->
+  <div class="sep"></div>
+  <div class="section-title">
+    <div class="icon">💡</div>
+    安装提示
+  </div>
+  <div style="background:var(--card); border:1.5px solid var(--border); border-radius:var(--radius); padding:24px; display:flex; flex-direction:column; gap:16px;">
+    <details style="cursor:pointer;">
+      <summary style="font-weight:700; font-size:.95rem; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+        🪟 Windows 安装提示
+        <span style="color:var(--muted); font-size:.85rem;">点击展开 ▾</span>
+      </summary>
+      <div style="margin-top:12px; color:var(--muted); font-size:.9rem; line-height:1.8;">
+        <p>1. 下载 <code>.exe</code> 安装包，双击运行</p>
+        <p>2. 如弹出 "Windows 已保护你的电脑" 提示，点击「更多信息」→「仍要运行」</p>
+        <p>3. 按向导完成安装即可</p>
+      </div>
+    </details>
+    <hr style="border:none; border-top:1px solid var(--border);" />
+    <details style="cursor:pointer;">
+      <summary style="font-weight:700; font-size:.95rem; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+        🍎 macOS 安装提示
+        <span style="color:var(--muted); font-size:.85rem;">点击展开 ▾</span>
+      </summary>
+      <div style="margin-top:12px; color:var(--muted); font-size:.9rem; line-height:1.8;">
+        <p>1. 下载 <code>.dmg</code> 文件，双击打开</p>
+        <p>2. 将 Karing 图标拖入 Applications 文件夹</p>
+        <p>3. 首次运行时，前往「系统设置 → 安全性」点击「仍要打开」</p>
+        <p>4. 或在终端执行：<code>xattr -cr /Applications/Karing.app</code></p>
+      </div>
+    </details>
+    <hr style="border:none; border-top:1px solid var(--border);" />
+    <details style="cursor:pointer;">
+      <summary style="font-weight:700; font-size:.95rem; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+        🤖 Android 安装提示
+        <span style="color:var(--muted); font-size:.85rem;">点击展开 ▾</span>
+      </summary>
+      <div style="margin-top:12px; color:var(--muted); font-size:.9rem; line-height:1.8;">
+        <p>1. 下载 <code>.apk</code> 文件到手机</p>
+        <p>2. 安装前需在「设置」中允许安装未知来源应用</p>
+        <p>3. 不确定选哪个版本？优先选择 <strong>ARM64</strong>（2019年后的主流手机）</p>
+      </div>
+    </details>
+  </div>
+</main>
+
+<footer>
+  <p>Karing 下载中心 · 当前版本 v1.2.19.2209</p>
+  <p style="margin-top:6px;">遇到问题？<a href="https://github.com/KaringX/karing" target="_blank">访问 GitHub 项目</a></p>
+</footer>
+
+<script>
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
