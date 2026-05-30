@@ -196,9 +196,10 @@
     .dl-btn:hover{background:#404040;color:#fff;transform:translateY(-1px);box-shadow:var(--shadow-sm)}
     /* ---- 代理加速切换 ---- */
     .proxy-toggle-bar {
-      display: flex; align-items: center; justify-content: center; gap: 12px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      flex-wrap: wrap;
       padding: 14px 20px; background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); margin-top: 16px; font-size: .88rem;
+      border-radius: var(--radius); margin-top: 16px; font-size: .85rem;
     }
     .proxy-toggle-bar .proxy-label { color: var(--text-2); font-weight: 500; }
     .proxy-toggle-bar .proxy-status { font-weight: 600; font-size: .82rem; white-space: nowrap; }
@@ -776,35 +777,33 @@
 </section>
 
 <!-- ===== 快速开始 ===== -->
-<section class="section" style="padding-top:0;padding-bottom:40px">
+<section class="section" style="padding-top:0;padding-bottom:32px">
   <div class="container">
-    <div style="background:linear-gradient(135deg,#fff7ed 0%,#fef3c7 100%);border:1px solid #fed7aa;border-radius:var(--radius-l);padding:28px 32px">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap">
-        <span style="font-size:1.1rem">🚀</span>
-        <h3 style="font-size:1.1rem;font-weight:700;color:#9a3412;margin:0">3 步快速开始</h3>
-        <span style="font-size:.78rem;color:#c2410c;background:#fff7ed;padding:2px 10px;border-radius:100px;font-weight:600">新手必看</span>
+    <div style="background:linear-gradient(135deg,#fff7ed 0%,#fef3c7 100%);border:1px solid #fed7aa;border-radius:var(--radius-l);padding:20px 28px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+        <span style="font-size:1.05rem">🚀</span>
+        <h3 style="font-size:1.05rem;font-weight:700;color:#9a3412;margin:0">3 步快速开始</h3>
+        <span style="font-size:.75rem;color:#c2410c;background:#fff7ed;padding:2px 10px;border-radius:100px;font-weight:600">新手必看</span>
+        <span style="font-size:.75rem;color:#9a3412;margin-left:auto;font-weight:500">📺 有视频教程，无脑照着做就行</span>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px">
-        <div style="background:#fff;border-radius:var(--radius);padding:16px 18px;display:flex;align-items:flex-start;gap:12px;border:1px solid #fde68a">
-          <div style="width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;margin-top:1px">1</div>
-          <div>
-            <div style="font-weight:600;font-size:.9rem;color:var(--text)">下载客户端</div>
-            <div style="font-size:.8rem;color:var(--text-2);margin-top:2px">选择你的设备，点击下载</div>
-          </div>
+      <!-- 紧凑水平步骤条 -->
+      <div style="display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center">
+        <div style="background:#fff;border-radius:100px;padding:8px 20px;border:1px solid #fde68a;display:flex;align-items:center;gap:8px;font-size:.85rem;white-space:nowrap">
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0">1</span>
+          <strong>下载客户端</strong>
+          <span style="color:var(--muted);font-size:.78rem">选设备下载</span>
         </div>
-        <div style="background:#fff;border-radius:var(--radius);padding:16px 18px;display:flex;align-items:flex-start;gap:12px;border:1px solid #fde68a">
-          <div style="width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;margin-top:1px">2</div>
-          <div>
-            <div style="font-weight:600;font-size:.9rem;color:var(--text)">复制节点链接</div>
-            <div style="font-size:.8rem;color:var(--text-2);margin-top:2px">点击「一键复制链接」按钮</div>
-          </div>
+        <span style="color:#fbbf24;font-size:1rem;padding:0 4px">→</span>
+        <div style="background:#fff;border-radius:100px;padding:8px 20px;border:1px solid #fde68a;display:flex;align-items:center;gap:8px;font-size:.85rem;white-space:nowrap">
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0">2</span>
+          <strong>复制节点链接</strong>
+          <span style="color:var(--muted);font-size:.78rem">一键复制</span>
         </div>
-        <div style="background:#fff;border-radius:var(--radius);padding:16px 18px;display:flex;align-items:flex-start;gap:12px;border:1px solid #fde68a">
-          <div style="width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;margin-top:1px">3</div>
-          <div>
-            <div style="font-weight:600;font-size:.9rem;color:var(--text)">导入即可使用</div>
-            <div style="font-size:.8rem;color:var(--text-2);margin-top:2px">打开 Karing → 订阅 → 粘贴</div>
-          </div>
+        <span style="color:#fbbf24;font-size:1rem;padding:0 4px">→</span>
+        <div style="background:#fff;border-radius:100px;padding:8px 20px;border:1px solid #fde68a;display:flex;align-items:center;gap:8px;font-size:.85rem;white-space:nowrap">
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0">3</span>
+          <strong>导入 Karing</strong>
+          <span style="color:var(--muted);font-size:.78rem">粘贴即可用</span>
         </div>
       </div>
     </div>
@@ -822,7 +821,7 @@
 
     <div class="version-bar">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      <span>最新版本 <strong>v1.2.19.2209</strong> — 请根据你的设备选择对应安装包</span>
+      <span>最新版本 <strong>v1.2.19.2209</strong> — 选设备下载安装 · <a href="#guide" style="color:var(--accent);font-weight:600;text-decoration:underline">📺 看视频教程，无脑操作</a></span>
     </div>
 
     <!-- 代理加速开关 -->
@@ -833,8 +832,8 @@
         <span class="toggle-slider"></span>
       </label>
       <span class="proxy-status on" id="proxy-status-text">已开启 · 主线路</span>
-      <a href="javascript:void(0)" class="proxy-switch-link" id="proxy-switch-link" onclick="switchProxyLine()" title="下载失败？点此切换备用线路">切换线路 ›</a>
-      <span style="font-size:.76rem;color:var(--muted)">关闭后走 GitHub 直连（海外用户或已有代理时可用）</span>
+      <span style="font-size:.76rem;color:var(--green);background:var(--green-l);padding:2px 8px;border-radius:100px;font-weight:600">国内学生推荐</span>
+      <a href="javascript:void(0)" class="proxy-switch-link" id="proxy-switch-link" onclick="switchProxyLine()" title="下载失败？点此切换备用线路">备用线路 ›</a>
     </div>
 
     <div class="tabs">
@@ -1283,14 +1282,14 @@
     <div style="margin-top:48px">
       <div style="margin-bottom:24px">
         <div class="section-label">Guide</div>
-        <h3 style="font-size:1.25rem;font-weight:700;letter-spacing:-.02em">操作演示视频</h3>
+        <h3 style="font-size:1.25rem;font-weight:700;letter-spacing:-.02em">📺 视频教程</h3>
+        <p style="color:var(--text-2);font-size:.875rem;margin-top:4px">跟着视频一步一步操作，<strong style="color:var(--accent)">无脑照着做就行</strong>，3 分钟搞定</p>
       </div>
       <div class="video-box">
-        <p style="color:var(--text-2);font-size:.875rem">演示视频即将上线，将展示 Karing 的完整配置流程</p>
         <div class="video-placeholder">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="8 5 19 12 8 19 8 5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="10" stroke="currentColor"/></svg>
-          <p>演示视频即将上线</p>
-          <p class="vp-sub">视频上传后将直接在此处播放，展示 Karing 的完整配置流程</p>
+          <p>视频教程即将发布</p>
+          <p class="vp-sub">发布后将在此处直接播放，展示从下载到使用的完整流程</p>
         </div>
       </div>
     </div>
