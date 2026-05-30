@@ -90,34 +90,79 @@
       background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='white'/%3E%3C/svg%3E");
       pointer-events:none;
     }
-    .hero-inner{position:relative;z-index:1;max-width:720px;margin:0 auto}
+    .hero-inner{position:relative;z-index:1;max-width:1040px;margin:0 auto}
+    .hero-main{
+      display:flex;align-items:center;justify-content:center;gap:48px;
+      flex-wrap:wrap;margin-bottom:28px;
+    }
+    .hero-text{flex:1;min-width:320px;max-width:560px;text-align:center}
+    .hero-img-wrap{
+      flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+    }
+    .hero-img{
+      width:clamp(140px,18vw,220px);height:clamp(140px,18vw,220px);
+      border-radius:50%;object-fit:cover;
+      border:3px solid rgba(251,146,60,.35);
+      box-shadow:0 0 40px rgba(251,146,60,.25),0 0 80px rgba(251,146,60,.12);
+      animation:float 4s ease-in-out infinite;
+    }
+    @keyframes float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-10px)}
+    }
     .hero-badge{
       display:inline-flex;align-items:center;gap:6px;
       background:rgba(251,146,60,.2);border:1px solid rgba(251,146,60,.3);
       border-radius:100px;padding:4px 16px;font-size:.8rem;font-weight:500;
-      color:#fcd34d;margin-bottom:24px;
+      color:#fcd34d;margin-bottom:20px;
     }
     .hero h1{
       font-size:clamp(2rem,5vw,3.2rem);font-weight:800;
-      letter-spacing:-.03em;line-height:1.15;margin-bottom:8px;
+      letter-spacing:-.03em;line-height:1.15;margin-bottom:6px;
       position:relative;
     }
     .hero h1 .big-zero{
-      font-size:clamp(4.5rem,10vw,8rem);font-weight:900;
-      line-height:1;display:block;color:#f97316;
+      font-size:clamp(4rem,9vw,7rem);font-weight:900;
+      line-height:1;display:inline-block;color:#f97316;
       text-shadow:0 2px 20px rgba(249,115,22,.3);
-      letter-spacing:-.06em;
+      letter-spacing:-.06em;vertical-align:middle;
     }
-    .hero h1 span{color:#fb923c}
+    .hero h1 .buddha-inline{
+      display:inline-block;width:clamp(52px,8vw,88px);height:clamp(52px,8vw,88px);
+      border-radius:50%;object-fit:cover;vertical-align:middle;
+      border:2px solid rgba(251,146,60,.4);
+      box-shadow:0 0 24px rgba(251,146,60,.2);
+      margin-left:10px;animation:float 4s ease-in-out infinite;
+    }
     .hero .tagline{
       font-size:clamp(1.1rem,3vw,1.5rem);font-weight:700;color:var(--hero-t);
-      margin-bottom:16px;letter-spacing:-.02em;
+      margin-bottom:14px;letter-spacing:-.02em;
     }
     .hero p{
-      font-size:clamp(.95rem,2vw,1.1rem);color:var(--hero-m);
-      max-width:520px;margin:0 auto 36px;line-height:1.65;
+      font-size:clamp(.92rem,2vw,1.05rem);color:var(--hero-m);
+      max-width:480px;margin:0 auto 28px;line-height:1.65;
     }
-    .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .hero-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+    .hero-actions .btn{padding:12px 22px;font-size:.9rem}
+    .btn-tertiary{
+      background:rgba(255,255,255,.06);color:#e2e8f0;
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .btn-tertiary:hover{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.2)}
+    .btn-gift{
+      background:linear-gradient(135deg,#f97316,#fbbf24);color:#1c1917;
+      font-weight:700;border:none;
+      box-shadow:0 2px 12px rgba(249,115,22,.35);
+    }
+    .btn-gift:hover{background:linear-gradient(135deg,#fb923c,#fcd34d);transform:translateY(-1px);
+      box-shadow:0 4px 16px rgba(249,115,22,.4)}
+    @media(max-width:720px){
+      .hero-main{gap:24px}
+      .hero-text{min-width:100%}
+      .hero-img-wrap{order:-1}
+      .hero h1 .buddha-inline{width:56px;height:56px;margin-left:6px}
+      .hero-actions .btn{padding:10px 16px;font-size:.85rem}
+    }
     .btn{
       display:inline-flex;align-items:center;gap:8px;
       padding:12px 28px;border-radius:8px;font-size:.95rem;font-weight:600;
@@ -655,28 +700,44 @@
 <!-- ===== Hero ===== -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-badge" style="background:rgba(251,191,36,.2);border-color:rgba(251,191,36,.3);color:#fcd34d">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-      学术公益项目 · 永久免费 · 无隐形费用
-    </div>
-    <h1><span class="big-zero">0</span></h1>
-    <div class="tagline">零元起步 · 学术上网</div>
-    <p>下载即用，不花一分钱。学生专享网络优化方案，访问谷歌学术、国际数据库、前沿开源项目，该看的都能看。</p>
-    <div class="hero-actions">
-      <a href="#downloads" class="btn btn-primary">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        免费下载软件
-      </a>
-      <a href="#nodes" class="btn btn-secondary">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
-        免费获取节点
-      </a>
-    </div>
-    <div style="margin-top:28px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-      <span class="price-badge lg">🎓 学生专享福利</span>
-      <span style="color:var(--hero-m);font-size:.88rem;display:flex;align-items:center;gap:4px">
-        <span style="font-size:1.1rem">💡</span> 可替代付费游戏加速器，一省再省
-      </span>
+    <div class="hero-main">
+      <div class="hero-text">
+        <div class="hero-badge" style="background:rgba(251,191,36,.2);border-color:rgba(251,191,36,.3);color:#fcd34d">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          学术公益项目 · 永久免费 · 无隐形费用
+        </div>
+        <h1><span class="big-zero">0</span><img src="img/buddha.jpg" alt="佛系上网" class="buddha-inline" loading="lazy" /></h1>
+        <div class="tagline">零元起步 · 学术上网</div>
+        <p>下载即用，不花一分钱。学生专享网络优化方案，访问谷歌学术、国际数据库、前沿开源项目，该看的都能看。</p>
+
+        <div class="hero-actions">
+          <a href="#downloads" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            免费下载软件
+          </a>
+          <a href="#nodes" class="btn btn-secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+            免费获取节点
+          </a>
+        </div>
+        <div class="hero-actions" style="margin-top:8px">
+          <a href="#guide" class="btn btn-tertiary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="10"/></svg>
+            点击观看教程
+          </a>
+          <a href="https://web.tabbit-ai.com/invite/F5EB5A55" target="_blank" rel="noopener" class="btn btn-gift">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 2.5 2.5V8"/><path d="M16.5 8v-2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1-2.5 2.5H16.5"/></svg>
+            领取限量PRO账号
+          </a>
+        </div>
+
+        <div style="margin-top:18px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+          <span class="price-badge lg">🎓 学生专享福利</span>
+          <span style="color:var(--hero-m);font-size:.82rem;display:flex;align-items:center;gap:4px">
+            <span style="font-size:1rem">💡</span> 可替代付费游戏加速器，一省再省
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -772,6 +833,47 @@
         </a>
       </div>
       <p style="margin-top:14px;font-size:.8rem;color:#c2410c;text-align:center">💡 提示：公众号会自动回复账号密码，无需人工等待</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Tabbit AI 限时福利 ===== -->
+<section class="section" style="padding-top:0;padding-bottom:32px">
+  <div class="container">
+    <div style="background:linear-gradient(135deg,#4c1d95 0%,#7c3aed 50%,#a855f7 100%);border-radius:var(--radius-l);padding:28px 32px;color:#fff;position:relative;overflow:hidden">
+      <!-- 背景装饰 -->
+      <div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.08);pointer-events:none"></div>
+      <div style="position:absolute;bottom:-30px;left:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.06);pointer-events:none"></div>
+
+      <div style="position:relative;z-index:1;display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap">
+        <div style="font-size:2.2rem;flex-shrink:0;line-height:1">🎁</div>
+        <div style="flex:1;min-width:260px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">
+            <h3 style="font-size:1.15rem;font-weight:700;color:#fff;margin:0">限时福利 · 限量18个内测名额</h3>
+            <span style="font-size:.72rem;color:#fef08a;background:rgba(254,240,138,.15);padding:2px 10px;border-radius:100px;font-weight:700;border:1px solid rgba(254,240,138,.25)">🔥 仅剩少量</span>
+          </div>
+          <p style="font-size:.9rem;color:#ddd6fe;line-height:1.6;margin:0 0 14px">注册即送 <strong style="color:#fef08a">美团AI全自动浏览器 Pro 账号</strong>，无需写代码，AI 自动帮你操作浏览器完成任务。限量 18 个名额，领完即止。</p>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <!-- 隐藏文本用于复制 -->
+            <span id="tabbit-link" style="display:none">https://web.tabbit-ai.com/invite/F5EB5A55</span>
+
+            <a href="https://web.tabbit-ai.com/invite/F5EB5A55" target="_blank" rel="noopener" class="btn" style="background:#fef08a;color:#4c1d95;border:none;font-weight:700;padding:10px 22px;font-size:.9rem;box-shadow:0 2px 12px rgba(254,240,138,.25);text-decoration:none">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              点击跳转注册
+            </a>
+            <button class="btn" onclick="copyText('tabbit-link');showToast('邀请链接已复制，快去分享给朋友吧！')" style="background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2);padding:10px 22px;font-size:.9rem">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              一键复制链接
+            </button>
+            <button class="btn" onclick="copyText('tabbit-link');showToast('邀请链接已复制，快去微信/QQ分享给朋友吧！')" style="background:rgba(255,255,255,.08);color:#e9d5ff;border:1px solid rgba(255,255,255,.12);padding:10px 18px;font-size:.85rem">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8.69 3.44C5.99 3.44 3.8 5.27 3.8 7.53c0 1.25.7 2.38 1.81 3.15l-.45 1.35 1.58-.86c.56.15 1.17.24 1.8.24.14 0 .28 0 .42-.02-.12-.35-.19-.72-.19-1.1 0-2.26 2.05-4.09 4.58-4.09.13 0 .26 0 .39.01-.11-.47-.26-.91-.47-1.31C12.44 3.95 10.67 3.44 8.69 3.44zM4.5 7.23a.96.96 0 1 1 1.92 0 .96.96 0 0 1-1.92 0zm4.79 0a.96.96 0 1 1 1.92 0 .96.96 0 0 1-1.92 0z"/><path d="M15.32 10.22c-2.53 0-4.58 1.84-4.58 4.1s2.05 4.1 4.58 4.1c.57 0 1.12-.1 1.63-.27l1.42.78-.4-1.22c.99-.7 1.63-1.75 1.63-2.92v-.47c0-2.26-2.05-4.1-4.58-4.1h.01-.01zm-1.74 3.44a.87.87 0 1 1 0 1.74.87.87 0 0 1 0-1.74zm3.47 0a.87.87 0 1 1 0 1.74.87.87 0 0 1 0-1.74z"/></svg>
+              转发给朋友
+            </button>
+          </div>
+          <p style="font-size:.78rem;color:#c4b5fd;margin-top:10px">💡 提示：注册后自动获得 Pro 权限，名额有限，建议尽快领取并分享给需要的朋友</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
