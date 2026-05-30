@@ -208,6 +208,13 @@
     }
     .toggle-switch input:checked + .toggle-slider { background: var(--accent); }
     .toggle-switch input:checked + .toggle-slider::before { transform: translateX(20px); }
+    .proxy-switch-link {
+      color: var(--accent); font-size: .82rem; font-weight: 600; text-decoration: none;
+      padding: 2px 8px; border-radius: 4px; transition: background .15s; white-space: nowrap;
+    }
+    .proxy-switch-link:hover { background: var(--accent-l); }
+    .proxy-switch-link.backup { color: var(--amber); }
+    .proxy-switch-link.backup:hover { background: var(--amber-l); }
     .dl-btn svg{width:16px;height:16px;fill:currentColor}
 
     /* ===== Tabs ===== */
@@ -350,7 +357,37 @@
     .tips-card .tip-arrow{font-size:.85rem;color:var(--muted);transition:transform .15s}
     .tips-card details[open] .tip-arrow{transform:rotate(180deg)}
 
-    /* ===== Footer ===== */
+    /* ===== Contact ===== */
+    .contact-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:16px;
+    }
+    .contact-card{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius-l);padding:28px;
+      display:flex;flex-direction:column;gap:16px;
+      transition:all .2s;
+    }
+    .contact-card:hover{border-color:var(--border-h);box-shadow:var(--shadow-md)}
+    .contact-card-icon{
+      width:44px;height:44px;border-radius:var(--radius);display:flex;
+      align-items:center;justify-content:center;flex-shrink:0;
+    }
+    .contact-card-icon.wechat{background:#dcfce7;color:#16a34a}
+    .contact-card-icon.email{background:#eff6ff;color:#2563eb}
+    .contact-card-icon svg{width:20px;height:20px}
+    .contact-card h4{font-size:1rem;font-weight:600;color:var(--text)}
+    .contact-card p{font-size:.875rem;color:var(--text-2);line-height:1.65}
+    .contact-card .contact-highlight{
+      display:inline-block;background:var(--accent-l);color:var(--accent);
+      padding:4px 12px;border-radius:5px;font-weight:600;font-size:.875rem;
+      margin-top:4px;
+    }
+    .contact-card .contact-hint{
+      font-size:.78rem;color:var(--muted);margin-top:2px;
+    }
+    @media(max-width:640px){
+      .contact-grid{grid-template-columns:1fr}
+    }
     .footer{
       border-top:1px solid var(--border);padding:40px 24px;
       background:var(--surface);
@@ -393,6 +430,7 @@
       <a href="#downloads">下载</a>
       <a href="#nodes">节点</a>
       <a href="#guide">指南</a>
+      <a href="#contact">联系我</a>
     </div>
   </div>
 </nav>
@@ -405,7 +443,7 @@
       合规科研上网工具
     </div>
     <h1>软件<span>·</span>节点<span>·</span>一站搞定</h1>
-    <p>为研究者和学生提供畅通的全球学术资源访问——Google Scholar、GitHub、联合国数据库，以及更多国际权威数据源。</p>
+    <p>不折腾。下载软件、导入节点，两步连接全球学术资源。Google Scholar、GitHub、联合国数据库，该看的都能看。</p>
     <div class="hero-actions">
       <a href="#downloads" class="btn btn-primary">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -423,7 +461,7 @@
 <section class="section" id="downloads">
   <div class="container">
     <div class="section-header">
-      <div class="section-label">Downloads</div>
+      <div class="section-label">下载</div>
       <h2 class="section-title">下载 Karing 客户端</h2>
       <p class="section-desc">选择你的设备平台，下载对应的安装包。当前版本 v1.2.19.2209</p>
     </div>
@@ -440,8 +478,9 @@
         <input type="checkbox" id="proxy-toggle" onchange="toggleProxy()" checked />
         <span class="toggle-slider"></span>
       </label>
-      <span class="proxy-status on" id="proxy-status-text">已开启 · 通过代理加速</span>
-      <span style="font-size:.76rem;color:var(--muted)">关闭后使用 GitHub 直连（需 VPN）</span>
+      <span class="proxy-status on" id="proxy-status-text">已开启 · 主线路</span>
+      <a href="javascript:void(0)" class="proxy-switch-link" id="proxy-switch-link" onclick="switchProxyLine()" title="下载失败？点此切换备用线路">切换线路 ›</a>
+      <span style="font-size:.76rem;color:var(--muted)">关闭后走 GitHub 直连（海外用户或已有代理时可用）</span>
     </div>
 
     <div class="tabs">
@@ -712,9 +751,9 @@
 <section class="section" id="nodes" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
   <div class="container">
     <div class="section-header">
-      <div class="section-label">Nodes</div>
-      <h2 class="section-title">免费订阅节点</h2>
-      <p class="section-desc">可直接导入 Karing 使用。如需获取最新节点或更多线路，请关注公众号 <strong>鸡血青年冀文辉</strong>，回复「微信」联系我。</p>
+      <div class="section-label">节点</div>
+    <h2 class="section-title">免费订阅节点</h2>
+      <p class="section-desc">复制链接，打开 Karing 一键导入即可使用。节点定期更新，下方可获取更多。</p>
     </div>
 
     <div class="grid grid-2">
@@ -765,8 +804,7 @@
     </div>
 
     <div class="info-box">
-      <strong>需要更多节点？</strong>关注公众号 <span class="accent-tag">鸡血青年冀文辉</span>，回复「<strong>微信</strong>」联系我获取最新节点。
-      <span style="font-size:.8rem;opacity:.7;display:block;margin-top:2px">节点由后台管理（仅博主本人可操作），保证稳定可用。</span>
+      <strong>⚠️ 节点偶尔失效？</strong> 正常现象，我会定期维护更新。如果上面的链接用不了，<a href="#contact" style="color:#b45309;font-weight:700;text-decoration:underline">联系我</a> 获取最新节点。
     </div>
   </div>
 </section>
@@ -866,11 +904,48 @@
   </div>
 </section>
 
-<!-- ===== Footer ===== -->
+<!-- ===== Contact ===== -->
+<section class="section" id="contact" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">联系我</h2>
+      <p class="section-desc">节点失效？想要更多线路？有问题想反馈？随时找我。</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-card-icon wechat">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.69 3.44C5.99 3.44 3.8 5.27 3.8 7.53c0 1.25.7 2.38 1.81 3.15l-.45 1.35 1.58-.86c.56.15 1.17.24 1.8.24.14 0 .28 0 .42-.02-.12-.35-.19-.72-.19-1.1 0-2.26 2.05-4.09 4.58-4.09.13 0 .26 0 .39.01-.11-.47-.26-.91-.47-1.31C12.44 3.95 10.67 3.44 8.69 3.44zM4.5 7.23a.96.96 0 1 1 1.92 0 .96.96 0 0 1-1.92 0zm4.79 0a.96.96 0 1 1 1.92 0 .96.96 0 0 1-1.92 0z"/><path d="M15.32 10.22c-2.53 0-4.58 1.84-4.58 4.1s2.05 4.1 4.58 4.1c.57 0 1.12-.1 1.63-.27l1.42.78-.4-1.22c.99-.7 1.63-1.75 1.63-2.92v-.47c0-2.26-2.05-4.1-4.58-4.1h.01-.01zm-1.74 3.44a.87.87 0 1 1 0 1.74.87.87 0 0 1 0-1.74zm3.47 0a.87.87 0 1 1 0 1.74.87.87 0 0 1 0-1.74z"/></svg>
+        </div>
+        <h4>微信公众号</h4>
+        <p>关注公众号，回复「<strong>微信</strong>」加我好友，获取最新节点、反馈问题、交流科研工具。</p>
+        <div>
+          <span class="contact-highlight">鸡血青年冀文辉</span>
+          <p class="contact-hint">微信搜索或扫码关注</p>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </div>
+        <h4>GitHub 开源项目</h4>
+        <p>Karing 是开源软件。遇到 bug？有功能建议？直接去项目主页提 Issue，开发者会看到。</p>
+        <div>
+          <a href="https://github.com/KaringX/karing" target="_blank" style="display:inline-block;background:var(--text);color:#fff;padding:6px 16px;border-radius:6px;font-size:.85rem;font-weight:600;text-decoration:none;transition:all .15s" onmouseover="this.style.background='#404040'" onmouseout="this.style.background='#171717'">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:6px"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            KaringX/karing
+          </a>
+          <p class="contact-hint" style="margin-top:6px">欢迎 Star & Issue</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-left">
-      <strong>学术科研网络助手</strong> · v1.2.19.2209
+      <strong>学术科研网络助手</strong> · v1.2.19.2209 · <a href="#contact" style="color:var(--text-2);text-decoration:underline">联系我</a>
     </div>
     <div class="footer-right">
       <a href="https://github.com/KaringX/karing" target="_blank">GitHub 项目</a>
@@ -927,17 +1002,21 @@
     toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
   }
 
-  // ===== GitHub 代理加速 =====
-  const PROXY_BASE = 'https://gh-proxy.com/';
+  // ===== GitHub 代理加速（双线路冗余） =====
+  var PROXIES = ['https://gh-proxy.com/', 'https://ghproxy.net/'];
+  var PROXY_NAMES = ['主线路', '备用线路'];
+  var currentProxyIdx = 0;
 
   // 初始化：给所有下载链接打上 data-gh 标记
   (function initProxy() {
     document.querySelectorAll('.dl-btn').forEach(function(btn) {
       btn.setAttribute('data-gh', btn.href);
     });
-    // 读取 localStorage 偏好，默认 true（开）
+    // 读取 localStorage 偏好
     var saved = localStorage.getItem('proxyOn');
     var proxyOn = saved === null ? true : saved === 'true';
+    var savedIdx = parseInt(localStorage.getItem('proxyIdx') || '0');
+    currentProxyIdx = (savedIdx === 0 || savedIdx === 1) ? savedIdx : 0;
     document.getElementById('proxy-toggle').checked = proxyOn;
     applyProxy(proxyOn);
   })();
@@ -948,18 +1027,31 @@
     applyProxy(proxyOn);
   }
 
+  function switchProxyLine() {
+    if (!document.getElementById('proxy-toggle').checked) return;
+    currentProxyIdx = currentProxyIdx === 0 ? 1 : 0;
+    localStorage.setItem('proxyIdx', currentProxyIdx.toString());
+    applyProxy(true);
+    showToast('已切换到' + PROXY_NAMES[currentProxyIdx] + '（' + new URL(PROXIES[currentProxyIdx]).hostname + '）');
+  }
+
   function applyProxy(proxyOn) {
     var status = document.getElementById('proxy-status-text');
+    var link = document.getElementById('proxy-switch-link');
     document.querySelectorAll('.dl-btn').forEach(function(btn) {
       var gh = btn.getAttribute('data-gh');
-      btn.href = proxyOn ? PROXY_BASE + gh : gh;
+      btn.href = proxyOn ? PROXIES[currentProxyIdx] + gh : gh;
     });
     if (proxyOn) {
-      status.textContent = '已开启 · 通过代理加速';
+      status.textContent = '已开启 · ' + PROXY_NAMES[currentProxyIdx];
       status.className = 'proxy-status on';
+      link.textContent = '切换线路 ›';
+      link.className = 'proxy-switch-link' + (currentProxyIdx === 1 ? ' backup' : '');
+      link.style.display = '';
     } else {
       status.textContent = '已关闭 · GitHub 直连';
       status.className = 'proxy-status off';
+      link.style.display = 'none';
     }
   }
 </script>
