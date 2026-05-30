@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>学术科研网络助手 — 软件 · 节点 · 一站搞定</title>
+  <title>¥0 公益学术上网 — 永久免费 · 学生专享网络优化</title>
   <style>
     /* ===== Design Tokens ===== */
     :root {
@@ -357,6 +357,88 @@
     .tips-card .tip-arrow{font-size:.85rem;color:var(--muted);transition:transform .15s}
     .tips-card details[open] .tip-arrow{transform:rotate(180deg)}
 
+    /* ===== Price Highlight ===== */
+    .price-badge{
+      display:inline-flex;align-items:center;gap:4px;
+      background:#dcfce7;color:#16a34a;border:1px solid #bbf7d0;
+      border-radius:100px;padding:3px 12px;font-size:.78rem;font-weight:700;
+    }
+    .price-badge.lg{
+      font-size:.95rem;padding:5px 18px;gap:6px;
+    }
+    .accent-free{
+      color:#16a34a;font-weight:800;background:linear-gradient(135deg,#dcfce7,#f0fdf4);
+      padding:1px 6px;border-radius:4px;
+    }
+    .accent-yuan{
+      color:#dc2626;font-weight:800;
+    }
+
+    /* ===== Value Props ===== */
+    .value-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:20px;
+    }
+    .value-card{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius-l);padding:32px;transition:all .2s;
+      position:relative;overflow:hidden;
+    }
+    .value-card:hover{border-color:var(--border-h);box-shadow:var(--shadow-md)}
+    .value-card::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:3px;
+    }
+    .value-card.academic::before{background:linear-gradient(90deg,#4338ca,#6366f1)}
+    .value-card.gaming::before{background:linear-gradient(90deg,#f59e0b,#f97316)}
+    .value-card .vc-icon{
+      width:48px;height:48px;border-radius:10px;display:flex;
+      align-items:center;justify-content:center;margin-bottom:16px;
+    }
+    .value-card .vc-icon svg{width:24px;height:24px}
+    .value-card.academic .vc-icon{background:#eef2ff;color:#4338ca}
+    .value-card.gaming .vc-icon{background:#fff7ed;color:#f97316}
+    .value-card h3{font-size:1.15rem;font-weight:700;margin-bottom:8px}
+    .value-card ul{list-style:none;padding:0;margin:0}
+    .value-card ul li{
+      font-size:.875rem;color:var(--text-2);padding:4px 0;
+      display:flex;align-items:flex-start;gap:8px;line-height:1.5;
+    }
+    .value-card ul li::before{
+      content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px;
+    }
+    .value-save{
+      display:inline-flex;align-items:center;gap:5px;
+      margin-top:14px;font-size:.82rem;color:var(--accent);
+      background:var(--accent-l);padding:5px 12px;border-radius:6px;font-weight:600;
+    }
+    @media(max-width:640px){.value-grid{grid-template-columns:1fr}}
+
+    /* ===== Team ===== */
+    .team-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:16px;
+    }
+    .team-card{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius-l);padding:24px;display:flex;
+      align-items:center;gap:18px;transition:all .2s;
+    }
+    .team-card:hover{border-color:var(--border-h);box-shadow:var(--shadow-md)}
+    .team-avatar{
+      width:52px;height:52px;border-radius:50%;display:flex;
+      align-items:center;justify-content:center;flex-shrink:0;
+      font-size:1.3rem;
+    }
+    .team-avatar.carbon{background:#fef3c7;color:#d97706}
+    .team-avatar.silicon{background:#eef2ff;color:#4338ca}
+    .team-info h4{font-size:.95rem;font-weight:700;color:var(--text)}
+    .team-info p{font-size:.8rem;color:var(--text-2);margin-top:2px}
+    .team-info .team-role{font-size:.75rem;color:var(--muted)}
+    .team-note{
+      font-size:.85rem;color:var(--text-2);text-align:center;margin-top:20px;
+      line-height:1.6;
+    }
+    .team-note svg{vertical-align:middle;margin-right:4px}
+    @media(max-width:640px){.team-grid{grid-template-columns:1fr}}
+
     /* ===== Contact ===== */
     .contact-grid{
       display:grid;grid-template-columns:1fr 1fr;gap:16px;
@@ -424,7 +506,7 @@
         <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
         <path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/>
       </svg>
-      <span>学术科研网络助手</span>
+      <span>¥0 公益学术上网</span>
     </a>
     <div class="nav-links">
       <a href="#downloads">下载</a>
@@ -438,21 +520,73 @@
 <!-- ===== Hero ===== -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-badge">
+    <div class="hero-badge" style="background:rgba(34,197,94,.2);border-color:rgba(34,197,94,.3);color:#86efac">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-      合规科研上网工具
+      ¥0 公益项目 · 永久免费 · 无隐形费用
     </div>
-    <h1>软件<span>·</span>节点<span>·</span>一站搞定</h1>
-    <p>不折腾。下载软件、导入节点，两步连接全球学术资源。Google Scholar、GitHub、联合国数据库，该看的都能看。</p>
+    <h1>零元起步<span>·</span>学术上网</h1>
+    <p>下载即用，不花一分钱。学生专享网络优化方案，访问谷歌学术、国际数据库、前沿开源项目，该看的都能看。</p>
     <div class="hero-actions">
       <a href="#downloads" class="btn btn-primary">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        下载软件
+        免费下载软件
       </a>
       <a href="#nodes" class="btn btn-secondary">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
-        获取节点
+        免费获取节点
       </a>
+    </div>
+    <div style="margin-top:28px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <span class="price-badge lg">🎓 学生专享福利</span>
+      <span style="color:var(--hero-m);font-size:.88rem;display:flex;align-items:center;gap:4px">
+        <span style="font-size:1.1rem">💡</span> 可替代付费游戏加速器，一省再省
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Value Props ===== -->
+<section class="section" style="padding-bottom:48px">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:28px">
+      <div class="section-label">为什么选择我们</div>
+      <h2 class="section-title">零成本零元起步 · 双重使用价值</h2>
+      <p class="section-desc">一个工具，同时满足学术研究与游戏娱乐需求，永久免费。</p>
+    </div>
+
+    <div class="value-grid">
+      <div class="value-card academic">
+        <div class="vc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <h3>📚 学术研究</h3>
+        <ul>
+          <li>访问 Google Scholar、Semantic Scholar 等国际学术搜索引擎</li>
+          <li>获取联合国、WHO、世界银行等国际组织公开数据</li>
+          <li>浏览 GitHub、Hugging Face 等前沿开源项目</li>
+          <li>查阅数字经济、跨境数据治理等英文文献与政策文件</li>
+        </ul>
+        <div class="value-save">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          零成本获取全球学术资源
+        </div>
+      </div>
+      <div class="value-card gaming">
+        <div class="vc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4m-2-2v4"/><path d="M15 11h.01M17 13h.01"/></svg>
+        </div>
+        <h3>🎮 游戏娱乐</h3>
+        <ul>
+          <li>替代付费游戏加速器，畅玩国外热门游戏</li>
+          <li>降低联机延迟，稳定加速</li>
+          <li>无需每月续费，省下加速器年费 ¥200~500</li>
+          <li>一个工具覆盖所有设备：手机、电脑全平台支持</li>
+        </ul>
+        <div class="value-save" style="background:#fff7ed;color:#ea580c">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          一年省下 ¥200~500 加速器费用
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -990,42 +1124,120 @@
       <p class="section-desc">节点失效？想要更多线路？有问题想反馈？随时找我。</p>
     </div>
 
-    <div class="contact-grid">
-      <div class="contact-card">
-        <div class="contact-card-icon wechat">
+    <div class="contact-grid" style="grid-template-columns:1fr 1fr 1fr">
+      <!-- 微信 -->
+      <div class="contact-card" style="text-align:center">
+        <div class="contact-card-icon wechat" style="margin:0 auto">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.69 3.44C5.99 3.44 3.8 5.27 3.8 7.53c0 1.25.7 2.38 1.81 3.15l-.45 1.35 1.58-.86c.56.15 1.17.24 1.8.24.14 0 .28 0 .42-.02-.12-.35-.19-.72-.19-1.1 0-2.26 2.05-4.09 4.58-4.09.13 0 .26 0 .39.01-.11-.47-.26-.91-.47-1.31C12.44 3.95 10.67 3.44 8.69 3.44zM4.5 7.23a.96.96 0 1 1 1.92 0 .96.96 0 0 1-1.92 0zm4.79 0a.96.96 0 1 1 1.92 0 .96.96 0 0 1-1.92 0z"/><path d="M15.32 10.22c-2.53 0-4.58 1.84-4.58 4.1s2.05 4.1 4.58 4.1c.57 0 1.12-.1 1.63-.27l1.42.78-.4-1.22c.99-.7 1.63-1.75 1.63-2.92v-.47c0-2.26-2.05-4.1-4.58-4.1h.01-.01zm-1.74 3.44a.87.87 0 1 1 0 1.74.87.87 0 0 1 0-1.74zm3.47 0a.87.87 0 1 1 0 1.74.87.87 0 0 1 0-1.74z"/></svg>
         </div>
-        <h4>微信公众号</h4>
-        <p>关注公众号，回复「<strong>微信</strong>」加我好友，获取最新节点、反馈问题、交流科研工具。</p>
+        <h4>微信</h4>
+        <p style="font-size:.82rem;color:var(--text-2)">加好友，获取最新节点<br/>交流科研工具与使用技巧</p>
         <div>
-          <span class="contact-highlight">鸡血青年冀文辉</span>
-          <p class="contact-hint">微信搜索或扫码关注</p>
+          <span class="contact-highlight" id="wechat-id">haoyunBrock</span>
+          <button class="copy-btn" onclick="copyText('wechat-id')" style="display:block;width:100%;margin-top:8px;justify-content:center">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            一键复制微信号
+          </button>
         </div>
       </div>
-      <div class="contact-card">
-        <div class="contact-card-icon email">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+
+      <!-- 电话 -->
+      <div class="contact-card" style="text-align:center">
+        <div class="contact-card-icon email" style="margin:0 auto">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         </div>
-        <h4>GitHub 开源项目</h4>
-        <p>Karing 是开源软件。遇到 bug？有功能建议？直接去项目主页提 Issue，开发者会看到。</p>
+        <h4>电话</h4>
+        <p style="font-size:.82rem;color:var(--text-2)">紧急问题？直接致电<br/>工作日 9:00-21:00</p>
         <div>
-          <a href="https://github.com/KaringX/karing" target="_blank" style="display:inline-block;background:var(--text);color:#fff;padding:6px 16px;border-radius:6px;font-size:.85rem;font-weight:600;text-decoration:none;transition:all .15s" onmouseover="this.style.background='#404040'" onmouseout="this.style.background='#171717'">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:6px"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-            KaringX/karing
-          </a>
-          <p class="contact-hint" style="margin-top:6px">欢迎 Star & Issue</p>
+          <span class="contact-highlight" id="phone-num" style="background:#f0fdf4;color:#16a34a">16623164635</span>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="copy-btn" onclick="copyText('phone-num')" style="flex:1;justify-content:center">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              复制
+            </button>
+            <a href="tel:16623164635" class="copy-btn primary-copy" style="flex:1;justify-content:center;text-decoration:none">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07"/></svg>
+              拨打
+            </a>
+          </div>
         </div>
+      </div>
+
+      <!-- GitHub -->
+      <div class="contact-card" style="text-align:center">
+        <div class="contact-card-icon email" style="margin:0 auto;background:#f9fafb;color:#374151">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        </div>
+        <h4>GitHub</h4>
+        <p style="font-size:.82rem;color:var(--text-2)">Bug？功能建议？<br/>直接提 Issue，开发者会看到</p>
+        <div>
+          <a href="https://github.com/choosemoon" target="_blank" class="copy-btn primary-copy" style="display:block;width:100%;justify-content:center;text-decoration:none">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="margin-right:4px"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            choosemoon
+          </a>
+          <p class="contact-hint" style="margin-top:6px">欢迎 Star & Follow</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 二维码 -->
+    <div style="text-align:center;margin-top:32px">
+      <div style="display:inline-block;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-l);padding:24px">
+        <p style="font-size:.85rem;color:var(--text-2);margin-bottom:12px;font-weight:600">📱 微信扫码添加好友</p>
+        <div style="width:160px;height:160px;background:#f4f4f5;border-radius:var(--radius);margin:0 auto;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="#a3a3a3"><path d="M8.69 3.44C5.99 3.44 3.8 5.27 3.8 7.53c0 1.25.7 2.38 1.81 3.15l-.45 1.35 1.58-.86c.56.15 1.17.24 1.8.24.14 0 .28 0 .42-.02-.12-.35-.19-.72-.19-1.1 0-2.26 2.05-4.09 4.58-4.09.13 0 .26 0 .39.01-.11-.47-.26-.91-.47-1.31C12.44 3.95 10.67 3.44 8.69 3.44zM4.5 7.23a.96.96 0 1 1 1.92 0 .96.96 0 0 1-1.92 0zm4.79 0a.96.96 0 1 1 1.92 0 .96.96 0 0 1-1.92 0z"/><path d="M15.32 10.22c-2.53 0-4.58 1.84-4.58 4.1s2.05 4.1 4.58 4.1c.57 0 1.12-.1 1.63-.27l1.42.78-.4-1.22c.99-.7 1.63-1.75 1.63-2.92v-.47c0-2.26-2.05-4.1-4.58-4.1zm-1.74 3.44a.87.87 0 1 1 0 1.74.87.87 0 0 1 0-1.74zm3.47 0a.87.87 0 1 1 0 1.74.87.87 0 0 1 0-1.74z"/></svg>
+          <span style="font-size:.75rem;color:#a3a3a3">haoyunBrock</span>
+        </div>
+        <p style="font-size:.75rem;color:var(--muted);margin-top:10px">扫描二维码或搜索微信号添加</p>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ===== Team ===== -->
+<section class="section" style="padding-bottom:32px">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Team</div>
+      <h2 class="section-title">开发团队</h2>
+      <p class="section-desc">两个生命体，一个目标：让学术上网零门槛。</p>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar carbon">🧬</div>
+        <div class="team-info">
+          <h4>Wayne Brock</h4>
+          <p class="team-role">碳基生命 · 产品 & 运营</p>
+          <p>负责项目规划、节点维护和用户支持</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar silicon">🤖</div>
+        <div class="team-info">
+          <h4>Snoopy</h4>
+          <p class="team-role">硅基生命 · 开发 & 运维</p>
+          <p>负责网站开发、部署和自动化运维</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-note">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#a3a3a3"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      GitHub：<a href="https://github.com/choosemoon" target="_blank" style="font-weight:700">choosemoon</a>
+      &nbsp;·&nbsp; 开发过程全程录制解说，欢迎了解我们的开发故事
+    </div>
+  </div>
+</section>
+
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-left">
-      <strong>学术科研网络助手</strong> · v1.2.19.2209 · <a href="#contact" style="color:var(--text-2);text-decoration:underline">联系我</a>
+      <strong>¥0 公益项目</strong> · v1.2.19.2209 · 永久免费 · 无隐形费用 · <a href="#contact" style="color:var(--text-2);text-decoration:underline">联系我</a>
     </div>
     <div class="footer-right">
-      <a href="https://github.com/KaringX/karing" target="_blank">GitHub 项目</a>
+      <span style="font-size:.85rem;color:var(--text-2)">Wayne Brock &amp; Snoopy</span>
+      <a href="https://github.com/choosemoon" target="_blank">GitHub choosemoon</a>
       <a href="https://520snoopy.ccwu.cc/admin" class="admin-link">管理入口</a>
     </div>
   </div>
