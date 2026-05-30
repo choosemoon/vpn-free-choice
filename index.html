@@ -757,50 +757,127 @@
     </div>
 
     <div class="grid grid-2">
+
+      <!-- 001: 单节点直连 -->
       <div class="node-card">
         <div class="node-header">
-          <div class="node-num">01</div>
+          <div class="node-num">001</div>
           <div>
-            <div class="node-title">标准订阅节点</div>
-            <div class="node-sub">通用线路 · 适合日常使用</div>
+            <div class="node-title">单节点直连</div>
+            <div class="node-sub">vless · 适合手动配置</div>
           </div>
         </div>
-        <div class="node-url">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be</div>
+        <div class="node-url">vless://9e07d96a-08a7-4249-8e11-2c5899aa2d16@520snoopy.ccwu.cc:443?security=tls&amp;type=ws&amp;host=520snoopy.ccwu.cc&amp;path=/</div>
         <div class="node-actions">
-          <button class="copy-btn" onclick="copyText('node01-name')">
+          <button class="copy-btn" onclick="copyText('node001-name')">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
             复制名称
           </button>
-          <button class="copy-btn primary-copy" onclick="copyText('node01-url')">
+          <button class="copy-btn primary-copy" onclick="copyText('node001-url')">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
             一键复制链接
           </button>
         </div>
-        <span id="node01-name" style="display:none">01节点</span>
-        <span id="node01-url" style="display:none">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be</span>
+        <span id="node001-name" style="display:none">001节点</span>
+        <span id="node001-url" style="display:none">vless://9e07d96a-08a7-4249-8e11-2c5899aa2d16@520snoopy.ccwu.cc:443?security=tls&amp;type=ws&amp;host=520snoopy.ccwu.cc&amp;path=/</span>
       </div>
+
+      <!-- 002: Clash 订阅 -->
       <div class="node-card">
         <div class="node-header">
-          <div class="node-num">02</div>
+          <div class="node-num">002</div>
           <div>
-            <div class="node-title">Base64 订阅节点</div>
+            <div class="node-title">Clash 订阅</div>
+            <div class="node-sub">推荐 Clash / V2rayN 使用</div>
+          </div>
+        </div>
+        <div class="node-url">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be&amp;clash</div>
+        <div class="node-actions">
+          <button class="copy-btn" onclick="copyText('node002-name')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            复制名称
+          </button>
+          <button class="copy-btn primary-copy" onclick="copyText('node002-url')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            一键复制链接
+          </button>
+        </div>
+        <span id="node002-name" style="display:none">002节点</span>
+        <span id="node002-url" style="display:none">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be&amp;clash</span>
+      </div>
+
+      <!-- 003: 通用订阅 -->
+      <div class="node-card">
+        <div class="node-header">
+          <div class="node-num">003</div>
+          <div>
+            <div class="node-title">通用订阅</div>
+            <div class="node-sub">v2rayN / Sing-box 推荐</div>
+          </div>
+        </div>
+        <div class="node-url">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be</div>
+        <div class="node-actions">
+          <button class="copy-btn" onclick="copyText('node003-name')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            复制名称
+          </button>
+          <button class="copy-btn primary-copy" onclick="copyText('node003-url')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            一键复制链接
+          </button>
+        </div>
+        <span id="node003-name" style="display:none">003节点</span>
+        <span id="node003-url" style="display:none">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be</span>
+      </div>
+
+      <!-- 004: Base64 订阅 -->
+      <div class="node-card">
+        <div class="node-header">
+          <div class="node-num">004</div>
+          <div>
+            <div class="node-title">Base64 订阅</div>
             <div class="node-sub">兼容模式 · 部分客户端推荐</div>
           </div>
         </div>
         <div class="node-url">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be&amp;b64</div>
         <div class="node-actions">
-          <button class="copy-btn" onclick="copyText('node02-name')">
+          <button class="copy-btn" onclick="copyText('node004-name')">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
             复制名称
           </button>
-          <button class="copy-btn primary-copy" onclick="copyText('node02-url')">
+          <button class="copy-btn primary-copy" onclick="copyText('node004-url')">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
             一键复制链接
           </button>
         </div>
-        <span id="node02-name" style="display:none">02节点</span>
-        <span id="node02-url" style="display:none">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be&amp;b64</span>
+        <span id="node004-name" style="display:none">004节点</span>
+        <span id="node004-url" style="display:none">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be&amp;b64</span>
       </div>
+
+      <!-- 005: Shadowrocket 订阅 -->
+      <div class="node-card">
+        <div class="node-header">
+          <div class="node-num">005</div>
+          <div>
+            <div class="node-title">Shadowrocket 订阅</div>
+            <div class="node-sub">iOS 用户推荐 · 小火箭专用</div>
+          </div>
+        </div>
+        <div class="node-url">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be&sb</div>
+        <div class="node-actions">
+          <button class="copy-btn" onclick="copyText('node005-name')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            复制名称
+          </button>
+          <button class="copy-btn primary-copy" onclick="copyText('node005-url')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            一键复制链接
+          </button>
+        </div>
+        <span id="node005-name" style="display:none">005节点</span>
+        <span id="node005-url" style="display:none">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be&amp;sb</span>
+      </div>
+
     </div>
 
     <div class="info-box">
