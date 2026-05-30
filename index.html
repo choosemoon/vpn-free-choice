@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>¥0 公益学术上网 — 永久免费 · 学生专享网络优化</title>
+  <title>学术公益上网 — 永久免费 · 学生专享网络优化</title>
   <style>
     /* ===== Design Tokens ===== */
     :root {
-      --bg:       #fafafa;
+      --bg:       #fffbf5;
       --surface:  #ffffff;
-      --text:     #171717;
-      --text-2:   #525252;
-      --muted:    #a3a3a3;
-      --border:   #e5e5e5;
-      --border-h: #d4d4d4;
-      --accent:   #4338ca;
-      --accent-l: #eef2ff;
-      --accent-h: #3730a3;
-      --hero:     #0f172a;
-      --hero-t:   #f1f5f9;
-      --hero-m:   #94a3b8;
+      --text:     #1c1917;
+      --text-2:   #57534e;
+      --muted:    #a8a29e;
+      --border:   #e7e5e4;
+      --border-h: #d6d3d1;
+      --accent:   #f97316;
+      --accent-l: #fff7ed;
+      --accent-h: #ea580c;
+      --hero:     #1c1917;
+      --hero-t:   #fef3c7;
+      --hero-m:   #d6d3d1;
       --green:    #16a34a;
       --green-l:  #dcfce7;
       --amber:    #d97706;
@@ -80,9 +80,9 @@
     }
     .hero::before{
       content:'';position:absolute;inset:0;
-      background-image:radial-gradient(circle at 20% 50%, rgba(99,102,241,.15) 0%, transparent 50%),
-                       radial-gradient(circle at 80% 20%, rgba(56,189,248,.1) 0%, transparent 50%),
-                       radial-gradient(circle at 50% 80%, rgba(129,140,248,.08) 0%, transparent 50%);
+      background-image:radial-gradient(circle at 20% 50%, rgba(251,146,60,.18) 0%, transparent 50%),
+                       radial-gradient(circle at 80% 20%, rgba(251,191,36,.14) 0%, transparent 50%),
+                       radial-gradient(circle at 50% 80%, rgba(244,114,182,.1) 0%, transparent 50%);
       pointer-events:none;
     }
     .hero::after{
@@ -93,15 +93,26 @@
     .hero-inner{position:relative;z-index:1;max-width:720px;margin:0 auto}
     .hero-badge{
       display:inline-flex;align-items:center;gap:6px;
-      background:rgba(99,102,241,.2);border:1px solid rgba(99,102,241,.3);
+      background:rgba(251,146,60,.2);border:1px solid rgba(251,146,60,.3);
       border-radius:100px;padding:4px 16px;font-size:.8rem;font-weight:500;
-      color:#a5b4fc;margin-bottom:24px;
+      color:#fcd34d;margin-bottom:24px;
     }
     .hero h1{
       font-size:clamp(2rem,5vw,3.2rem);font-weight:800;
-      letter-spacing:-.03em;line-height:1.15;margin-bottom:16px;
+      letter-spacing:-.03em;line-height:1.15;margin-bottom:8px;
+      position:relative;
     }
-    .hero h1 span{color:#818cf8}
+    .hero h1 .big-zero{
+      font-size:clamp(4.5rem,10vw,8rem);font-weight:900;
+      line-height:1;display:block;color:#f97316;
+      text-shadow:0 2px 20px rgba(249,115,22,.3);
+      letter-spacing:-.06em;
+    }
+    .hero h1 span{color:#fb923c}
+    .hero .tagline{
+      font-size:clamp(1.1rem,3vw,1.5rem);font-weight:700;color:var(--hero-t);
+      margin-bottom:16px;letter-spacing:-.02em;
+    }
     .hero p{
       font-size:clamp(.95rem,2vw,1.1rem);color:var(--hero-m);
       max-width:520px;margin:0 auto 36px;line-height:1.65;
@@ -115,10 +126,10 @@
     }
     .btn-primary{
       background:var(--accent);color:#fff;
-      box-shadow:0 1px 3px rgba(67,56,202,.3),0 0 0 1px rgba(67,56,202,.2);
+      box-shadow:0 1px 3px rgba(249,115,22,.3),0 0 0 1px rgba(249,115,22,.2);
     }
     .btn-primary:hover{background:var(--accent-h);color:#fff;transform:translateY(-1px);
-      box-shadow:0 4px 12px rgba(67,56,202,.35),0 0 0 1px rgba(67,56,202,.3)}
+      box-shadow:0 4px 12px rgba(249,115,22,.35),0 0 0 1px rgba(249,115,22,.3)}
     .btn-secondary{
       background:rgba(255,255,255,.08);color:#e2e8f0;
       border:1px solid rgba(255,255,255,.15);
@@ -360,7 +371,7 @@
     /* ===== Price Highlight ===== */
     .price-badge{
       display:inline-flex;align-items:center;gap:4px;
-      background:#dcfce7;color:#16a34a;border:1px solid #bbf7d0;
+      background:#fef3c7;color:#d97706;border:1px solid #fde68a;
       border-radius:100px;padding:3px 12px;font-size:.78rem;font-weight:700;
     }
     .price-badge.lg{
@@ -387,15 +398,15 @@
     .value-card::before{
       content:'';position:absolute;top:0;left:0;right:0;height:3px;
     }
-    .value-card.academic::before{background:linear-gradient(90deg,#4338ca,#6366f1)}
-    .value-card.gaming::before{background:linear-gradient(90deg,#f59e0b,#f97316)}
+    .value-card.academic::before{background:linear-gradient(90deg,#f97316,#fb923c)}
+    .value-card.gaming::before{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
     .value-card .vc-icon{
       width:48px;height:48px;border-radius:10px;display:flex;
       align-items:center;justify-content:center;margin-bottom:16px;
     }
     .value-card .vc-icon svg{width:24px;height:24px}
-    .value-card.academic .vc-icon{background:#eef2ff;color:#4338ca}
-    .value-card.gaming .vc-icon{background:#fff7ed;color:#f97316}
+    .value-card.academic .vc-icon{background:#fff7ed;color:#f97316}
+    .value-card.gaming .vc-icon{background:#fffbeb;color:#f59e0b}
     .value-card h3{font-size:1.15rem;font-weight:700;margin-bottom:8px}
     .value-card ul{list-style:none;padding:0;margin:0}
     .value-card ul li{
@@ -428,7 +439,7 @@
       font-size:1.3rem;
     }
     .team-avatar.carbon{background:#fef3c7;color:#d97706}
-    .team-avatar.silicon{background:#eef2ff;color:#4338ca}
+    .team-avatar.silicon{background:#fff7ed;color:#f97316}
     .team-info h4{font-size:.95rem;font-weight:700;color:var(--text)}
     .team-info p{font-size:.8rem;color:var(--text-2);margin-top:2px}
     .team-info .team-role{font-size:.75rem;color:var(--muted)}
@@ -454,8 +465,8 @@
       width:44px;height:44px;border-radius:var(--radius);display:flex;
       align-items:center;justify-content:center;flex-shrink:0;
     }
-    .contact-card-icon.wechat{background:#dcfce7;color:#16a34a}
-    .contact-card-icon.email{background:#eff6ff;color:#2563eb}
+    .contact-card-icon.wechat{background:#fef3c7;color:#d97706}
+    .contact-card-icon.email{background:#fff7ed;color:#f97316}
     .contact-card-icon svg{width:20px;height:20px}
     .contact-card h4{font-size:1rem;font-weight:600;color:var(--text)}
     .contact-card p{font-size:.875rem;color:var(--text-2);line-height:1.65}
@@ -502,11 +513,11 @@
 <nav class="nav">
   <div class="nav-inner">
     <a href="#" class="nav-brand">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#4338ca" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
         <path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/>
       </svg>
-      <span>¥0 公益学术上网</span>
+      <span>学术公益上网</span>
     </a>
     <div class="nav-links">
       <a href="#downloads">下载</a>
@@ -520,11 +531,12 @@
 <!-- ===== Hero ===== -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-badge" style="background:rgba(34,197,94,.2);border-color:rgba(34,197,94,.3);color:#86efac">
+    <div class="hero-badge" style="background:rgba(251,191,36,.2);border-color:rgba(251,191,36,.3);color:#fcd34d">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-      ¥0 公益项目 · 永久免费 · 无隐形费用
+      学术公益项目 · 永久免费 · 无隐形费用
     </div>
-    <h1>零元起步<span>·</span>学术上网</h1>
+    <h1><span class="big-zero">0</span></h1>
+    <div class="tagline">零元起步 · 学术上网</div>
     <p>下载即用，不花一分钱。学生专享网络优化方案，访问谷歌学术、国际数据库、前沿开源项目，该看的都能看。</p>
     <div class="hero-actions">
       <a href="#downloads" class="btn btn-primary">
@@ -1179,19 +1191,6 @@
         </div>
       </div>
     </div>
-
-    <!-- 二维码 -->
-    <div style="text-align:center;margin-top:32px">
-      <div style="display:inline-block;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-l);padding:24px">
-        <p style="font-size:.85rem;color:var(--text-2);margin-bottom:12px;font-weight:600">📱 微信扫码添加好友</p>
-        <div style="width:160px;height:160px;background:#f4f4f5;border-radius:var(--radius);margin:0 auto;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="#a3a3a3"><path d="M8.69 3.44C5.99 3.44 3.8 5.27 3.8 7.53c0 1.25.7 2.38 1.81 3.15l-.45 1.35 1.58-.86c.56.15 1.17.24 1.8.24.14 0 .28 0 .42-.02-.12-.35-.19-.72-.19-1.1 0-2.26 2.05-4.09 4.58-4.09.13 0 .26 0 .39.01-.11-.47-.26-.91-.47-1.31C12.44 3.95 10.67 3.44 8.69 3.44zM4.5 7.23a.96.96 0 1 1 1.92 0 .96.96 0 0 1-1.92 0zm4.79 0a.96.96 0 1 1 1.92 0 .96.96 0 0 1-1.92 0z"/><path d="M15.32 10.22c-2.53 0-4.58 1.84-4.58 4.1s2.05 4.1 4.58 4.1c.57 0 1.12-.1 1.63-.27l1.42.78-.4-1.22c.99-.7 1.63-1.75 1.63-2.92v-.47c0-2.26-2.05-4.1-4.58-4.1zm-1.74 3.44a.87.87 0 1 1 0 1.74.87.87 0 0 1 0-1.74zm3.47 0a.87.87 0 1 1 0 1.74.87.87 0 0 1 0-1.74z"/></svg>
-          <span style="font-size:.75rem;color:#a3a3a3">haoyunBrock</span>
-        </div>
-        <p style="font-size:.75rem;color:var(--muted);margin-top:10px">扫描二维码或搜索微信号添加</p>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- ===== Team ===== -->
@@ -1200,7 +1199,7 @@
     <div class="section-header">
       <div class="section-label">Team</div>
       <h2 class="section-title">开发团队</h2>
-      <p class="section-desc">两个生命体，一个目标：让学术上网零门槛。</p>
+      <p class="section-desc">choosemoon · One Person Company 一人公司</p>
     </div>
 
     <div class="team-grid">
@@ -1215,9 +1214,9 @@
       <div class="team-card">
         <div class="team-avatar silicon">🤖</div>
         <div class="team-info">
-          <h4>Snoopy</h4>
-          <p class="team-role">硅基生命 · 开发 & 运维</p>
-          <p>负责网站开发、部署和自动化运维</p>
+          <h4>Snoopy (硅基生命)</h4>
+          <p class="team-role">开发 & 自动化运维</p>
+          <p>负责网站开发、部署和技术架构</p>
         </div>
       </div>
     </div>
@@ -1225,7 +1224,7 @@
     <div class="team-note">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="#a3a3a3"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
       GitHub：<a href="https://github.com/choosemoon" target="_blank" style="font-weight:700">choosemoon</a>
-      &nbsp;·&nbsp; 开发过程全程录制解说，欢迎了解我们的开发故事
+      &nbsp;·&nbsp; 一人公司 · 开发过程全程录制解说，欢迎了解
     </div>
   </div>
 </section>
@@ -1233,10 +1232,10 @@
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-left">
-      <strong>¥0 公益项目</strong> · v1.2.19.2209 · 永久免费 · 无隐形费用 · <a href="#contact" style="color:var(--text-2);text-decoration:underline">联系我</a>
+      <strong>学术公益项目</strong> · v1.2.19.2209 · 永久免费 · 无隐形费用 · <a href="#contact" style="color:var(--text-2);text-decoration:underline">联系我</a>
     </div>
     <div class="footer-right">
-      <span style="font-size:.85rem;color:var(--text-2)">Wayne Brock &amp; Snoopy</span>
+      <span style="font-size:.85rem;color:var(--text-2)">choosemoon · One Person Company</span>
       <a href="https://github.com/choosemoon" target="_blank">GitHub choosemoon</a>
       <a href="https://520snoopy.ccwu.cc/admin" class="admin-link">管理入口</a>
     </div>
