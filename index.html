@@ -434,12 +434,12 @@
     }
     .team-card:hover{border-color:var(--border-h);box-shadow:var(--shadow-md)}
     .team-avatar{
-      width:52px;height:52px;border-radius:50%;display:flex;
-      align-items:center;justify-content:center;flex-shrink:0;
-      font-size:1.3rem;
+      width:60px;height:60px;border-radius:50%;flex-shrink:0;
+      overflow:hidden;border:2px solid var(--border);
     }
-    .team-avatar.carbon{background:#fef3c7;color:#d97706}
-    .team-avatar.silicon{background:#fff7ed;color:#f97316}
+    .team-avatar img{
+      width:100%;height:100%;object-fit:cover;display:block;
+    }
     .team-info h4{font-size:.95rem;font-weight:700;color:var(--text)}
     .team-info p{font-size:.8rem;color:var(--text-2);margin-top:2px}
     .team-info .team-role{font-size:.75rem;color:var(--muted)}
@@ -489,6 +489,66 @@
       max-width:1040px;margin:0 auto;display:flex;
       justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
     }
+
+    /* ===== Floating Action Button ===== */
+    .fab-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+    .fab-menu {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-end;
+    }
+    .fab-container.open .fab-menu {
+      display: flex;
+    }
+    .fab-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 8px 18px;
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      box-shadow: var(--shadow-md);
+      transition: all .15s;
+      white-space: nowrap;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .fab-item:hover { border-color: var(--accent); color: var(--accent); }
+    .fab-main {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      box-shadow: 0 4px 16px rgba(249,115,22,.35);
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: all .2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .fab-main:hover { background: var(--accent-h); transform: scale(1.08); }
+    .fab-main .fab-close { display: none; }
+    .fab-container.open .fab-main .fab-open { display: none; }
+    .fab-container.open .fab-main .fab-close { display: inline; }
+    @media(max-width:640px){
+      .fab-container { bottom: 16px; right: 16px; }
+    }
     .footer-left{font-size:.85rem;color:var(--text-2)}
     .footer-left strong{color:var(--text)}
     .footer-right{display:flex;gap:16px;align-items:center}
@@ -496,6 +556,69 @@
     .footer-right a:hover{color:var(--text)}
     .admin-link{font-size:.8rem;color:#d4d4d8!important}
     .admin-link:hover{color:var(--muted)!important}
+
+    /* ===== Paper Download ===== */
+    .paper-section {
+      background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+      border: 1px solid #fed7aa;
+      border-radius: var(--radius-l);
+      padding: 32px;
+      margin-top: 32px;
+    }
+    .paper-section .section-header { margin-bottom: 24px; }
+    .paper-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .paper-step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 16px;
+      text-align: center;
+      transition: all .2s;
+    }
+    .paper-step:hover { border-color: var(--border-h); box-shadow: var(--shadow-sm); }
+    .paper-step .step-num {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: .9rem;
+      margin-bottom: 12px;
+    }
+    .paper-step h4 { font-size: .95rem; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+    .paper-step p { font-size: .82rem; color: var(--text-2); line-height: 1.6; }
+    .paper-cta {
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .paper-cta .mp-name-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 8px 16px;
+      font-weight: 600;
+      font-size: .95rem;
+      color: var(--text);
+    }
+    .paper-cta .mp-name-box svg { color: var(--accent); flex-shrink: 0; }
+    @media(max-width:640px){
+      .paper-steps { grid-template-columns: 1fr; }
+      .paper-cta { flex-direction: column; align-items: stretch; }
+    }
 
     /* ===== Responsive ===== */
     @media(max-width:640px){
@@ -597,6 +720,91 @@
         <div class="value-save" style="background:#fff7ed;color:#ea580c">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           一年省下 ¥200~500 加速器费用
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 学术文献下载 ===== -->
+<section class="section" id="paper" style="padding-top:0">
+  <div class="container">
+    <div class="paper-section">
+      <div class="section-header" style="margin-bottom:20px">
+        <div class="section-label" style="color:#ea580c">免费福利</div>
+        <h2 class="section-title" style="color:#9a3412">📄 免费学术文献下载</h2>
+        <p class="section-desc" style="color:#c2410c">关注公众号，免费获取知网/外文论文下载账号，不限量下载</p>
+      </div>
+
+      <div class="paper-steps">
+        <div class="paper-step">
+          <div class="step-num">1</div>
+          <h4>复制公众号名称</h4>
+          <p>点击下方按钮，一键复制<br/>「鸡血青年冀文辉」</p>
+        </div>
+        <div class="paper-step">
+          <div class="step-num">2</div>
+          <h4>微信搜索关注</h4>
+          <p>打开微信 → 搜索刚复制的名称<br/>→ 关注公众号</p>
+        </div>
+        <div class="paper-step">
+          <div class="step-num">3</div>
+          <h4>回复关键词</h4>
+          <p>向公众号发送消息<br/>回复「<strong style="color:var(--accent)">论文</strong>」</p>
+        </div>
+        <div class="paper-step">
+          <div class="step-num">4</div>
+          <h4>获取账号密码</h4>
+          <p>自动回复你的专属账号<br/>直接登录下载论文</p>
+        </div>
+      </div>
+
+      <div class="paper-cta">
+        <span class="paper-mp-name" id="mp-name" style="display:none">鸡血青年冀文辉</span>
+        <button class="btn btn-primary" style="padding:12px 28px;font-size:1rem" onclick="copyText('mp-name');showToast('公众号名称已复制，快去微信搜索吧！')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          一键复制公众号名称
+        </button>
+        <a href="weixin://dl/chat?t=鸡血青年冀文辉" class="btn btn-secondary" style="padding:12px 28px;font-size:1rem;text-decoration:none;color:var(--text);border:1px solid var(--border)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8.69 3.44C5.99 3.44 3.8 5.27 3.8 7.53c0 1.25.7 2.38 1.81 3.15l-.45 1.35 1.58-.86c.56.15 1.17.24 1.8.24.14 0 .28 0 .42-.02-.12-.35-.19-.72-.19-1.1 0-2.26 2.05-4.09 4.58-4.09.13 0 .26 0 .39.01-.11-.47-.26-.91-.47-1.31C12.44 3.95 10.67 3.44 8.69 3.44zM4.5 7.23a.96.96 0 1 1 1.92 0 .96.96 0 0 1-1.92 0zm4.79 0a.96.96 0 1 1 1.92 0 .96.96 0 0 1-1.92 0z"/></svg>
+          打开微信关注
+        </a>
+      </div>
+      <p style="margin-top:14px;font-size:.8rem;color:#c2410c;text-align:center">💡 提示：公众号会自动回复账号密码，无需人工等待</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 快速开始 ===== -->
+<section class="section" style="padding-top:0;padding-bottom:40px">
+  <div class="container">
+    <div style="background:linear-gradient(135deg,#fff7ed 0%,#fef3c7 100%);border:1px solid #fed7aa;border-radius:var(--radius-l);padding:28px 32px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap">
+        <span style="font-size:1.1rem">🚀</span>
+        <h3 style="font-size:1.1rem;font-weight:700;color:#9a3412;margin:0">3 步快速开始</h3>
+        <span style="font-size:.78rem;color:#c2410c;background:#fff7ed;padding:2px 10px;border-radius:100px;font-weight:600">新手必看</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px">
+        <div style="background:#fff;border-radius:var(--radius);padding:16px 18px;display:flex;align-items:flex-start;gap:12px;border:1px solid #fde68a">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;margin-top:1px">1</div>
+          <div>
+            <div style="font-weight:600;font-size:.9rem;color:var(--text)">下载客户端</div>
+            <div style="font-size:.8rem;color:var(--text-2);margin-top:2px">选择你的设备，点击下载</div>
+          </div>
+        </div>
+        <div style="background:#fff;border-radius:var(--radius);padding:16px 18px;display:flex;align-items:flex-start;gap:12px;border:1px solid #fde68a">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;margin-top:1px">2</div>
+          <div>
+            <div style="font-weight:600;font-size:.9rem;color:var(--text)">复制节点链接</div>
+            <div style="font-size:.8rem;color:var(--text-2);margin-top:2px">点击「一键复制链接」按钮</div>
+          </div>
+        </div>
+        <div style="background:#fff;border-radius:var(--radius);padding:16px 18px;display:flex;align-items:flex-start;gap:12px;border:1px solid #fde68a">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;margin-top:1px">3</div>
+          <div>
+            <div style="font-weight:600;font-size:.9rem;color:var(--text)">导入即可使用</div>
+            <div style="font-size:.8rem;color:var(--text-2);margin-top:2px">打开 Karing → 订阅 → 粘贴</div>
+          </div>
         </div>
       </div>
     </div>
@@ -899,7 +1107,13 @@
     <div class="section-header">
       <div class="section-label">节点</div>
     <h2 class="section-title">免费订阅节点</h2>
-      <p class="section-desc">复制链接，打开 Karing 一键导入即可使用。节点定期更新，下方可获取更多。</p>
+      <p class="section-desc">复制链接 → 打开 Karing → 一键导入。节点定期更新，失效可联系我获取最新版。</p>
+    </div>
+
+    <!-- 导入提示 -->
+    <div style="background:var(--accent-l);border:1px solid #fed7aa;border-radius:var(--radius);padding:14px 20px;margin-bottom:24px;font-size:.88rem;color:#9a3412;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <span style="font-size:1.1rem">💡</span>
+      <span><strong>不知道怎么导入？</strong> 复制链接后，打开 Karing → 点击左下角「订阅」→「+」→ 粘贴链接 → 完成！</span>
     </div>
 
     <div class="grid grid-2">
@@ -1138,19 +1352,21 @@
 
     <div class="contact-grid" style="grid-template-columns:1fr 1fr 1fr">
       <!-- 微信 -->
-      <div class="contact-card" style="text-align:center">
-        <div class="contact-card-icon wechat" style="margin:0 auto">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.69 3.44C5.99 3.44 3.8 5.27 3.8 7.53c0 1.25.7 2.38 1.81 3.15l-.45 1.35 1.58-.86c.56.15 1.17.24 1.8.24.14 0 .28 0 .42-.02-.12-.35-.19-.72-.19-1.1 0-2.26 2.05-4.09 4.58-4.09.13 0 .26 0 .39.01-.11-.47-.26-.91-.47-1.31C12.44 3.95 10.67 3.44 8.69 3.44zM4.5 7.23a.96.96 0 1 1 1.92 0 .96.96 0 0 1-1.92 0zm4.79 0a.96.96 0 1 1 1.92 0 .96.96 0 0 1-1.92 0z"/><path d="M15.32 10.22c-2.53 0-4.58 1.84-4.58 4.1s2.05 4.1 4.58 4.1c.57 0 1.12-.1 1.63-.27l1.42.78-.4-1.22c.99-.7 1.63-1.75 1.63-2.92v-.47c0-2.26-2.05-4.1-4.58-4.1h.01-.01zm-1.74 3.44a.87.87 0 1 1 0 1.74.87.87 0 0 1 0-1.74zm3.47 0a.87.87 0 1 1 0 1.74.87.87 0 0 1 0-1.74z"/></svg>
+      <div class="contact-card" style="text-align:center;border-color:var(--accent);border-width:2px">
+        <div class="contact-card-icon wechat" style="margin:0 auto;width:52px;height:52px">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8.69 3.44C5.99 3.44 3.8 5.27 3.8 7.53c0 1.25.7 2.38 1.81 3.15l-.45 1.35 1.58-.86c.56.15 1.17.24 1.8.24.14 0 .28 0 .42-.02-.12-.35-.19-.72-.19-1.1 0-2.26 2.05-4.09 4.58-4.09.13 0 .26 0 .39.01-.11-.47-.26-.91-.47-1.31C12.44 3.95 10.67 3.44 8.69 3.44zM4.5 7.23a.96.96 0 1 1 1.92 0 .96.96 0 0 1-1.92 0zm4.79 0a.96.96 0 1 1 1.92 0 .96.96 0 0 1-1.92 0z"/><path d="M15.32 10.22c-2.53 0-4.58 1.84-4.58 4.1s2.05 4.1 4.58 4.1c.57 0 1.12-.1 1.63-.27l1.42.78-.4-1.22c.99-.7 1.63-1.75 1.63-2.92v-.47c0-2.26-2.05-4.1-4.58-4.1h.01-.01zm-1.74 3.44a.87.87 0 1 1 0 1.74.87.87 0 0 1 0-1.74zm3.47 0a.87.87 0 1 1 0 1.74.87.87 0 0 1 0-1.74z"/></svg>
         </div>
-        <h4>微信</h4>
-        <p style="font-size:.82rem;color:var(--text-2)">加好友，获取最新节点<br/>交流科研工具与使用技巧</p>
-        <div>
-          <span class="contact-highlight" id="wechat-id">haoyunBrock</span>
-          <button class="copy-btn" onclick="copyText('wechat-id')" style="display:block;width:100%;margin-top:8px;justify-content:center">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            一键复制微信号
-          </button>
+        <h4 style="color:var(--accent)">📱 微信联系（推荐）</h4>
+        <p style="font-size:.85rem;color:var(--text-2);margin-bottom:8px">加好友获取最新节点 · 回复「论文」获取下载账号</p>
+        <div style="background:var(--accent-l);border:1px dashed var(--accent);border-radius:var(--radius);padding:10px 16px;margin-bottom:12px">
+          <div style="font-size:.78rem;color:var(--muted);margin-bottom:4px">第一步：复制微信号</div>
+          <div style="font-size:1.1rem;font-weight:700;color:var(--text);letter-spacing:.05em" id="wechat-id">haoyunBrock</div>
         </div>
+        <button class="copy-btn" onclick="copyText('wechat-id');showToast('微信号已复制，快去微信搜索添加吧！')" style="display:block;width:100%;justify-content:center;font-size:.95rem;padding:10px 20px;background:var(--accent);color:#fff;border-color:var(--accent)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          一键复制微信号
+        </button>
+        <p style="font-size:.76rem;color:var(--muted);margin-top:8px">复制后，打开微信 → 右上角「+」→「添加朋友」→ 粘贴搜索</p>
       </div>
 
       <!-- 电话 -->
@@ -1204,7 +1420,7 @@
 
     <div class="team-grid">
       <div class="team-card">
-        <div class="team-avatar carbon">🧬</div>
+        <div class="team-avatar"><img src="img/avatar-wayne.png" alt="Wayne Brock" /></div>
         <div class="team-info">
           <h4>Wayne Brock</h4>
           <p class="team-role">碳基生命 · 产品 & 运营</p>
@@ -1212,7 +1428,7 @@
         </div>
       </div>
       <div class="team-card">
-        <div class="team-avatar silicon">🤖</div>
+        <div class="team-avatar"><img src="img/avatar-snoopy.png" alt="Snoopy" /></div>
         <div class="team-info">
           <h4>Snoopy</h4>
           <p class="team-role">硅基生命 · 开发 & 自动化运维</p>
@@ -1245,7 +1461,44 @@
 <!-- Toast -->
 <div id="copy-toast" class="toast"></div>
 
+<!-- 浮动快捷按钮 -->
+<div class="fab-container" id="fab-container">
+  <div class="fab-menu" id="fab-menu">
+    <a href="#downloads" class="fab-item" onclick="document.getElementById('fab-container').classList.remove('open')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      下载客户端
+    </a>
+    <a href="#nodes" class="fab-item" onclick="document.getElementById('fab-container').classList.remove('open')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      获取节点
+    </a>
+    <a href="#contact" class="fab-item" onclick="document.getElementById('fab-container').classList.remove('open')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8.69 3.44C5.99 3.44 3.8 5.27 3.8 7.53c0 1.25.7 2.38 1.81 3.15l-.45 1.35 1.58-.86c.56.15 1.17.24 1.8.24.14 0 .28 0 .42-.02-.12-.35-.19-.72-.19-1.1 0-2.26 2.05-4.09 4.58-4.09.13 0 .26 0 .39.01-.11-.47-.26-.91-.47-1.31C12.44 3.95 10.67 3.44 8.69 3.44zM4.5 7.23a.96.96 0 1 1 1.92 0 .96.96 0 0 1-1.92 0zm4.79 0a.96.96 0 1 1 1.92 0 .96.96 0 0 1-1.92 0z"/></svg>
+      联系我
+    </a>
+  </div>
+  <button class="fab-main" id="fab-main" onclick="toggleFab()" aria-label="快捷菜单">
+    <span class="fab-open">💬</span>
+    <span class="fab-close">✕</span>
+  </button>
+</div>
+
 <script>
+  // ===== 平台自动检测，自动切换到对应下载 tab =====
+  (function autoDetectPlatform() {
+    var ua = navigator.userAgent || '';
+    var tab = 'windows'; // 默认
+    if (/Macintosh|Mac OS X/i.test(ua)) tab = 'macos';
+    else if (/Android/i.test(ua)) tab = 'android';
+    else if (/Linux|X11/i.test(ua) && !/Android/i.test(ua)) tab = 'linux';
+
+    // 页面加载后自动切换
+    setTimeout(function() {
+      var btn = document.querySelector('.tab-btn[onclick*="' + tab + '"]');
+      if (btn) switchTab(tab, btn);
+    }, 100);
+  })();
+
   function switchTab(name, btn) {
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -1289,6 +1542,18 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
   }
+
+  function toggleFab() {
+    document.getElementById('fab-container').classList.toggle('open');
+  }
+
+  // 点击页面其他地方自动关闭 FAB 菜单
+  document.addEventListener('click', function(e) {
+    var fab = document.getElementById('fab-container');
+    if (fab && !fab.contains(e.target) && fab.classList.contains('open')) {
+      fab.classList.remove('open');
+    }
+  });
 
   // ===== GitHub 代理加速（双线路冗余） =====
   var PROXIES = ['https://gh-proxy.com/', 'https://ghproxy.net/'];
