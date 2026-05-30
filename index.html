@@ -110,9 +110,70 @@
     footer { text-align: center; padding: 32px 24px; font-size: .85rem; color: var(--muted); border-top: 1px solid var(--border); }
     footer a { color: var(--primary); text-decoration: none; }
     .sep { height: 48px; }
+    /* ---- 节点专区 ---- */
+    .node-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 20px; }
+    .node-card {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 28px; transition: all .22s;
+    }
+    .node-card:hover { border-color: #06b6d4; box-shadow: 0 4px 16px rgba(6,182,212,.15); }
+    .node-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .node-num {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: linear-gradient(135deg, #06b6d4, #6366f1);
+      color: #fff; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.05rem; flex-shrink: 0;
+    }
+    .node-name { font-weight: 700; font-size: 1.05rem; }
+    .node-tag { font-size: .78rem; color: var(--muted); margin-top: 2px; }
+    .node-url-box {
+      background: #f1f5f9; border: 1px solid var(--border);
+      border-radius: 10px; padding: 12px 14px; margin-bottom: 16px;
+      font-size: .8rem; color: var(--muted);
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Consolas', monospace;
+      line-height: 1.5; max-height: 48px; overflow: hidden; position: relative;
+      word-break: break-all; user-select: all;
+    }
+    .node-url-box::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 20px;
+      background: linear-gradient(transparent, #f1f5f9); pointer-events: none;
+    }
+    .node-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .copy-btn {
+      display: flex; align-items: center; gap: 6px;
+      padding: 10px 18px; border-radius: 10px; border: 1.5px solid var(--border);
+      background: var(--card); color: var(--text); font-size: .88rem; font-weight: 600;
+      cursor: pointer; transition: all .2s; font-family: inherit;
+    }
+    .copy-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .copy-btn.copied { background: #dcfce7; border-color: #22c55e; color: #16a34a; }
+    .copy-btn.copied svg { fill: #16a34a; }
+    .copy-btn.primary-copy {
+      background: linear-gradient(135deg, #06b6d4, #6366f1); color: #fff; border: none; flex: 1; justify-content: center;
+    }
+    .copy-btn.primary-copy:hover { opacity: .92; transform: scale(1.02); color: #fff; }
+    .toast {
+      position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+      background: #1e293b; color: #fff; padding: 12px 28px; border-radius: 10px;
+      font-size: .9rem; font-weight: 600; z-index: 9999; box-shadow: 0 4px 20px rgba(0,0,0,.25);
+      opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s;
+      transform: translateX(-50%) translateY(10px);
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .node-tip-box {
+      background: linear-gradient(135deg, #fffbeb, #fef3c7);
+      border: 1px solid #f59e0b; border-radius: 12px; padding: 18px 22px;
+      margin-top: 24px; font-size: .9rem; line-height: 1.7; color: #92400e;
+    }
+    .node-tip-box strong { color: #d97706; }
+    .node-tip-box .acct {
+      background: #fef3c7; padding: 2px 8px; border-radius: 4px; font-weight: 700;
+      white-space: nowrap;
+    }
     @media (max-width: 600px) {
       header h1 { font-size: 1.8rem; }
       .cards-grid { grid-template-columns: 1fr; }
+      .node-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -369,6 +430,56 @@
     </div>
   </div>
 
+  <!-- 免费节点 -->
+  <div class="sep"></div>
+  <div class="section-title">
+    <div class="icon">🔗</div>
+    免费节点
+  </div>
+  <p style="color:var(--muted); font-size:.9rem; margin-bottom:20px; line-height:1.6;">
+    以下为免费公用节点，可直接导入 Karing 使用。如需获取最新节点或更多线路，请关注公众号 <span class="acct" style="background:#fef3c7;padding:2px 8px;border-radius:4px;font-weight:700;">鸡血青年冀文辉</span>，回复「<strong>微信</strong>」联系我。
+  </p>
+  <div class="node-grid">
+    <!-- 01节点 -->
+    <div class="node-card">
+      <div class="node-card-header">
+        <div class="node-num">01</div>
+        <div>
+          <div class="node-name">标准订阅节点</div>
+          <div class="node-tag">通用线路 · 适合日常使用</div>
+        </div>
+      </div>
+      <div class="node-url-box">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be</div>
+      <div class="node-actions">
+        <button class="copy-btn" onclick="copyText('node01-name')" title="复制节点名称"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> 复制名称</button>
+        <button class="copy-btn primary-copy" onclick="copyText('node01-url')" title="一键复制订阅链接"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> 一键复制链接</button>
+      </div>
+      <span id="node01-name" style="display:none;">01节点</span>
+      <span id="node01-url" style="display:none;">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be</span>
+    </div>
+    <!-- 02节点 -->
+    <div class="node-card">
+      <div class="node-card-header">
+        <div class="node-num">02</div>
+        <div>
+          <div class="node-name">Base64 订阅节点</div>
+          <div class="node-tag">兼容模式 · 部分客户端推荐</div>
+        </div>
+      </div>
+      <div class="node-url-box">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be&amp;b64</div>
+      <div class="node-actions">
+        <button class="copy-btn" onclick="copyText('node02-name')" title="复制节点名称"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> 复制名称</button>
+        <button class="copy-btn primary-copy" onclick="copyText('node02-url')" title="一键复制订阅链接"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> 一键复制链接</button>
+      </div>
+      <span id="node02-name" style="display:none;">02节点</span>
+      <span id="node02-url" style="display:none;">https://520snoopy.ccwu.cc/sub?token=283d0fd74ef13332bd34218a7ca6d2be&amp;b64</span>
+    </div>
+  </div>
+  <div class="node-tip-box">
+    💡 <strong>需要更多节点？</strong>关注公众号 <span class="acct">鸡血青年冀文辉</span>，回复「<strong>微信</strong>」联系我获取最新节点。<br>
+    <span style="font-size:.82rem;opacity:.75;">节点由后台管理（仅博主本人可操作），保证稳定可用。</span>
+  </div>
+
   <!-- Video placeholder -->
   <div class="sep"></div>
   <div class="section-title">
@@ -443,6 +554,50 @@
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('tab-' + name).classList.add('active');
     btn.classList.add('active');
+  }
+
+  function copyText(elemId) {
+    const el = document.getElementById(elemId);
+    if (!el) return;
+    const text = el.textContent.trim();
+
+    // 使用 Clipboard API
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => showToast('已复制: ' + (text.length > 50 ? text.slice(0, 50) + '...' : text)));
+    } else {
+      // 降级方案
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed'; ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); showToast('已复制!'); } catch (e) { alert('复制失败，请手动复制'); }
+      document.body.removeChild(ta);
+    }
+
+    // 按钮视觉反馈
+    const btn = document.querySelector(`[onclick="copyText('${elemId}')"]`);
+    if (btn) {
+      btn.classList.add('copied');
+      const origHTML = btn.innerHTML;
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 已复制';
+      setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = origHTML; }, 1500);
+    }
+  }
+
+  let toastTimer;
+  function showToast(msg) {
+    let toast = document.getElementById('copy-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'copy-toast';
+      toast.className = 'toast';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
   }
 </script>
 
