@@ -64,8 +64,6 @@
       transition:top .2s;
     }
     body.has-wechat-tip .nav{top:48px}
-    body.has-tabbit-banner .nav{top:64px}
-    body.has-wechat-tip.has-tabbit-banner .nav{top:112px}
     .nav-inner{
       max-width:1040px;margin:0 auto;padding:0 24px;
       display:flex;align-items:center;justify-content:space-between;height:56px;
@@ -84,8 +82,6 @@
     @media(max-width:640px){
       .nav-links a{font-size:.8rem;padding:5px 8px}
       .nav-brand span{display:none}
-      body.has-tabbit-banner .nav{top:50px}
-      body.has-wechat-tip.has-tabbit-banner .nav{top:98px}
     }
 
     /* ===== Hero ===== */
@@ -1161,66 +1157,60 @@
       .contact-card .copy-btn{font-size:.78rem;padding:8px 10px}
     }
 
-    /* ===== Tabbit Pro 顶部福利弹窗 ===== */
-    .tabbit-banner{
-      display:none;position:fixed;top:0;left:0;right:0;z-index:9998;
-      background:linear-gradient(135deg,#1e1b4b 0%,#312e81 40%,#4338ca 100%);
-      color:#e0e7ff;box-shadow:0 4px 24px rgba(67,56,202,.35);
-      animation:tabbitSlide .45s ease;
+    /* ===== Tabbit 悬浮岛 FAB ===== */
+    .tabbit-fab{
+      display:none;position:fixed;bottom:24px;right:16px;z-index:9998;
+      background:linear-gradient(135deg,#1e1b4b 0%,#312e81 50%,#4338ca 100%);
+      color:#e0e7ff;border-radius:16px;
+      box-shadow:0 8px 32px rgba(67,56,202,.4),0 0 0 3px rgba(245,158,11,.3);
+      animation:fabSlideIn .5s cubic-bezier(.34,1.56,.64,1),fabPulse 2s ease-in-out 1s infinite;
+      max-width:calc(100vw - 32px);cursor:pointer;
     }
-    .tabbit-banner.show{display:block}
-    @keyframes tabbitSlide{
-      from{transform:translateY(-100%)}
-      to{transform:translateY(0)}
+    .tabbit-fab.show{display:block}
+    @keyframes fabSlideIn{
+      from{transform:translateX(120%);opacity:0}
+      to{transform:translateX(0);opacity:1}
     }
-    .tabbit-banner-inner{
-      max-width:1040px;margin:0 auto;padding:14px 20px;
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      flex-wrap:wrap;
+    @keyframes fabPulse{
+      0%,100%{box-shadow:0 8px 32px rgba(67,56,202,.4),0 0 0 3px rgba(245,158,11,.3)}
+      50%{box-shadow:0 8px 36px rgba(67,56,202,.55),0 0 0 8px rgba(245,158,11,.15)}
     }
-    .tabbit-banner-left{
-      display:flex;align-items:center;gap:10px;flex:1;min-width:0;
-    }
-    .tabbit-banner-icon{
-      width:36px;height:36px;border-radius:10px;flex-shrink:0;
-      background:linear-gradient(135deg,#a78bfa,#7c3aed);
+    .tabbit-fab-icon{
+      width:44px;height:44px;border-radius:12px;flex-shrink:0;
+      background:linear-gradient(135deg,#f59e0b,#f97316);
       display:flex;align-items:center;justify-content:center;
-      font-size:1.2rem;
+      font-size:1.4rem;box-shadow:0 2px 8px rgba(245,158,11,.35);
     }
-    .tabbit-banner-text{font-size:.88rem;line-height:1.5;min-width:0}
-    .tabbit-banner-text strong{color:#c4b5fd;font-weight:700}
-    .tabbit-banner-text .highlight-token{
+    .tabbit-fab-text{
+      font-size:.85rem;line-height:1.4;min-width:0;
+      font-weight:500;padding-right:36px;
+    }
+    .tabbit-fab-text .fab-highlight{
       display:inline-block;background:linear-gradient(135deg,#f59e0b,#f97316);
       color:#fff;padding:2px 8px;border-radius:5px;font-size:.82rem;
-      font-weight:700;margin:0 2px;
+      font-weight:700;margin-right:4px;
     }
-    .tabbit-banner-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
-    .tabbit-banner-btn{
-      padding:10px 20px;border-radius:8px;font-size:.88rem;font-weight:700;
-      background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;
-      text-decoration:none;white-space:nowrap;transition:all .15s;
-      display:flex;align-items:center;gap:6px;
+    .tabbit-fab-text .fab-brand{
+      color:#c4b5fd;font-weight:700;white-space:nowrap;
     }
-    .tabbit-banner-btn:hover{filter:brightness(1.12);color:#fff;transform:translateY(-1px)}
-    .tabbit-banner-close{
-      width:28px;height:28px;border-radius:50%;border:none;flex-shrink:0;
-      background:rgba(255,255,255,.15);color:#a5b4fc;font-size:.85rem;
+    .tabbit-fab-close{
+      position:absolute;top:8px;right:8px;
+      width:24px;height:24px;border-radius:50%;border:none;flex-shrink:0;
+      background:rgba(255,255,255,.12);color:#a5b4fc;font-size:.75rem;
       cursor:pointer;display:flex;align-items:center;justify-content:center;
       transition:all .15s;
     }
-    .tabbit-banner-close:hover{background:rgba(255,255,255,.25);color:#fff}
+    .tabbit-fab-close:hover{background:rgba(255,255,255,.2);color:#fff}
     @media(max-width:640px){
-      .tabbit-banner-inner{padding:10px 14px}
-      .tabbit-banner-text{font-size:.8rem}
-      .tabbit-banner-btn{padding:8px 14px;font-size:.8rem}
-      .tabbit-banner-icon{width:30px;height:30px;font-size:1rem}
+      .tabbit-fab{bottom:16px;right:10px;border-radius:14px}
+      .tabbit-fab-icon{width:38px;height:38px;border-radius:10px;font-size:1.2rem}
+      .tabbit-fab-text{font-size:.8rem;padding-right:32px}
+      .tabbit-fab-close{top:6px;right:6px;width:22px;height:22px;font-size:.7rem}
     }
     @media(max-width:374px){
-      .tabbit-banner-left{gap:6px}
-      .tabbit-banner-text{font-size:.74rem}
-      .tabbit-banner-btn{padding:6px 10px;font-size:.74rem}
-      body.has-tabbit-banner .nav{top:44px}
-      body.has-wechat-tip.has-tabbit-banner .nav{top:92px}
+      .tabbit-fab{bottom:12px;right:6px}
+      .tabbit-fab-icon{width:32px;height:32px;border-radius:8px;font-size:1rem}
+      .tabbit-fab-text{font-size:.74rem;padding-right:28px}
     }
   </style>
 </head>
@@ -1228,28 +1218,20 @@
 
 <!-- ===== 微信环境提示条 ===== -->
 <div id="wechat-tip" style="display:none;position:fixed;top:0;left:0;right:0;z-index:99999;background:#eff6ff;color:#0369a1;text-align:center;padding:12px 16px;font-size:.92rem;font-weight:500;box-shadow:0 2px 8px rgba(59,130,246,.12);border-bottom:1px solid #dbeafe;line-height:1.5">
-
-<!-- ===== Tabbit Pro 顶部福利弹窗 ===== -->
-<div class="tabbit-banner" id="tabbit-banner">
-  <div class="tabbit-banner-inner">
-    <div class="tabbit-banner-left">
-      <a href="https://web.tabbit-ai.com/invite/F5EB5A55" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;flex:1;min-width:0" onclick="dismissTabbitBanner()">
-      <div class="tabbit-banner-icon">🧠</div>
-      <div class="tabbit-banner-text">
-        <span class="highlight-token">白嫖美团Token</span> — Top模型随心换、AI工具随手搓、Agent助手随时用 | <strong>Tabbit AI浏览器Pro账号</strong>
-      </div>
-      </a>
-    </div>
-    <div class="tabbit-banner-right">
-      <a href="https://web.tabbit-ai.com/invite/F5EB5A55" target="_blank" rel="noopener" class="tabbit-banner-btn" onclick="dismissTabbitBanner()">
-        🎁 免费领取
-      </a>
-      <button class="tabbit-banner-close" onclick="dismissTabbitBanner()" title="关闭">✕</button>
-    </div>
-  </div>
-</div>
   温馨提示：若您在微信中打开，部分功能受限，请点击右上角 <strong style="color:#0c4a6e">「···」</strong> → 选择 <strong style="color:#0c4a6e">「在浏览器打开」</strong> 以获得完整体验
   <button onclick="document.getElementById('wechat-tip').style.display='none'" style="margin-left:12px;background:#fff;border:1px solid #93c5fd;color:#0369a1;border-radius:6px;padding:4px 12px;font-size:.82rem;cursor:pointer;font-weight:600;box-shadow:0 1px 3px rgba(59,130,246,.1)">我知道了</button>
+</div>
+
+<!-- ===== Tabbit 悬浮岛 FAB ===== -->
+<div class="tabbit-fab" id="tabbit-fab">
+  <a href="https://web.tabbit-ai.com/invite/F5EB5A55" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:12px;padding:14px 16px" onclick="dismissTabbitFab()">
+    <div class="tabbit-fab-icon">🧠</div>
+    <div class="tabbit-fab-text">
+      <span class="fab-highlight">白嫖美团Token</span>
+      <span class="fab-brand">Tabbit Pro</span>
+    </div>
+  </a>
+  <button class="tabbit-fab-close" onclick="dismissTabbitFab();event.stopPropagation()" title="关闭">✕</button>
 </div>
 
 <script>
@@ -1263,28 +1245,21 @@
   }
 })();
 
-// Tabbit Pro 福利弹窗
+// Tabbit 悬浮岛 FAB
 (function(){
-  // 首次访问显示弹窗，关闭后当天不再弹出
   var dismissed = localStorage.getItem('tabbit-banner-dismissed');
   var today = new Date().toDateString();
   if (dismissed !== today) {
     setTimeout(function() {
-      var banner = document.getElementById('tabbit-banner');
-      if (banner) {
-        banner.classList.add('show');
-        document.body.classList.add('has-tabbit-banner');
-      }
-    }, 600);
+      var fab = document.getElementById('tabbit-fab');
+      if (fab) fab.classList.add('show');
+    }, 1500);
   }
 })();
 
-function dismissTabbitBanner() {
-  var banner = document.getElementById('tabbit-banner');
-  if (banner) {
-    banner.classList.remove('show');
-    document.body.classList.remove('has-tabbit-banner');
-  }
+function dismissTabbitFab() {
+  var fab = document.getElementById('tabbit-fab');
+  if (fab) fab.classList.remove('show');
   var today = new Date().toDateString();
   localStorage.setItem('tabbit-banner-dismissed', today);
 }
