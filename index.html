@@ -481,6 +481,19 @@
     }
     .version-bar strong{font-weight:700;color:var(--text)}
 
+    /* 下载安全警告横幅 */
+    .dl-warning{
+      display:flex;align-items:flex-start;gap:14px;
+      padding:16px 20px;margin-bottom:24px;
+      background:#fef2f2;border:1.5px solid #fecaca;border-radius:var(--radius-l);
+      font-size:.875rem;color:#991b1b;line-height:1.7;
+    }
+    .dl-warning svg{flex-shrink:0;margin-top:1px}
+    .dl-warning strong{color:#7f1d1d}
+    .dl-warning code{background:#fee2e2;padding:1px 6px;border-radius:3px;color:#991b1b;font-size:.82rem}
+    .dl-warning ol{margin:6px 0 0 16px;padding:0}
+    .dl-warning li{margin-bottom:4px}
+
     /* ===== Video ===== */
     .video-box{
       background:var(--surface);border:1px solid var(--border);
@@ -873,7 +886,7 @@
       <div class="hero-text">
         <div class="hero-badge" style="background:rgba(251,191,36,.2);border-color:rgba(251,191,36,.3);color:#fcd34d">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          学术科研 · 游戏加速 · 零成本替代付费 VPN
+          学术科研 · 游戏加速 · 零成本替代付费工具
         </div>
         <h1><span class="big-zero">0</span><img src="img/buddha.jpg" alt="佛系上网" class="buddha-inline" loading="lazy" /><a href="https://github.com/choosemoon/vpn-free-choice" target="_blank" rel="noopener" class="star-badge">⭐ Star 支持</a></h1>
         <div class="tagline">不花钱 · 不跑路 · 不懂技术也能3步搞定</div>
@@ -1177,6 +1190,22 @@
     <div class="version-bar">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
       <span>最新版本 <strong>v1.2.19.2209</strong> — 选设备下载安装 · <a href="#video-proof" style="color:var(--accent);font-weight:600;text-decoration:underline">📺 看视频教程，无脑操作</a></span>
+    </div>
+
+    <!-- ⚠️ 下载报错解决 -->
+    <div class="dl-warning" id="dl-warning">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#991b1b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div>
+        <strong>⚠️ 下载提示：浏览器可能误报「病毒扫描失败」</strong><br>
+        由于 <code>.zip</code> / <code>.exe</code> 文件包含网络工具程序，Chrome / Edge 的安全扫描会误判为风险文件。
+        文件<strong>安全无毒</strong>，这是浏览器的误报。解决方法：
+        <ol>
+          <li><strong>换浏览器</strong>：用 <strong>Firefox</strong> 下载，不会拦截</li>
+          <li><strong>右键另存为</strong>：对着下载按钮 → 右键 → 「链接存储为...」</li>
+          <li><strong>Windows 用户用 .exe</strong>：选 <strong>安装版</strong> 而非便携版 .zip，通过率更高</li>
+          <li><strong>手动恢复</strong>：Chrome 下载栏 → 点击「⋯」→「保留」或「继续下载」</li>
+        </ol>
+      </div>
     </div>
 
     <!-- 代理加速开关 -->
@@ -1994,7 +2023,7 @@
 
   // 一键转发：复制分享文案到剪贴板
   function copyShareText() {
-    var text = '我发现了一个超实用的免费学术上网工具，专门给不会技术的学生和科研党设计！\n\n✅ 零成本替代付费 VPN，一年省下 ¥200~500\n✅ 不用写代码，3 分钟搞定 GitHub、Google Scholar 访问\n✅ 稳定不跑路，亲测可用\n\n如果你也需要查国外文献、逛 GitHub 学前沿大模型技术，推荐试试～\n🔗 https://choosemoon.github.io/vpn-free-choice/';
+    var text = '我发现了一个超实用的免费学术上网工具，专门给不会技术的学生和科研党设计！\n\n✅ 零成本替代付费工具，一年省下 ¥200~500\n✅ 不用写代码，3 分钟搞定 GitHub、Google Scholar 访问\n✅ 稳定不跑路，亲测可用\n\n如果你也需要查国外文献、逛 GitHub 学前沿大模型技术，推荐试试～\n🔗 https://choosemoon.github.io/vpn-free-choice/';
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(function() {
         showToast('分享文案已复制，快去转发给朋友吧！');
