@@ -1149,7 +1149,7 @@
     /* ===== 悬浮注册弹窗 ===== */
     .float-popup{
       display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
-      z-index:99990;max-width:500px;width:calc(100% - 24px);
+      z-index:100000;max-width:500px;width:calc(100% - 24px);
       background:linear-gradient(135deg,#f59e0b,#f97316);
       border-radius:16px;box-shadow:0 8px 40px rgba(245,158,11,.45),0 0 60px rgba(245,158,11,.15);
       padding:18px 20px;animation:popupSlideUp .5s cubic-bezier(.34,1.56,.64,1);
@@ -1227,17 +1227,17 @@
 </div>
 
 <!-- ===== 悬浮注册弹窗 ===== -->
-<a href="https://web.tabbit-ai.com/invite/F5EB5A55" target="_blank" rel="noopener" class="float-popup" id="float-popup" onclick="dismissFloatPopup()">
-  <button class="float-popup-close" onclick="dismissFloatPopup();event.stopPropagation();event.preventDefault()" title="关闭">✕</button>
+<div class="float-popup" id="float-popup" onclick="goFloatPopup()">
+  <button class="float-popup-close" onclick="dismissFloatPopup(event)" title="关闭">✕</button>
   <div class="float-popup-inner">
     <div class="float-popup-emoji">🎁</div>
     <div class="float-popup-text">
-      <div class="popup-title">免费领取美团Tabbit AI浏览器Pro账号</div>
-      <div class="popup-sub">📱 手机验证码注册 → 💻 电脑下载登录 → ⚙️ 设为默认浏览器 → 🎉 即可领取 PRO</div>
+      <div class="popupup-title">免费领取美团Tabbit AI浏览器Pro账号</div>
+      <div class="popupup-sub">📱 手机验证码注册 → 🖥️ 电脑下载登录 → ⚙️ 设为默认浏览器 → 🎉 即可领取 PRO</div>
     </div>
     <div class="float-popup-arrow">→</div>
   </div>
-</a>
+</div>
 
 <script>
 // 微信环境检测
@@ -1281,7 +1281,12 @@ function dismissTabbitFab() {
   }
 })();
 
-function dismissFloatPopup() {
+function goFloatPopup() {
+  window.open('https://web.tabbit-ai.com/invite/F5EB5A55', '_blank', 'noopener');
+}
+
+function dismissFloatPopup(e) {
+  if (e) e.stopPropagation();
   var popup = document.getElementById('float-popup');
   if (popup) popup.classList.remove('show');
   var today = new Date().toDateString();
