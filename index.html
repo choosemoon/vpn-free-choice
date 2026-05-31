@@ -473,6 +473,56 @@
     }
     @media(max-width:640px){.value-grid{grid-template-columns:1fr}}
 
+    /* ===== 3-Step Flow Cards ===== */
+    .steps-flow{display:flex;flex-direction:column;align-items:center;gap:0;max-width:680px;margin:0 auto}
+    .step-card{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius-l);padding:24px 28px;width:100%;
+      transition:all .2s;position:relative;
+    }
+    .step-card:hover{border-color:var(--border-h);box-shadow:var(--shadow-md)}
+    .step-card.step-pro{
+      background:linear-gradient(135deg,#4c1d95 0%,#7c3aed 50%,#a855f7 100%);
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .step-card.step-pro:hover{box-shadow:0 4px 20px rgba(124,58,237,.25)}
+    .step-badge{
+      display:flex;align-items:center;gap:10px;margin-bottom:14px;
+    }
+    .step-num{
+      width:32px;height:32px;border-radius:50%;
+      background:var(--accent);color:#fff;
+      display:inline-flex;align-items:center;justify-content:center;
+      font-weight:700;font-size:.85rem;flex-shrink:0;
+    }
+    .step-pro .step-num{background:#fef08a;color:#4c1d95}
+    .step-label{
+      font-size:.78rem;color:var(--muted);font-weight:500;
+    }
+    .step-pro .step-label{color:#c4b5fd}
+    .step-body{
+      display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;
+    }
+    .step-content{flex:1;min-width:220px}
+    .step-actions{flex-shrink:0;display:flex;gap:8px;flex-wrap:wrap}
+    .step-note{
+      display:inline-flex;align-items:center;gap:6px;
+      margin-top:14px;font-size:.78rem;font-weight:600;
+      background:#f4f4f5;color:var(--text-2);
+      padding:5px 12px;border-radius:100px;
+      border:1px solid var(--border);
+    }
+    .step-pro .step-note{background:rgba(255,255,255,.1);color:#fef08a;border:1px solid rgba(254,240,138,.2)}
+    .step-connector{
+      display:flex;justify-content:center;padding:4px 0;
+    }
+    @media(max-width:720px){
+      .step-body{flex-direction:column;gap:14px}
+      .step-actions{width:100%}
+      .step-actions .btn{width:100%;justify-content:center}
+      .step-card{padding:20px}
+    }
+
     /* ===== Team ===== */
     .team-grid{
       display:grid;grid-template-columns:1fr 1fr;gap:16px;
@@ -711,6 +761,7 @@
       <span>学术公益上网</span>
     </a>
     <div class="nav-links">
+      <a href="#quickstart">流程</a>
       <a href="#video-proof">视频</a>
       <a href="#downloads">下载</a>
       <a href="#nodes">节点</a>
@@ -739,9 +790,9 @@
         </p>
 
         <div class="hero-actions">
-          <a href="#downloads" class="btn btn-primary">
+          <a href="#quickstart" class="btn btn-primary">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;flex-shrink:0"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            <span>免费下载软件</span>
+            <span>3 步免费开始</span>
           </a>
           <a href="#nodes" class="btn btn-secondary">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;flex-shrink:0"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
@@ -897,37 +948,109 @@
   </div>
 </section>
 
-<!-- ===== 快速开始 ===== -->
-<section class="section" style="padding-top:0;padding-bottom:32px">
+<!-- ===== 3 步快速开始 (整合版) ===== -->
+<section class="section" id="quickstart" style="padding:0 0 48px">
   <div class="container">
-    <div style="background:linear-gradient(135deg,#fff7ed 0%,#fef3c7 100%);border:1px solid #fed7aa;border-radius:var(--radius-l);padding:20px 28px">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
-        <span style="font-size:1.05rem">🚀</span>
-        <h3 style="font-size:1.05rem;font-weight:700;color:#9a3412;margin:0">3 步快速开始</h3>
-        <span style="font-size:.75rem;color:#c2410c;background:#fff7ed;padding:2px 10px;border-radius:100px;font-weight:600">新手必看</span>
-        <span style="font-size:.75rem;color:#9a3412;margin-left:auto;font-weight:500">📺 有视频教程，无脑照着做就行</span>
+    <div class="section-header" style="margin-bottom:28px">
+      <div class="section-label">流程</div>
+      <h2 class="section-title">3 步搞定，从注册到上网只需 5 分钟</h2>
+      <p class="section-desc">无需任何技术基础，手机+电脑配合，跟着走就能完成。</p>
+    </div>
+
+    <div class="steps-flow">
+      <!-- 步骤 1：注册 PRO 会员 -->
+      <div class="step-card step-pro" id="step-pro">
+        <div class="step-badge">
+          <span class="step-num">1</span>
+          <span class="step-label">手机操作 · 2分钟</span>
+        </div>
+        <div class="step-body">
+          <div class="step-content">
+            <h4 style="font-weight:700;font-size:1.05rem;color:#fff;margin:0 0 6px">注册领取 Pro 会员权益</h4>
+            <p style="font-size:.85rem;color:#ddd6fe;line-height:1.6;margin:0">
+              手机扫码/点击注册，领取 AI 全自动浏览器 Pro 账号。<br>不用写代码，AI 自动帮你填表、爬数据、自动化办公。<br><span style="color:#fef08a;font-size:.8rem">⚠️ 手机端即可注册，电脑端下载使用</span>
+            </p>
+          </div>
+          <div class="step-actions">
+            <a href="https://web.tabbit-ai.com/invite/F5EB5A55" target="_blank" rel="noopener" class="btn" style="background:#fef08a;color:#4c1d95;border:none;font-weight:700;padding:12px 24px;font-size:.9rem;box-shadow:0 2px 12px rgba(254,240,138,.25);text-decoration:none;white-space:nowrap">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              免费领取 Pro 账号
+            </a>
+            <button class="btn" onclick="copyText('tabbit-link');showToast('邀请链接已复制，快去分享给朋友吧！')" style="background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2);padding:10px 20px;font-size:.85rem">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              复制链接
+            </button>
+          </div>
+        </div>
+        <div class="step-note">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          限量 18 个名额，领完即止
+        </div>
       </div>
-      <!-- 紧凑水平步骤条 -->
-      <div style="display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center">
-        <div style="background:#fff;border-radius:100px;padding:8px 20px;border:1px solid #fde68a;display:flex;align-items:center;gap:8px;font-size:.85rem;white-space:nowrap">
-          <span style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0">1</span>
-          <strong>下载客户端</strong>
-          <span style="color:var(--muted);font-size:.78rem">选设备下载</span>
+
+      <div class="step-connector">
+        <svg width="24" height="40" viewBox="0 0 24 40"><path d="M12 0 L12 32 M6 26 L12 32 L18 26" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+      <!-- 步骤 2：下载客户端 -->
+      <div class="step-card" id="step-download">
+        <div class="step-badge">
+          <span class="step-num">2</span>
+          <span class="step-label">电脑操作 · 1分钟</span>
         </div>
-        <span style="color:#fbbf24;font-size:1rem;padding:0 4px">→</span>
-        <div style="background:#fff;border-radius:100px;padding:8px 20px;border:1px solid #fde68a;display:flex;align-items:center;gap:8px;font-size:.85rem;white-space:nowrap">
-          <span style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0">2</span>
-          <strong>复制节点链接</strong>
-          <span style="color:var(--muted);font-size:.78rem">一键复制</span>
+        <div class="step-body">
+          <div class="step-content">
+            <h4 style="font-weight:700;font-size:1.05rem;color:var(--text);margin:0 0 6px">下载 Karing 客户端</h4>
+            <p style="font-size:.85rem;color:var(--text-2);line-height:1.6;margin:0">
+              选对你的设备（Windows / Mac / Android / Linux），一键下载。<br>安装包体积小，校园网也能快速下载完。
+            </p>
+          </div>
+          <div class="step-actions">
+            <a href="#downloads" class="btn btn-primary" style="padding:12px 24px;font-size:.9rem;white-space:nowrap">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              去下载客户端
+            </a>
+          </div>
         </div>
-        <span style="color:#fbbf24;font-size:1rem;padding:0 4px">→</span>
-        <div style="background:#fff;border-radius:100px;padding:8px 20px;border:1px solid #fde68a;display:flex;align-items:center;gap:8px;font-size:.85rem;white-space:nowrap">
-          <span style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0">3</span>
-          <strong>导入 Karing</strong>
-          <span style="color:var(--muted);font-size:.78rem">粘贴即可用</span>
+        <div class="step-note" style="background:var(--green-l);color:var(--green);border-color:#bbf7d0">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          完全免费，无需付费
+        </div>
+      </div>
+
+      <div class="step-connector">
+        <svg width="24" height="40" viewBox="0 0 24 40"><path d="M12 0 L12 32 M6 26 L12 32 L18 26" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+      <!-- 步骤 3：获取节点 -->
+      <div class="step-card" id="step-nodes">
+        <div class="step-badge">
+          <span class="step-num">3</span>
+          <span class="step-label">电脑操作 · 2分钟</span>
+        </div>
+        <div class="step-body">
+          <div class="step-content">
+            <h4 style="font-weight:700;font-size:1.05rem;color:var(--text);margin:0 0 6px">免费订阅节点，开始上网</h4>
+            <p style="font-size:.85rem;color:var(--text-2);line-height:1.6;margin:0">
+              复制节点链接 → 粘贴到 Karing → 一键导入。<br>节点定期更新，失效了随时联系我换新的。
+            </p>
+          </div>
+          <div class="step-actions">
+            <a href="#nodes" class="btn btn-primary" style="padding:12px 24px;font-size:.9rem;white-space:nowrap">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="10"/></svg>
+              去获取免费节点
+            </a>
+          </div>
+        </div>
+        <div class="step-note" style="background:var(--amber-l);color:var(--amber);border-color:#fde68a">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          节点失效联系我更新
         </div>
       </div>
     </div>
+
+    <!-- 隐藏的 Tabbit 链接 -->
+    <span id="tabbit-link" style="display:none">https://web.tabbit-ai.com/invite/F5EB5A55</span>
   </div>
 </section>
 
@@ -1215,43 +1338,6 @@
               下载 .zip
             </a>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== 额外福利：Tabbit PRO账号 ===== -->
-<section class="section" style="padding-top:0;padding-bottom:32px">
-  <div class="container">
-    <div style="background:linear-gradient(135deg,#4c1d95 0%,#7c3aed 50%,#a855f7 100%);border-radius:var(--radius-l);padding:28px 32px;color:#fff;position:relative;overflow:hidden">
-      <!-- 背景装饰 -->
-      <div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.08);pointer-events:none"></div>
-      <div style="position:absolute;bottom:-30px;left:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.06);pointer-events:none"></div>
-
-      <div style="position:relative;z-index:1;display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap">
-        <div style="font-size:2.2rem;flex-shrink:0;line-height:1">🎁</div>
-        <div style="flex:1;min-width:260px">
-          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-            <h3 style="font-size:1.15rem;font-weight:700;color:#fff;margin:0">额外福利 · 免费领取 AI 全自动浏览器 Pro 账号</h3>
-            <span style="font-size:.72rem;color:#fef08a;background:rgba(254,240,138,.15);padding:2px 10px;border-radius:100px;font-weight:700;border:1px solid rgba(254,240,138,.25)">🔥 限量 18 个</span>
-          </div>
-          <p style="font-size:.9rem;color:#ddd6fe;line-height:1.6;margin:0 0 10px"><strong style="color:#fef08a">不用写代码，AI 自动帮你操作浏览器</strong>。填表、爬数据、自动化办公，一句话搞定。</p>
-          <p style="font-size:.85rem;color:#c4b5fd;line-height:1.6;margin:0 0 14px">一键手机验证即可注册领取，零成本体验 Pro 功能。名额有限，领完即止。</p>
-
-          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-            <span id="tabbit-link" style="display:none">https://web.tabbit-ai.com/invite/F5EB5A55</span>
-
-            <a href="https://web.tabbit-ai.com/invite/F5EB5A55" target="_blank" rel="noopener" class="btn" style="background:#fef08a;color:#4c1d95;border:none;font-weight:700;padding:12px 28px;font-size:1rem;box-shadow:0 2px 12px rgba(254,240,138,.25);text-decoration:none">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              免费领取 Pro 账号
-            </a>
-            <button class="btn" onclick="copyText('tabbit-link');showToast('邀请链接已复制，快去分享给朋友吧！')" style="background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2);padding:10px 22px;font-size:.9rem">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              复制链接
-            </button>
-          </div>
-          <p style="font-size:.78rem;color:#c4b5fd;margin-top:10px">💡 注册后自动获得 Pro 权限，建议尽快领取</p>
         </div>
       </div>
     </div>
