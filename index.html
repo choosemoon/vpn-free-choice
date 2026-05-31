@@ -52,7 +52,9 @@
       position:sticky;top:0;z-index:100;
       background:rgba(255,255,255,.82); backdrop-filter:blur(16px) saturate(180%);
       border-bottom:1px solid var(--border);
+      transition:top .2s;
     }
+    body.has-wechat-tip .nav{top:48px}
     .nav-inner{
       max-width:1040px;margin:0 auto;padding:0 24px;
       display:flex;align-items:center;justify-content:space-between;height:56px;
@@ -680,6 +682,24 @@
 </head>
 <body>
 
+<!-- ===== 微信环境提示条 ===== -->
+<div id="wechat-tip" style="display:none;position:fixed;top:0;left:0;right:0;z-index:99999;background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;text-align:center;padding:12px 16px;font-size:.92rem;font-weight:600;box-shadow:0 2px 12px rgba(239,68,68,.4);line-height:1.5">
+  <span style="font-size:1.1rem">⚠️</span> 检测到你在微信内打开，部分功能受限，请点击右上角 <strong>「···」</strong> → 选择 <strong>「在浏览器打开」</strong> 以获得完整体验
+  <button onclick="document.getElementById('wechat-tip').style.display='none'" style="margin-left:12px;background:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.4);color:#fff;border-radius:6px;padding:4px 12px;font-size:.82rem;cursor:pointer;font-weight:600">我知道了</button>
+</div>
+
+<script>
+// 微信环境检测
+(function(){
+  var ua = navigator.userAgent.toLowerCase();
+  var isWechat = /micromessenger/.test(ua);
+  if(isWechat){
+    document.getElementById('wechat-tip').style.display = 'block';
+    document.body.classList.add('has-wechat-tip');
+  }
+})();
+</script>
+
 <!-- ===== Nav ===== -->
 <nav class="nav">
   <div class="nav-inner">
@@ -961,7 +981,7 @@
               <span class="dl-tag rec">推荐</span>
               <span class="dl-tag">43 MB</span>
             </div>
-            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_windows_x64.exe" target="_blank">
+            <a class="dl-btn" href="https://github.com/choosemoon/vpn-free-choice/releases/download/v1.2.19.2209/karing_1.2.19.2209_windows_x64.exe" target="_blank">
               <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
               下载 .exe
             </a>
@@ -981,7 +1001,7 @@
             <div class="dl-meta">
               <span class="dl-tag">62 MB</span>
             </div>
-            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_windows_x64.zip" target="_blank">
+            <a class="dl-btn" href="https://github.com/choosemoon/vpn-free-choice/releases/download/v1.2.19.2209/karing_1.2.19.2209_windows_x64.zip" target="_blank">
               <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
               下载 .zip
             </a>
@@ -1008,7 +1028,7 @@
               <span class="dl-tag rec">推荐</span>
               <span class="dl-tag">91 MB</span>
             </div>
-            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_macos_universal.dmg" target="_blank">
+            <a class="dl-btn" href="https://github.com/choosemoon/vpn-free-choice/releases/download/v1.2.19.2209/karing_1.2.19.2209_macos_universal.dmg" target="_blank">
               <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
               下载 .dmg
             </a>
@@ -1035,7 +1055,7 @@
               <span class="dl-tag rec">推荐</span>
               <span class="dl-tag">50 MB</span>
             </div>
-            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_android_arm64-v8a.apk" target="_blank">
+            <a class="dl-btn" href="https://github.com/choosemoon/vpn-free-choice/releases/download/v1.2.19.2209/karing_1.2.19.2209_android_arm64-v8a.apk" target="_blank">
               <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
               下载 .apk
             </a>
@@ -1055,7 +1075,7 @@
             <div class="dl-meta">
               <span class="dl-tag">86 MB</span>
             </div>
-            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_android_arm.apk" target="_blank">
+            <a class="dl-btn" href="https://github.com/choosemoon/vpn-free-choice/releases/download/v1.2.19.2209/karing_1.2.19.2209_android_arm.apk" target="_blank">
               <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
               下载 .apk
             </a>
@@ -1075,7 +1095,7 @@
             <div class="dl-meta">
               <span class="dl-tag">50 MB</span>
             </div>
-            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_android_armeabi-v7a.apk" target="_blank">
+            <a class="dl-btn" href="https://github.com/choosemoon/vpn-free-choice/releases/download/v1.2.19.2209/karing_1.2.19.2209_android_armeabi-v7a.apk" target="_blank">
               <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
               下载 .apk
             </a>
@@ -1102,7 +1122,7 @@
               <span class="dl-tag rec">推荐</span>
               <span class="dl-tag">70 MB</span>
             </div>
-            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_linux_amd64.AppImage" target="_blank">
+            <a class="dl-btn" href="https://github.com/choosemoon/vpn-free-choice/releases/download/v1.2.19.2209/karing_1.2.19.2209_linux_amd64.AppImage" target="_blank">
               <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
               下载 .AppImage
             </a>
@@ -1122,7 +1142,7 @@
             <div class="dl-meta">
               <span class="dl-tag">48 MB</span>
             </div>
-            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_linux_amd64.deb" target="_blank">
+            <a class="dl-btn" href="https://github.com/choosemoon/vpn-free-choice/releases/download/v1.2.19.2209/karing_1.2.19.2209_linux_amd64.deb" target="_blank">
               <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
               下载 .deb
             </a>
@@ -1142,7 +1162,7 @@
             <div class="dl-meta">
               <span class="dl-tag">52 MB</span>
             </div>
-            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing_1.2.19.2209_linux_amd64.rpm" target="_blank">
+            <a class="dl-btn" href="https://github.com/choosemoon/vpn-free-choice/releases/download/v1.2.19.2209/karing_1.2.19.2209_linux_amd64.rpm" target="_blank">
               <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
               下载 .rpm
             </a>
@@ -1168,7 +1188,7 @@
             <div class="dl-meta">
               <span class="dl-tag">21 MB</span>
             </div>
-            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing-1.2.19.2209.tar.gz" target="_blank">
+            <a class="dl-btn" href="https://github.com/choosemoon/vpn-free-choice/releases/download/v1.2.19.2209/karing-1.2.19.2209.tar.gz" target="_blank">
               <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
               下载 .tar.gz
             </a>
@@ -1188,7 +1208,7 @@
             <div class="dl-meta">
               <span class="dl-tag">22 MB</span>
             </div>
-            <a class="dl-btn" href="https://github.com/choosemoon/karing-download/releases/download/v1.2.19.2209/karing-1.2.19.2209.zip" target="_blank">
+            <a class="dl-btn" href="https://github.com/choosemoon/vpn-free-choice/releases/download/v1.2.19.2209/karing-1.2.19.2209.zip" target="_blank">
               <svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.41-1.41L11 13.17V4h2v9.17l2.59-2.58L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
               下载 .zip
             </a>
@@ -1386,8 +1406,8 @@
       </div>
       <div class="video-box">
         <video controls preload="metadata" poster="" style="width:100%;border-radius:var(--radius);background:#0f172a">
-          <source src="https://choosemoon.github.io/karing-download/video/tutorial.mp4" type="video/mp4">
-          你的浏览器不支持视频播放，<a href="https://choosemoon.github.io/karing-download/video/tutorial.mp4" style="color:var(--accent)">点此下载视频</a>后观看。
+          <source src="https://choosemoon.github.io/vpn-free-choice/video/tutorial.mp4" type="video/mp4">
+          你的浏览器不支持视频播放，<a href="https://choosemoon.github.io/vpn-free-choice/video/tutorial.mp4" style="color:var(--accent)">点此下载视频</a>后观看。
         </video>
       </div>
     </div>
