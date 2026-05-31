@@ -59,6 +59,8 @@
       transition:top .2s;
     }
     body.has-wechat-tip .nav{top:48px}
+    body.has-tabbit-banner .nav{top:64px}
+    body.has-wechat-tip.has-tabbit-banner .nav{top:112px}
     .nav-inner{
       max-width:1040px;margin:0 auto;padding:0 24px;
       display:flex;align-items:center;justify-content:space-between;height:56px;
@@ -77,6 +79,8 @@
     @media(max-width:640px){
       .nav-links a{font-size:.8rem;padding:5px 8px}
       .nav-brand span{display:none}
+      body.has-tabbit-banner .nav{top:50px}
+      body.has-wechat-tip.has-tabbit-banner .nav{top:98px}
     }
 
     /* ===== Hero ===== */
@@ -302,6 +306,7 @@
       font-size:.8rem;color:#cbd5e1;line-height:1.65;
       position:relative;padding-left:16px;
       border-left:2px solid rgba(251,191,36,.3);
+      text-align:left;
     }
     .rant-card .rant-tag{
       display:inline-block;font-size:.68rem;padding:2px 8px;border-radius:100px;
@@ -1150,12 +1155,92 @@
       .footer-right a{font-size:.72rem}
       .contact-card .copy-btn{font-size:.78rem;padding:8px 10px}
     }
+
+    /* ===== Tabbit Pro 顶部福利弹窗 ===== */
+    .tabbit-banner{
+      display:none;position:fixed;top:0;left:0;right:0;z-index:9998;
+      background:linear-gradient(135deg,#1e1b4b 0%,#312e81 40%,#4338ca 100%);
+      color:#e0e7ff;box-shadow:0 4px 24px rgba(67,56,202,.35);
+      animation:tabbitSlide .45s ease;
+    }
+    .tabbit-banner.show{display:block}
+    @keyframes tabbitSlide{
+      from{transform:translateY(-100%)}
+      to{transform:translateY(0)}
+    }
+    .tabbit-banner-inner{
+      max-width:1040px;margin:0 auto;padding:14px 20px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      flex-wrap:wrap;
+    }
+    .tabbit-banner-left{
+      display:flex;align-items:center;gap:10px;flex:1;min-width:0;
+    }
+    .tabbit-banner-icon{
+      width:36px;height:36px;border-radius:10px;flex-shrink:0;
+      background:linear-gradient(135deg,#a78bfa,#7c3aed);
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.2rem;
+    }
+    .tabbit-banner-text{font-size:.88rem;line-height:1.5;min-width:0}
+    .tabbit-banner-text strong{color:#c4b5fd;font-weight:700}
+    .tabbit-banner-text .highlight-token{
+      display:inline-block;background:linear-gradient(135deg,#f59e0b,#f97316);
+      color:#fff;padding:2px 8px;border-radius:5px;font-size:.82rem;
+      font-weight:700;margin:0 2px;
+    }
+    .tabbit-banner-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+    .tabbit-banner-btn{
+      padding:10px 20px;border-radius:8px;font-size:.88rem;font-weight:700;
+      background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;
+      text-decoration:none;white-space:nowrap;transition:all .15s;
+      display:flex;align-items:center;gap:6px;
+    }
+    .tabbit-banner-btn:hover{filter:brightness(1.12);color:#fff;transform:translateY(-1px)}
+    .tabbit-banner-close{
+      width:28px;height:28px;border-radius:50%;border:none;flex-shrink:0;
+      background:rgba(255,255,255,.15);color:#a5b4fc;font-size:.85rem;
+      cursor:pointer;display:flex;align-items:center;justify-content:center;
+      transition:all .15s;
+    }
+    .tabbit-banner-close:hover{background:rgba(255,255,255,.25);color:#fff}
+    @media(max-width:640px){
+      .tabbit-banner-inner{padding:10px 14px}
+      .tabbit-banner-text{font-size:.8rem}
+      .tabbit-banner-btn{padding:8px 14px;font-size:.8rem}
+      .tabbit-banner-icon{width:30px;height:30px;font-size:1rem}
+    }
+    @media(max-width:374px){
+      .tabbit-banner-left{gap:6px}
+      .tabbit-banner-text{font-size:.74rem}
+      .tabbit-banner-btn{padding:6px 10px;font-size:.74rem}
+      body.has-tabbit-banner .nav{top:44px}
+      body.has-wechat-tip.has-tabbit-banner .nav{top:92px}
+    }
   </style>
 </head>
 <body>
 
 <!-- ===== 微信环境提示条 ===== -->
 <div id="wechat-tip" style="display:none;position:fixed;top:0;left:0;right:0;z-index:99999;background:#eff6ff;color:#0369a1;text-align:center;padding:12px 16px;font-size:.92rem;font-weight:500;box-shadow:0 2px 8px rgba(59,130,246,.12);border-bottom:1px solid #dbeafe;line-height:1.5">
+
+<!-- ===== Tabbit Pro 顶部福利弹窗 ===== -->
+<div class="tabbit-banner" id="tabbit-banner">
+  <div class="tabbit-banner-inner">
+    <div class="tabbit-banner-left">
+      <div class="tabbit-banner-icon">🧠</div>
+      <div class="tabbit-banner-text">
+        <strong>学生福利</strong> — Tabbit AI 浏览器 <span class="highlight-token">Pro 账号</span> 免费领取，内置 AI 大模型，写论文、读文献直接可用
+      </div>
+    </div>
+    <div class="tabbit-banner-right">
+      <a href="https://web.tabbit-ai.com/invite/F5EB5A55" target="_blank" rel="noopener" class="tabbit-banner-btn" onclick="dismissTabbitBanner()">
+        🎁 免费领取
+      </a>
+      <button class="tabbit-banner-close" onclick="dismissTabbitBanner()" title="关闭">✕</button>
+    </div>
+  </div>
+</div>
   温馨提示：若您在微信中打开，部分功能受限，请点击右上角 <strong style="color:#0c4a6e">「···」</strong> → 选择 <strong style="color:#0c4a6e">「在浏览器打开」</strong> 以获得完整体验
   <button onclick="document.getElementById('wechat-tip').style.display='none'" style="margin-left:12px;background:#fff;border:1px solid #93c5fd;color:#0369a1;border-radius:6px;padding:4px 12px;font-size:.82rem;cursor:pointer;font-weight:600;box-shadow:0 1px 3px rgba(59,130,246,.1)">我知道了</button>
 </div>
@@ -1170,6 +1255,32 @@
     document.body.classList.add('has-wechat-tip');
   }
 })();
+
+// Tabbit Pro 福利弹窗
+(function(){
+  // 首次访问显示弹窗，关闭后当天不再弹出
+  var dismissed = localStorage.getItem('tabbit-banner-dismissed');
+  var today = new Date().toDateString();
+  if (dismissed !== today) {
+    setTimeout(function() {
+      var banner = document.getElementById('tabbit-banner');
+      if (banner) {
+        banner.classList.add('show');
+        document.body.classList.add('has-tabbit-banner');
+      }
+    }, 600);
+  }
+})();
+
+function dismissTabbitBanner() {
+  var banner = document.getElementById('tabbit-banner');
+  if (banner) {
+    banner.classList.remove('show');
+    document.body.classList.remove('has-tabbit-banner');
+  }
+  var today = new Date().toDateString();
+  localStorage.setItem('tabbit-banner-dismissed', today);
+}
 </script>
 
 <!-- ===== Nav ===== -->
@@ -1201,7 +1312,7 @@
           学生专享 · 校园网直连 · 不用花钱
         </div>
         <h1><span class="big-zero">0</span><br>告别付费上网</h1>
-        <div class="tagline">Karing 客户端 + 免费节点，校园网直连 Google Scholar / GitHub / ChatGPT</div>
+        <div class="tagline">Karing 客户端 + 免费节点，校园网直连 Google Scholar / GitHub / ChatGPT / Gemini</div>
         <!-- 痛点对比 -->
         <div class="pain-compare">
           <div class="pain-col old-col">
