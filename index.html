@@ -378,6 +378,42 @@
       font-size:.8rem;color:var(--muted);line-height:1.7;
     }
 
+    /* ===== 同意区域 ===== */
+    .agree-area{
+      margin-top:20px;padding:20px 24px;background:var(--bg);
+      border-radius:var(--radius);border:1px solid var(--border);
+      text-align:center;
+    }
+    .agree-divider{
+      border:none;border-top:1px dashed var(--border);margin:0 0 16px;
+    }
+    .agree-label{
+      display:flex;align-items:flex-start;gap:10px;
+      font-size:.85rem;color:var(--text-2);line-height:1.6;
+      cursor:pointer;text-align:left;
+    }
+    .agree-label input[type="checkbox"]{
+      width:18px;height:18px;flex-shrink:0;margin-top:2px;
+      accent-color:var(--accent);cursor:pointer;
+    }
+
+    /* ===== 节点锁定遮罩 ===== */
+    .nodes-lock{
+      position:absolute;top:0;left:0;right:0;bottom:0;
+      background:rgba(255,251,245,.92);backdrop-filter:blur(8px);
+      z-index:10;display:flex;align-items:center;justify-content:center;
+      border-radius:var(--radius-l);text-align:center;
+    }
+    .nodes-lock-content{
+      max-width:420px;padding:32px;
+    }
+    #nodes .container{position:relative}
+
+    @media(max-width:640px){
+      .nodes-lock-content{padding:24px 16px}
+      .agree-label{font-size:.8rem}
+    }
+
     /* ===== Version Bar ===== */
     .version-bar{
       display:flex;align-items:center;gap:12px;padding:14px 20px;
@@ -1486,6 +1522,22 @@
     <div class="info-box">
       <strong>⚠️ 节点偶尔失效？</strong> 正常现象，我会定期维护更新。如果上面的链接用不了，<a href="#contact" style="color:#b45309;font-weight:700;text-decoration:underline">联系我</a> 获取最新节点。
     </div>
+
+    <!-- 节点锁定遮罩层 -->
+    <div id="nodes-lock" class="nodes-lock" style="display:none">
+      <div class="nodes-lock-content">
+        <div style="font-size:3rem;margin-bottom:12px">🔒</div>
+        <h3 style="font-size:1.25rem;font-weight:700;color:var(--text);margin-bottom:8px">节点内容已锁定</h3>
+        <p style="font-size:.9rem;color:var(--text-2);max-width:360px;margin:0 auto 20px;line-height:1.6">
+          在获取免费节点之前，你需要阅读并同意<br><strong>学术用途声明</strong>
+        </p>
+        <a href="#guide" onclick="openDisclaimer();return false" class="btn btn-primary" style="padding:12px 28px;font-size:1rem">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          阅读学术用途声明
+        </a>
+        <p style="font-size:.78rem;color:var(--muted);margin-top:14px">点击上方按钮，阅读声明后点击「同意」即可解锁</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1518,6 +1570,20 @@
           <p><strong>使用声明：</strong>本平台所提供的仅为网络连接优化服务，旨在帮助研究者更高效地获取合法的国际学术与公共信息资源。用户应严格遵守《中华人民共和国网络安全法》《中华人民共和国数据安全法》及相关法律法规。</p>
           <p style="margin-top:8px"><strong>严禁用途：</strong>禁止利用本工具访问国家法律法规明令禁止的网站或内容，禁止从事任何危害国家安全、传播违法信息、侵犯他人合法权益的活动。使用者须自行承担因违规使用而产生的一切法律后果。</p>
           <p style="margin-top:8px">本工具仅供学习、科研、交流使用，请勿用于任何商业或非法目的。如涉及版权问题，请联系我们处理。</p>
+        </div>
+
+        <!-- 同意确认区域 -->
+        <div id="agree-area" class="agree-area">
+          <div class="agree-divider"></div>
+          <label class="agree-label">
+            <input type="checkbox" id="agree-check">
+            <span>我已阅读并同意上述学术用途声明，承诺仅将本工具用于合法的学术科研用途。</span>
+          </label>
+          <button id="agree-btn" class="btn btn-primary" disabled onclick="agreeDisclaimer()" style="margin-top:12px;padding:12px 32px;font-size:1rem;font-weight:700;opacity:.5;cursor:not-allowed">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            我已阅读并同意
+          </button>
+          <p id="agree-hint" style="font-size:.78rem;color:var(--muted);margin-top:8px">请先勾选上方复选框，再点击确认</p>
         </div>
       </div>
     </div>
@@ -1736,6 +1802,60 @@
   function toggleDisclaimer() {
     document.getElementById('disclaimer-box').classList.toggle('open');
   }
+
+  function openDisclaimer() {
+    var box = document.getElementById('disclaimer-box');
+    if (box && !box.classList.contains('open')) box.classList.add('open');
+    document.getElementById('guide').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function agreeDisclaimer() {
+    var check = document.getElementById('agree-check');
+    if (!check || !check.checked) {
+      showToast('请先勾选同意复选框');
+      return;
+    }
+    localStorage.setItem('agreedDisclaimer', 'true');
+    var lock = document.getElementById('nodes-lock');
+    if (lock) lock.style.display = 'none';
+    showToast('✅ 已解锁节点内容，现在可以获取免费节点了');
+    // 滚动回节点区域
+    setTimeout(function() {
+      document.getElementById('nodes').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 600);
+  }
+
+  // checkbox 联动按钮状态
+  document.addEventListener('DOMContentLoaded', function() {
+    var check = document.getElementById('agree-check');
+    var btn = document.getElementById('agree-btn');
+    var hint = document.getElementById('agree-hint');
+
+    if (check && btn) {
+      check.addEventListener('change', function() {
+        if (check.checked) {
+          btn.disabled = false;
+          btn.style.opacity = '1';
+          btn.style.cursor = 'pointer';
+          if (hint) hint.style.display = 'none';
+        } else {
+          btn.disabled = true;
+          btn.style.opacity = '.5';
+          btn.style.cursor = 'not-allowed';
+          if (hint) hint.style.display = '';
+        }
+      });
+    }
+
+    // 页面加载时检查是否已同意
+    var agreed = localStorage.getItem('agreedDisclaimer');
+    var lock = document.getElementById('nodes-lock');
+    if (agreed === 'true' && lock) {
+      lock.style.display = 'none';
+    } else if (lock) {
+      lock.style.display = 'flex';
+    }
+  });
 
   function copyText(elemId) {
     const el = document.getElementById(elemId);
