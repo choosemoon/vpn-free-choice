@@ -33,13 +33,17 @@
 
     /* ===== Reset & Base ===== */
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
     body{
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text',
                    'PingFang SC', 'Microsoft YaHei', sans-serif;
       background: var(--bg); color: var(--text); line-height:1.6;
       -webkit-font-smoothing: antialiased;
+      max-width:100vw;overflow-x:hidden;
     }
+    img,video,iframe,canvas,svg{max-width:100%;height:auto}
+    pre,code{word-break:break-all;white-space:pre-wrap}
+    table{max-width:100%;display:block;overflow-x:auto}
     a{color:var(--accent);text-decoration:none}
     a:hover{color:var(--accent-h)}
     code{
@@ -97,7 +101,7 @@
       display:flex;align-items:center;justify-content:center;gap:48px;
       flex-wrap:wrap;margin-bottom:28px;
     }
-    .hero-text{flex:1;min-width:320px;max-width:560px;text-align:center}
+    .hero-text{flex:1;min-width:0;max-width:560px;text-align:center}
     .hero-img-wrap{
       flex:0 0 auto;display:flex;align-items:center;justify-content:center;
     }
@@ -277,15 +281,20 @@
       box-shadow:0 4px 16px rgba(249,115,22,.4)}
     @media(max-width:768px){
       .hero-main{gap:28px}
-      .hero-text{min-width:100%;max-width:100%}
+      .hero-text{width:100%;max-width:100%}
       .hero-img-wrap{order:-1}
       .hero h1 .buddha-inline{width:52px;height:52px;margin-left:4px}
       .pain-compare{grid-template-columns:1fr;gap:14px;max-width:100%}
       .hero-actions{grid-template-columns:1fr 1fr;gap:10px;max-width:100%}
-      .hero-actions .btn{padding:12px 10px;font-size:.82rem}
+      .hero-actions .btn{padding:12px 10px;font-size:.82rem;white-space:normal}
       .nav-links{gap:2px}
       .nav-links a{padding:6px 10px;font-size:.8rem}
       .container{padding:0 20px}
+      .grid-4{grid-template-columns:repeat(2,1fr)}
+      .grid-3{grid-template-columns:repeat(2,1fr)}
+      .paper-steps{grid-template-columns:repeat(2,1fr)}
+      .step-actions{flex-direction:column;gap:8px}
+      .step-actions .btn{width:100%;justify-content:center}
     }
     .btn{
       display:inline-flex;align-items:center;gap:8px;
@@ -542,9 +551,10 @@
 
     /* ===== Version Bar ===== */
     .version-bar{
-      display:flex;align-items:center;gap:12px;padding:14px 20px;
+      display:flex;align-items:center;gap:8px;padding:12px 18px;
       background:var(--surface);border:1px solid var(--border);
       border-radius:var(--radius-l);margin-bottom:32px;font-size:.875rem;color:var(--text-2);
+      flex-wrap:wrap;
     }
     .version-bar strong{font-weight:700;color:var(--text)}
 
@@ -682,7 +692,7 @@
     .step-body{
       display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;
     }
-    .step-content{flex:1;min-width:220px}
+    .step-content{flex:1;min-width:0}
     .step-actions{flex-shrink:0;display:flex;gap:8px;flex-wrap:wrap}
     .step-note{
       display:inline-flex;align-items:center;gap:6px;
@@ -903,6 +913,8 @@
       .grid-4{grid-template-columns:repeat(2,1fr)}
       .grid-3{grid-template-columns:repeat(2,1fr)}
       .paper-steps{grid-template-columns:repeat(2,1fr)}
+      .step-actions{flex-wrap:wrap;gap:8px}
+      .step-actions .btn{flex:1 1 auto;min-width:120px;justify-content:center}
     }
 
     /* Large phone / Small tablet */
@@ -918,14 +930,15 @@
 
     /* Phone */
     @media(max-width:640px){
-      .hero{padding:48px 16px 40px}
-      .section{padding:48px 0}
-      .section-header{margin-bottom:28px}
-      .section-desc{font-size:.88rem}
+      .hero{padding:44px 14px 36px}
+      .section{padding:44px 0}
+      .section-header{margin-bottom:24px}
+      .section-desc{font-size:.85rem}
       .paper-steps{grid-template-columns:1fr}
       .paper-cta{flex-direction:column;align-items:stretch}
-      .paper-section{padding:20px 16px}
-      .tabs{flex-wrap:wrap;width:100%}
+      .paper-section{padding:18px 14px}
+      .tabs{flex-wrap:wrap;width:100%;gap:4px}
+      .tab-btn{padding:7px 14px;font-size:.82rem}
       .contact-grid{grid-template-columns:1fr}
       .value-grid{grid-template-columns:1fr}
       .team-grid{grid-template-columns:1fr}
@@ -936,9 +949,9 @@
       .hero h1 .big-zero{font-size:clamp(3rem,10vw,5rem)}
       .nav-links a{font-size:.75rem;padding:5px 8px}
       .nav-brand span{display:none}
-      .value-card{padding:24px}
-      .step-card{padding:18px 16px}
-      .contact-card{padding:20px}
+      .value-card{padding:20px}
+      .step-card{padding:16px 14px}
+      .contact-card{padding:18px 14px}
       .dl-card-inner{gap:10px}
       .nodes-lock-content{padding:24px 16px}
       .agree-label{font-size:.8rem}
@@ -946,16 +959,39 @@
       .footer-left,.footer-right a{font-size:.8rem}
       .star-guide-actions{flex-direction:column;align-items:stretch}
       .star-guide-actions .btn-star,.star-guide-actions .btn-share{width:100%;justify-content:center}
+      .version-bar{padding:10px 14px;font-size:.82rem}
+      .proxy-toggle-bar{padding:10px 14px;gap:8px}
+      .proxy-toggle-bar .proxy-status{font-size:.78rem}
+      .dl-warning{padding:14px 14px}
+      .dl-warning code{font-size:.78rem}
+      .disclaimer-header{padding:14px 16px}
+      .disclaimer-body{padding:0 16px 20px}
+      .agree-area{padding:16px 14px}
+      .step-body{padding:14px 16px}
+      .step-actions{gap:8px}
+      .step-actions .btn{padding:10px 14px;font-size:.82rem}
+      .hero-img{width:130px;height:130px}
+      .hero-main{gap:20px}
     }
 
     /* Tiny phone (320px - 374px) */
     @media(max-width:374px){
-      .hero{padding:40px 12px 32px}
-      .hero h1 .buddha-inline{width:40px;height:40px}
-      .hero h1 .big-zero{font-size:2.5rem}
+      .hero{padding:36px 10px 28px}
+      .hero h1 .buddha-inline{width:36px;height:36px}
+      .hero h1 .big-zero{font-size:2.2rem}
       .nav-links{gap:1px}
-      .nav-links a{padding:4px 6px;font-size:.7rem}
-      .container{padding:0 12px}
+      .nav-links a{padding:4px 5px;font-size:.68rem}
+      .container{padding:0 10px}
+      .section{padding:36px 0}
+      .hero-actions .btn{padding:10px 8px;font-size:.78rem}
+      .tab-btn{padding:6px 10px;font-size:.78rem}
+      .value-card{padding:16px}
+      .contact-card{padding:14px}
+      .paper-step{padding:16px 12px}
+      .step-card{padding:14px 12px}
+      .dl-warning{padding:12px 12px;font-size:.78rem}
+      .version-bar{padding:8px 12px;font-size:.78rem}
+      .hero-img{width:110px;height:110px}
     }
   </style>
 </head>
@@ -1085,7 +1121,7 @@
       <span style="font-size:.75rem;color:var(--green);background:var(--green-l);padding:2px 10px;border-radius:100px;font-weight:600">3 分钟搞定</span>
     </div>
     <div style="display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap">
-      <div style="flex:1;min-width:280px;max-width:480px">
+      <div style="flex:1 1 280px;min-width:0;max-width:480px">
         <h3 style="font-size:clamp(1.1rem,3vw,1.5rem);font-weight:700;letter-spacing:-.02em;margin-bottom:10px">
           📺 怕不会用？看视频，<span style="color:var(--accent)">无脑照着做就行</span>
         </h3>
@@ -1102,7 +1138,7 @@
           立即观看视频教程
         </a>
       </div>
-      <div style="flex:1;min-width:280px;max-width:560px">
+      <div style="flex:1 1 280px;min-width:0;max-width:560px">
         <div class="video-box" style="border-radius:var(--radius-l);overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--border)">
           <video controls preload="metadata" poster="" style="width:100%;display:block;background:#0f172a">
             <source src="https://choosemoon.github.io/vpn-free-choice/video/tutorial.mp4" type="video/mp4">
