@@ -6,7 +6,7 @@
   <title>学术公益上网 — 永久免费 · 学生专享网络优化</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23f97316'/%3E%3Ccircle cx='50' cy='42' r='18' fill='%23fff'/%3E%3Ccircle cx='50' cy='30' r='10' fill='%23fff'/%3E%3Ccircle cx='44' cy='38' r='3' fill='%23222'/%3E%3Ccircle cx='56' cy='38' r='3' fill='%23222'/%3E%3Cpath d='M42 52 Q50 62 58 52' stroke='%23222' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3Crect x='46' y='62' width='8' height='16' rx='4' fill='%23fff'/%3E%3Cline x1='10' y1='72' x2='36' y2='62' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='90' y1='72' x2='64' y2='62' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='50' cy='62' r='26' fill='none' stroke='%23fff' stroke-width='2' stroke-dasharray='6 4'/%3E%3C/svg%3E" />
   <meta property="og:title" content="学术公益上网 — 永久免费 · 学生专享网络优化" />
-  <meta property="og:description" content="校园网直连 Google Scholar / GitHub / ChatGPT / Gemini，永久免费，无需配置" />
+  <meta property="og:description" content="校园网直连 Google Scholar / GitHub / ChatGPT，永久免费，无需配置" />
   <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' rx='24' fill='%23f97316'/%3E%3Ccircle cx='100' cy='84' r='36' fill='%23fff'/%3E%3Ccircle cx='100' cy='60' r='20' fill='%23fff'/%3E%3Ccircle cx='88' cy='76' r='6' fill='%23222'/%3E%3Ccircle cx='112' cy='76' r='6' fill='%23222'/%3E%3Cpath d='M84 104 Q100 124 116 104' stroke='%23222' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3Crect x='92' y='124' width='16' height='32' rx='8' fill='%23fff'/%3E%3Cline x1='20' y1='144' x2='72' y2='124' stroke='%23fff' stroke-width='6' stroke-linecap='round'/%3E%3Cline x1='180' y1='144' x2='128' y2='124' stroke='%23fff' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E" />
   <meta property="og:type" content="website" />
   <style>
@@ -1146,6 +1146,64 @@
       .tabbit-fab-icon{width:32px;height:32px;border-radius:8px;font-size:1rem}
       .tabbit-fab-text{font-size:.74rem;padding-right:28px}
     }
+    /* ===== 悬浮注册弹窗 ===== */
+    .float-popup{
+      display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+      z-index:99990;max-width:500px;width:calc(100% - 24px);
+      background:linear-gradient(135deg,#f59e0b,#f97316);
+      border-radius:16px;box-shadow:0 8px 40px rgba(245,158,11,.45),0 0 60px rgba(245,158,11,.15);
+      padding:18px 20px;animation:popupSlideUp .5s cubic-bezier(.34,1.56,.64,1);
+      cursor:pointer;
+    }
+    .float-popup.show{display:block}
+    @keyframes popupSlideUp{
+      from{opacity:0;transform:translateX(-50%) translateY(40px)}
+      to{opacity:1;transform:translateX(-50%) translateY(0)}
+    }
+    .float-popup-inner{
+      display:flex;align-items:center;gap:14px;
+    }
+    .float-popup-emoji{
+      font-size:2.2rem;flex-shrink:0;animation:popupPulse 1.8s ease-in-out infinite;
+    }
+    @keyframes popupPulse{
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.15)}
+    }
+    .float-popup-text{
+      flex:1;min-width:0;
+    }
+    .float-popup-text .popup-title{
+      font-size:1rem;font-weight:800;color:#fff;line-height:1.3;
+      text-shadow:0 1px 3px rgba(0,0,0,.2);
+    }
+    .float-popup-text .popup-sub{
+      font-size:.78rem;color:rgba(255,255,255,.85);margin-top:2px;
+      font-weight:500;
+    }
+    .float-popup-arrow{
+      font-size:1.4rem;color:#fff;flex-shrink:0;
+      animation:popupBounce .8s ease-in-out infinite alternate;
+    }
+    @keyframes popupBounce{
+      from{transform:translateX(0)}
+      to{transform:translateX(6px)}
+    }
+    .float-popup-close{
+      position:absolute;top:8px;right:12px;
+      background:rgba(255,255,255,.25);border:none;color:#fff;
+      width:26px;height:26px;border-radius:50%;font-size:.8rem;
+      cursor:pointer;display:flex;align-items:center;justify-content:center;
+      transition:all .15s;
+    }
+    .float-popup-close:hover{background:rgba(255,255,255,.4)}
+    @media(max-width:480px){
+      .float-popup{padding:14px 16px;bottom:12px;border-radius:14px}
+      .float-popup-emoji{font-size:1.8rem}
+      .float-popup-text .popup-title{font-size:.9rem}
+      .float-popup-text .popup-sub{font-size:.72rem}
+      .float-popup-arrow{font-size:1.2rem}
+    }
   </style>
 </head>
 <body>
@@ -1167,6 +1225,19 @@
   </a>
   <button class="tabbit-fab-close" onclick="dismissTabbitFab();event.stopPropagation()" title="关闭">✕</button>
 </div>
+
+<!-- ===== 悬浮注册弹窗 ===== -->
+<a href="https://web.tabbit-ai.com/invite/F5EB5A55" target="_blank" rel="noopener" class="float-popup" id="float-popup" onclick="dismissFloatPopup()">
+  <button class="float-popup-close" onclick="dismissFloatPopup();event.stopPropagation();event.preventDefault()" title="关闭">✕</button>
+  <div class="float-popup-inner">
+    <div class="float-popup-emoji">🎁</div>
+    <div class="float-popup-text">
+      <div class="popup-title">免费领取美团Tabbit AI浏览器Pro账号</div>
+      <div class="popup-sub">点击立即注册 · 写论文/读文献/自动化办公一步到位</div>
+    </div>
+    <div class="float-popup-arrow">→</div>
+  </div>
+</a>
 
 <script>
 // 微信环境检测
@@ -1196,6 +1267,25 @@ function dismissTabbitFab() {
   if (fab) fab.classList.remove('show');
   var today = new Date().toDateString();
   localStorage.setItem('tabbit-banner-dismissed', today);
+}
+
+// 悬浮注册弹窗
+(function(){
+  var dismissed = localStorage.getItem('float-popup-dismissed');
+  var today = new Date().toDateString();
+  if (dismissed !== today) {
+    setTimeout(function() {
+      var popup = document.getElementById('float-popup');
+      if (popup) popup.classList.add('show');
+    }, 3000);
+  }
+})();
+
+function dismissFloatPopup() {
+  var popup = document.getElementById('float-popup');
+  if (popup) popup.classList.remove('show');
+  var today = new Date().toDateString();
+  localStorage.setItem('float-popup-dismissed', today);
 }
 </script>
 
@@ -1228,12 +1318,12 @@ function dismissTabbitFab() {
           学生专享 · 校园网直连 · 不用花钱
         </div>
         <h1><span class="big-zero">0</span><br>告别付费上网</h1>
-        <div class="tagline">校园网直连 Google Scholar / GitHub / ChatGPT / Gemini</div>
+        <div class="tagline">校园网直连 Google Scholar / GitHub / ChatGPT</div>
         <!-- 痛点对比 -->
         <div class="pain-compare">
           <div class="pain-col old-col">
             <div class="pain-header old">❌ 以前的体验</div>
-            <div class="pain-item"><span class="pain-icon">🔌</span> 频繁断连，论文看一半掉线</div>
+            <div class="pain-item"><span class="pain-icon">🌍</span> 区域限制，ChatGPT等账号无法登陆</div>
             <div class="pain-item"><span class="pain-icon">🐌</span> 网速极慢，文献半天打不开</div>
             <div class="pain-item"><span class="pain-icon">🏫</span> 校园网下完全无法使用</div>
             <div class="pain-item"><span class="pain-icon">💰</span> 花钱买的服务，商家随时跑路</div>
@@ -1271,8 +1361,8 @@ function dismissTabbitFab() {
   <div class="container">
     <div class="section-header" style="margin-bottom:24px">
       <div class="section-label" style="color:#c4b5fd">🎬 视频教程</div>
-      <h2 class="section-title" style="color:#e0e7ff">白嫖美团Token — Top模型随心换、AI工具随手搓、Agent助手随时用 | Tabbit AI浏览器Pro账号</h2>
-      <p class="section-desc" style="color:#a5b4fc">3 分钟教你注册领取美团 AI 全自动浏览器 Pro 账号，写论文、读文献、自动化办公一步到位</p>
+      <h2 class="section-title" style="color:#e0e7ff">白嫖美团Token — Top模型随心换、AI工具随手搓、Agent助手随时用</h2>
+      <p class="section-desc" style="color:#a5b4fc">美团Tabbit AI浏览器Pro账号，写论文、读文献、自动化办公一步到位</p>
     </div>
     <div style="max-width:720px;margin:0 auto">
       <video controls preload="metadata" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='720' height='405' viewBox='0 0 720 405'%3E%3Crect width='720' height='405' fill='%231e1b4b'/%3E%3Ctext x='360' y='190' text-anchor='middle' font-size='48' fill='%23a78bfa'%3E🧠%3C/text%3E%3Ctext x='360' y='250' text-anchor='middle' font-size='20' fill='%23c4b5fd'%3ETabbit AI 浏览器教程%3C/text%3E%3C/svg%3E" style="width:100%;border-radius:14px;box-shadow:0 8px 40px rgba(67,56,202,.45)">
@@ -1281,7 +1371,7 @@ function dismissTabbitFab() {
       </video>
       <div style="text-align:center;margin-top:16px">
         <a href="https://web.tabbit-ai.com/invite/F5EB5A55" target="_blank" rel="noopener" class="btn" style="background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;font-weight:700;padding:14px 36px;font-size:1rem;border-radius:10px;text-decoration:none;box-shadow:0 4px 20px rgba(245,158,11,.35);display:inline-block">
-          🧠 免费注册 Tabbit Pro
+          🎁 免费领取福利Pro会员<br><small style="font-size:.75rem;opacity:.85">限量18个名额，领完即止</small>
         </a>
       </div>
     </div>
