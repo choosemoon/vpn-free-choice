@@ -104,8 +104,8 @@
     .hero-img{
       width:clamp(140px,18vw,220px);height:clamp(140px,18vw,220px);
       border-radius:50%;object-fit:cover;
-      border:3px solid rgba(251,146,60,.35);
-      box-shadow:0 0 40px rgba(251,146,60,.25),0 0 80px rgba(251,146,60,.12);
+      border:4px solid #fbbf24;
+      box-shadow:0 0 30px rgba(251,191,36,.35),0 0 60px rgba(251,191,36,.15),inset 0 0 20px rgba(251,191,36,.08);
       animation:float 4s ease-in-out infinite;
     }
     @keyframes float{
@@ -132,10 +132,35 @@
     .hero h1 .buddha-inline{
       display:inline-block;width:clamp(52px,8vw,88px);height:clamp(52px,8vw,88px);
       border-radius:50%;object-fit:cover;vertical-align:middle;
-      border:2px solid rgba(251,146,60,.4);
-      box-shadow:0 0 24px rgba(251,146,60,.2);
-      margin-left:10px;animation:float 4s ease-in-out infinite;
+      border:3px solid #fbbf24;
+      box-shadow:0 0 20px rgba(251,191,36,.3),0 0 40px rgba(251,191,36,.1);
+      margin-left:10px;animation:coin-toss 3s ease-in-out infinite;
     }
+    @keyframes coin-toss{
+      0%{transform:perspective(300px) rotateY(0deg) translateY(0)}
+      15%{transform:perspective(300px) rotateY(0deg) translateY(-18px)}
+      40%{transform:perspective(300px) rotateY(360deg) translateY(-18px)}
+      65%{transform:perspective(300px) rotateY(720deg) translateY(-6px)}
+      85%{transform:perspective(300px) rotateY(720deg) translateY(0)}
+      100%{transform:perspective(300px) rotateY(720deg) translateY(0)}
+    }
+    /* GitHub Star 浮动徽章 */
+    .star-badge{
+      display:inline-flex;align-items:center;gap:6px;
+      background:linear-gradient(135deg,#fbbf24,#f59e0b);
+      border:2px solid #fcd34d;border-radius:100px;
+      padding:5px 14px;font-size:.78rem;font-weight:700;
+      color:#78350f;vertical-align:middle;margin-left:6px;
+      animation:star-pop 3s ease-in-out infinite;
+      box-shadow:0 2px 12px rgba(251,191,36,.35);
+      text-decoration:none;cursor:pointer;white-space:nowrap;
+    }
+    @keyframes star-pop{
+      0%,55%{opacity:.7;transform:scale(.95)}
+      75%{opacity:1;transform:scale(1.08)}
+      85%,100%{opacity:1;transform:scale(1)}
+    }
+    .star-badge:hover{opacity:1;transform:scale(1.05);box-shadow:0 3px 16px rgba(251,191,36,.5)}
     .hero .tagline{
       font-size:clamp(1.1rem,3vw,1.5rem);font-weight:700;color:var(--hero-t);
       margin-bottom:14px;letter-spacing:-.02em;
@@ -816,7 +841,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           学术科研 · 游戏加速 · 零成本替代付费 VPN
         </div>
-        <h1><span class="big-zero">0</span><img src="img/buddha.jpg" alt="佛系上网" class="buddha-inline" loading="lazy" /></h1>
+        <h1><span class="big-zero">0</span><img src="img/buddha.jpg" alt="佛系上网" class="buddha-inline" loading="lazy" /><a href="https://github.com/choosemoon/vpn-free-choice" target="_blank" rel="noopener" class="star-badge">⭐ 觉得有用？给个 Star</a></h1>
         <div class="tagline">不花钱 · 不跑路 · 不懂技术也能3步搞定</div>
         <p style="max-width:540px;margin-left:auto;margin-right:auto;font-size:.95rem;line-height:1.8;color:var(--hero-m)">
           做科研要查<span style="color:#fbbf24;font-weight:600">国外文献</span>，但 Google Scholar 打不开？<br>
@@ -1821,7 +1846,7 @@
       showToast('请先勾选同意复选框');
       return;
     }
-    localStorage.setItem('agreedDisclaimer', 'true');
+    // 不持久化，每次访问都必须重新同意
     var lock = document.getElementById('nodes-lock');
     if (lock) lock.style.display = 'none';
     showToast('✅ 已解锁节点内容，现在可以获取免费节点了');
@@ -1831,34 +1856,61 @@
     }, 600);
   }
 
-  // checkbox 联动按钮状态
+  // checkbox 联动 + 3秒强制阅读倒计时
   document.addEventListener('DOMContentLoaded', function() {
     var check = document.getElementById('agree-check');
     var btn = document.getElementById('agree-btn');
     var hint = document.getElementById('agree-hint');
+    var countdownTimer = null;
+    var countdownSeconds = 3;
 
     if (check && btn) {
       check.addEventListener('change', function() {
         if (check.checked) {
-          btn.disabled = false;
-          btn.style.opacity = '1';
-          btn.style.cursor = 'pointer';
-          if (hint) hint.style.display = 'none';
-        } else {
+          // 启动3秒强制阅读倒计时
           btn.disabled = true;
           btn.style.opacity = '.5';
           btn.style.cursor = 'not-allowed';
-          if (hint) hint.style.display = '';
+          if (hint) {
+            hint.textContent = '请认真阅读声明内容，还有 ' + countdownSeconds + ' 秒即可确认';
+            hint.style.display = '';
+            hint.style.color = 'var(--accent)';
+            hint.style.fontWeight = '600';
+          }
+
+          var remaining = countdownSeconds;
+          btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>请等待 ' + remaining + ' 秒...';
+
+          countdownTimer = setInterval(function() {
+            remaining--;
+            if (hint) hint.textContent = '请认真阅读声明内容，还有 ' + remaining + ' 秒即可确认';
+
+            if (remaining <= 0) {
+              clearInterval(countdownTimer);
+              btn.disabled = false;
+              btn.style.opacity = '1';
+              btn.style.cursor = 'pointer';
+              btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>我已阅读并同意';
+              if (hint) { hint.textContent = ''; hint.style.display = 'none'; }
+            } else {
+              btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>请等待 ' + remaining + ' 秒...';
+            }
+          }, 1000);
+        } else {
+          // 取消勾选 → 重置倒计时
+          if (countdownTimer) { clearInterval(countdownTimer); countdownTimer = null; }
+          btn.disabled = true;
+          btn.style.opacity = '.5';
+          btn.style.cursor = 'not-allowed';
+          btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>我已阅读并同意';
+          if (hint) { hint.textContent = '请先勾选上方复选框，再点击确认'; hint.style.color = ''; hint.style.fontWeight = ''; hint.style.display = ''; }
         }
       });
     }
 
-    // 页面加载时检查是否已同意
-    var agreed = localStorage.getItem('agreedDisclaimer');
+    // 每次访问都必须显示锁定遮罩（不检查localStorage）
     var lock = document.getElementById('nodes-lock');
-    if (agreed === 'true' && lock) {
-      lock.style.display = 'none';
-    } else if (lock) {
+    if (lock) {
       lock.style.display = 'flex';
     }
   });
