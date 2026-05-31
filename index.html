@@ -161,6 +161,40 @@
       85%,100%{opacity:1;transform:scale(1)}
     }
     .star-badge:hover{opacity:1;transform:scale(1.05);box-shadow:0 3px 16px rgba(251,191,36,.5)}
+    /* Star 引导横幅 */
+    .star-guide-banner{
+      background:linear-gradient(135deg,rgba(251,191,36,.18),rgba(245,158,11,.1));
+      border:1.5px solid rgba(251,191,36,.4);
+      border-radius:16px;
+      padding:16px 20px;margin:0 auto 20px;
+      max-width:540px;text-align:center;
+      box-shadow:0 4px 20px rgba(251,191,36,.15);
+      backdrop-filter:blur(4px);
+    }
+    .star-guide-text{
+      font-size:.82rem;color:#fde68a;line-height:1.75;margin-bottom:12px;
+    }
+    .star-guide-text strong{color:#fbbf24;font-weight:700}
+    .star-guide-text a{color:#fcd34d;text-decoration:underline}
+    .star-guide-actions{
+      display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
+    }
+    .btn-star,.btn-share{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:8px 16px;border-radius:100px;font-size:.78rem;font-weight:700;
+      cursor:pointer;transition:.2s;white-space:nowrap;
+    }
+    .btn-star{
+      background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#78350f;
+      border:2px solid #fcd34d;box-shadow:0 2px 12px rgba(251,191,36,.35);
+      text-decoration:none;
+    }
+    .btn-star:hover{transform:scale(1.05);box-shadow:0 3px 16px rgba(251,191,36,.55)}
+    .btn-share{
+      background:rgba(255,255,255,.1);color:#e2e8f0;
+      border:1.5px solid rgba(255,255,255,.25);
+    }
+    .btn-share:hover{background:rgba(255,255,255,.18);transform:scale(1.05)}
     .hero .tagline{
       font-size:clamp(1.1rem,3vw,1.5rem);font-weight:700;color:var(--hero-t);
       margin-bottom:14px;letter-spacing:-.02em;
@@ -841,7 +875,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           学术科研 · 游戏加速 · 零成本替代付费 VPN
         </div>
-        <h1><span class="big-zero">0</span><img src="img/buddha.jpg" alt="佛系上网" class="buddha-inline" loading="lazy" /><a href="https://github.com/choosemoon/vpn-free-choice" target="_blank" rel="noopener" class="star-badge">⭐ 觉得有用？给个 Star</a></h1>
+        <h1><span class="big-zero">0</span><img src="img/buddha.jpg" alt="佛系上网" class="buddha-inline" loading="lazy" /><a href="https://github.com/choosemoon/vpn-free-choice" target="_blank" rel="noopener" class="star-badge">⭐ Star 支持</a></h1>
         <div class="tagline">不花钱 · 不跑路 · 不懂技术也能3步搞定</div>
         <p style="max-width:540px;margin-left:auto;margin-right:auto;font-size:.95rem;line-height:1.8;color:var(--hero-m)">
           做科研要查<span style="color:#fbbf24;font-weight:600">国外文献</span>，但 Google Scholar 打不开？<br>
@@ -849,6 +883,16 @@
           技术不强不会自己搭，只想<span style="color:#34d399;font-weight:600">稳定、免费、马上能用</span>？<br>
           <span style="color:#fbbf24;font-weight:700;font-size:1rem">↓ 往下看，3分钟解决所有问题 ↓</span>
         </p>
+
+        <div class="star-guide-banner">
+          <div class="star-guide-text">
+            如果本页帮你解决了访问 <strong>GitHub、Google Scholar</strong> 等学习前沿大模型和学术知识的阻碍，请使用已部署好的学术网络 <a href="https://github.com/choosemoon/vpn-free-choice" target="_blank" rel="noopener">创建 GitHub 账号</a>，点击右上角 ⭐️ <strong>Star</strong> 支持项目，也欢迎在评论区交流
+          </div>
+          <div class="star-guide-actions">
+            <a href="https://github.com/choosemoon/vpn-free-choice" target="_blank" rel="noopener" class="btn-star">⭐ 去 GitHub 点 Star</a>
+            <button class="btn-share" onclick="copyShareText()">📤 一键转发给朋友</button>
+          </div>
+        </div>
 
         <div class="hero-actions">
           <a href="#quickstart" class="btn btn-primary">
@@ -1946,6 +1990,27 @@
     toast.classList.add('show');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+  }
+
+  // 一键转发：复制分享文案到剪贴板
+  function copyShareText() {
+    var text = '我发现了一个超实用的免费学术上网工具，专门给不会技术的学生和科研党设计！\n\n✅ 零成本替代付费 VPN，一年省下 ¥200~500\n✅ 不用写代码，3 分钟搞定 GitHub、Google Scholar 访问\n✅ 稳定不跑路，亲测可用\n\n如果你也需要查国外文献、逛 GitHub 学前沿大模型技术，推荐试试～\n🔗 https://choosemoon.github.io/vpn-free-choice/';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        showToast('分享文案已复制，快去转发给朋友吧！');
+      }).catch(function() {
+        fallbackCopyShare(text);
+      });
+    } else {
+      fallbackCopyShare(text);
+    }
+  }
+  function fallbackCopyShare(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); showToast('分享文案已复制，快去转发给朋友吧！'); } catch (e) { alert('复制失败，请手动复制'); }
+    document.body.removeChild(ta);
   }
 
   function toggleFab() {
