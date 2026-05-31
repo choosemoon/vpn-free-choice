@@ -316,7 +316,7 @@
     .btn svg{width:18px;height:18px;flex-shrink:0}
 
     /* ===== Container ===== */
-    .container{max-width:1040px;margin:0 auto;padding:0 24px}
+    .container{max-width:1040px;margin:0 auto;padding:0 24px;overflow-x:hidden}
 
     /* ===== Section ===== */
     .section{padding:80px 0}
@@ -747,7 +747,7 @@
       background:var(--surface);border:1px solid var(--border);
       border-radius:var(--radius-l);padding:28px;
       display:flex;flex-direction:column;gap:16px;
-      transition:all .2s;
+      transition:all .2s;min-width:0;overflow-wrap:break-word;word-break:break-word;
     }
     .contact-card:hover{border-color:var(--border-h);box-shadow:var(--shadow-md)}
     .contact-card-icon{
@@ -762,7 +762,7 @@
     .contact-card .contact-highlight{
       display:inline-block;background:var(--accent-l);color:var(--accent);
       padding:4px 12px;border-radius:5px;font-weight:600;font-size:.875rem;
-      margin-top:4px;
+      margin-top:4px;max-width:100%;overflow-wrap:break-word;
     }
     .contact-card .contact-hint{
       font-size:.78rem;color:var(--muted);margin-top:2px;
@@ -842,7 +842,7 @@
     }
     .footer-left{font-size:.85rem;color:var(--text-2)}
     .footer-left strong{color:var(--text)}
-    .footer-right{display:flex;gap:16px;align-items:center}
+    .footer-right{display:flex;gap:16px;align-items:center;flex-wrap:wrap;row-gap:8px}
     .footer-right a{font-size:.85rem;color:var(--muted)}
     .footer-right a:hover{color:var(--text)}
     .admin-link{font-size:.8rem;color:#d4d4d8!important}
@@ -926,6 +926,8 @@
       .container{padding:0 20px}
       .nav-inner{padding:0 16px}
       .footer-inner{flex-direction:column;text-align:center;gap:12px}
+      .footer-right{justify-content:center}
+      .fab-item{font-size:.8rem;padding:7px 14px}
     }
 
     /* Phone */
@@ -940,6 +942,7 @@
       .tabs{flex-wrap:wrap;width:100%;gap:4px}
       .tab-btn{padding:7px 14px;font-size:.82rem}
       .contact-grid{grid-template-columns:1fr}
+      .contact-grid-3{grid-template-columns:1fr}
       .value-grid{grid-template-columns:1fr}
       .team-grid{grid-template-columns:1fr}
       .hero-actions{grid-template-columns:1fr;gap:10px;max-width:100%}
@@ -957,6 +960,8 @@
       .agree-label{font-size:.8rem}
       .fab-container{bottom:16px;right:16px}
       .footer-left,.footer-right a{font-size:.8rem}
+      .footer-right{gap:10px;justify-content:center}
+      .footer-inner{gap:8px}
       .star-guide-actions{flex-direction:column;align-items:stretch}
       .star-guide-actions .btn-star,.star-guide-actions .btn-share{width:100%;justify-content:center}
       .version-bar{padding:10px 14px;font-size:.82rem}
@@ -992,6 +997,9 @@
       .dl-warning{padding:12px 12px;font-size:.78rem}
       .version-bar{padding:8px 12px;font-size:.78rem}
       .hero-img{width:110px;height:110px}
+      .footer-right{gap:6px}
+      .footer-right a{font-size:.72rem}
+      .contact-card .copy-btn{font-size:.78rem;padding:8px 10px}
     }
   </style>
 </head>
