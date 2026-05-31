@@ -273,72 +273,6 @@
       .proof-badge{padding:6px 12px;font-size:.76rem}
     }
 
-    /* ===== 吐槽墙 ===== */
-    .rant-wall{margin-top:10px}
-    .rant-wall-title{
-      text-align:center;font-size:.82rem;font-weight:700;color:var(--hero-m);
-      letter-spacing:.06em;margin-bottom:18px;text-transform:uppercase;
-    }
-    .rant-grid{
-      display:grid;grid-template-columns:repeat(2,1fr);gap:12px;
-      max-width:540px;margin:0 auto;
-    }
-    .rant-card{
-      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);
-      border-radius:14px;padding:18px 16px;position:relative;
-      transition:all .2s;
-    }
-    .rant-card:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.15)}
-    .rant-card .rant-persona{
-      display:flex;align-items:center;gap:8px;margin-bottom:10px;
-    }
-    .rant-card .rant-avatar{
-      width:32px;height:32px;border-radius:50%;flex-shrink:0;
-      display:flex;align-items:center;justify-content:center;
-      font-size:.85rem;font-weight:700;
-    }
-    .rant-card .rant-name{
-      font-size:.82rem;font-weight:600;color:#e2e8f0;
-    }
-    .rant-card .rant-major{
-      font-size:.68rem;color:var(--hero-m);margin-top:1px;
-    }
-    .rant-card .rant-quote{
-      font-size:.8rem;color:#cbd5e1;line-height:1.65;
-      position:relative;padding-left:16px;
-      border-left:2px solid rgba(251,191,36,.3);
-      text-align:left;
-    }
-    .rant-card .rant-tag{
-      display:inline-block;font-size:.68rem;padding:2px 8px;border-radius:100px;
-      margin-top:10px;
-      background:rgba(251,191,36,.12);color:#fbbf24;
-    }
-    .rant-card .rant-tag.angry{background:rgba(239,68,68,.12);color:#f87171}
-    .rant-card .rant-tag.sad{background:rgba(99,102,241,.12);color:#a5b4fc}
-    .rant-bridge{
-      text-align:center;margin-top:20px;color:var(--hero-m);font-size:.85rem;
-      display:flex;align-items:center;gap:8px;justify-content:center;
-      flex-wrap:wrap;
-    }
-    .rant-bridge .rant-line{width:40px;height:1px;background:rgba(255,255,255,.15)}
-    .rant-bridge strong{color:#fde68a}
-
-    @media(max-width:768px){
-      .rant-grid{grid-template-columns:repeat(2,1fr);max-width:100%;gap:10px}
-      .rant-card{padding:14px 12px}
-      .rant-card .rant-quote{font-size:.76rem}
-    }
-    @media(max-width:640px){
-      .rant-grid{grid-template-columns:1fr;gap:10px}
-      .rant-card{padding:14px}
-      .rant-bridge{font-size:.8rem}
-    }
-    @media(max-width:374px){
-      .rant-card{padding:12px}
-      .rant-card .rant-quote{font-size:.74rem}
-    }
-
     .btn-tertiary{
       background:rgba(255,255,255,.06);color:#e2e8f0;
       border:1px solid rgba(255,255,255,.12);
@@ -1294,7 +1228,7 @@ function dismissTabbitFab() {
           学生专享 · 校园网直连 · 不用花钱
         </div>
         <h1><span class="big-zero">0</span><br>告别付费上网</h1>
-        <div class="tagline">Karing 客户端 + 免费节点，校园网直连 Google Scholar / GitHub / ChatGPT / Gemini</div>
+        <div class="tagline">校园网直连 Google Scholar / GitHub / ChatGPT / Gemini</div>
         <!-- 痛点对比 -->
         <div class="pain-compare">
           <div class="pain-col old-col">
@@ -1332,61 +1266,23 @@ function dismissTabbitFab() {
   </div>
 </section>
 
-<!-- ===== 吐槽墙：你踩过的坑，我们都经历过 ===== -->
-<section class="hero" style="padding:0 0 56px 0">
+<!-- ===== Tabbit AI 浏览器视频教程 ===== -->
+<section class="section" id="tabbit-video" style="padding:28px 0 48px;background:linear-gradient(180deg,#0f0a1e 0%,#1e1b4b 50%,#0f0a1e 100%)">
   <div class="container">
-    <div class="rant-wall">
-      <div class="rant-wall-title">💬 文科生 & 商科生 · 真实吐槽</div>
-      <div class="rant-grid">
-        <div class="rant-card">
-          <div class="rant-persona">
-            <div class="rant-avatar" style="background:linear-gradient(135deg,#f97316,#fb923c);color:#fff">陈</div>
-            <div>
-              <div class="rant-name">中文系 小陈</div>
-              <div class="rant-major">大三 · 准备保研材料</div>
-            </div>
-          </div>
-          <div class="rant-quote">花了几十块买了三个月套餐，结果用了一个多月线路全挂。发消息问客服，三天才回一句"在修"，后来直接不回了。钱不多，但气不过。</div>
-          <span class="rant-tag angry">💸 跑路+失联</span>
-        </div>
-        <div class="rant-card">
-          <div class="rant-persona">
-            <div class="rant-avatar" style="background:linear-gradient(135deg,#06b6d4,#22d3ee);color:#fff">刘</div>
-            <div>
-              <div class="rant-name">市场营销 小刘</div>
-              <div class="rant-major">研一 · 写开题报告</div>
-            </div>
-          </div>
-          <div class="rant-quote">看教程折腾了一下午才配好，结果在宿舍校园网下根本连不上。同学说最近查得严，好多节点都废了，校园网特别容易被封。</div>
-          <span class="rant-tag">🏫 校园网用不了</span>
-        </div>
-        <div class="rant-card">
-          <div class="rant-persona">
-            <div class="rant-avatar" style="background:linear-gradient(135deg,#10b981,#34d399);color:#fff">鹏</div>
-            <div>
-              <div class="rant-name">历史系 大鹏</div>
-              <div class="rant-major">博一 · 做文献综述</div>
-            </div>
-          </div>
-          <div class="rant-quote">实在搞不懂那些配置，干脆买了"科研上网流量包"。结果打开 Google Scholar 加载一篇论文要等五分钟，翻一页又卡半分钟，还不如去图书馆。</div>
-          <span class="rant-tag angry">🐌 慢到崩溃</span>
-        </div>
-        <div class="rant-card">
-          <div class="rant-persona">
-            <div class="rant-avatar" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff">思</div>
-            <div>
-              <div class="rant-name">社会学 思思</div>
-              <div class="rant-major">研一 · 搞混合方法</div>
-            </div>
-          </div>
-          <div class="rant-quote">同学都在用 ChatGPT、Claude 读文献、润色论文，我只能干瞪眼。明明有更好的 AI 模型，就是打不开，文献效率比别人差一大截。</div>
-          <span class="rant-tag sad">🤖 AI 用不了</span>
-        </div>
-      </div>
-      <div class="rant-bridge">
-        <span class="rant-line"></span>
-        上面这些坑，<strong>我们全都帮你填平了</strong> ——
-        <span class="rant-line"></span>
+    <div class="section-header" style="margin-bottom:24px">
+      <div class="section-label" style="color:#c4b5fd">🎬 视频教程</div>
+      <h2 class="section-title" style="color:#e0e7ff">白嫖美团Token — Top模型随心换、AI工具随手搓、Agent助手随时用 | Tabbit AI浏览器Pro账号</h2>
+      <p class="section-desc" style="color:#a5b4fc">3 分钟教你注册领取美团 AI 全自动浏览器 Pro 账号，写论文、读文献、自动化办公一步到位</p>
+    </div>
+    <div style="max-width:720px;margin:0 auto">
+      <video controls preload="metadata" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='720' height='405' viewBox='0 0 720 405'%3E%3Crect width='720' height='405' fill='%231e1b4b'/%3E%3Ctext x='360' y='190' text-anchor='middle' font-size='48' fill='%23a78bfa'%3E🧠%3C/text%3E%3Ctext x='360' y='250' text-anchor='middle' font-size='20' fill='%23c4b5fd'%3ETabbit AI 浏览器教程%3C/text%3E%3C/svg%3E" style="width:100%;border-radius:14px;box-shadow:0 8px 40px rgba(67,56,202,.45)">
+        <source src="tabbit-tutorial.mp4" type="video/mp4">
+        您的浏览器不支持视频播放
+      </video>
+      <div style="text-align:center;margin-top:16px">
+        <a href="https://web.tabbit-ai.com/invite/F5EB5A55" target="_blank" rel="noopener" class="btn" style="background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;font-weight:700;padding:14px 36px;font-size:1rem;border-radius:10px;text-decoration:none;box-shadow:0 4px 20px rgba(245,158,11,.35);display:inline-block">
+          🧠 免费注册 Tabbit Pro
+        </a>
       </div>
     </div>
   </div>
