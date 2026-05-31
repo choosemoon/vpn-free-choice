@@ -1,6 +1,6 @@
-# 🌐 VPN Free Choice
+# 🌐 学术公益上网 · Academic Free Choice
 
-> **学生的第一台免费 VPN · 3 分钟搞定学术上网**
+> **学生的第一台免费学术上网工具 · 3 分钟搞定学术访问**
 
 [![GitHub Pages](https://img.shields.io/badge/在线体验-点击访问-brightgreen?style=flat-square)](https://choosemoon.github.io/vpn-free-choice/)
 [![Karing Version](https://img.shields.io/badge/Karing-v1.2.19.2209-orange?style=flat-square)](https://github.com/KaringX/karing/releases)
@@ -11,12 +11,12 @@
 
 ## 🎯 这是什么？
 
-**VPN Free Choice** 是一个专为**国内学生**设计的**完全免费**上网解决方案导航站。
+**学术公益上网** 是一个专为**国内学生**设计的**完全免费**上网解决方案导航站。
 
 | ❌ 你的痛点 | ✅ 我们的方案 |
 |------------|------------|
 | Google Scholar 打不开，论文查不了 | 免费节点，一键导入 |
-| 付费 VPN 太贵，学生党伤不起 | **永久免费**，不收一分钱 |
+| 付费工具太贵，学生党伤不起 | **永久免费**，不收一分钱 |
 | 担心商家跑路，钱打了水漂 | 开源透明，节点可自查 |
 | 技术不强，不会自己搭 | **3 分钟视频教程**，无脑跟着做 |
 
@@ -70,7 +70,7 @@
 
 - **前端**：纯 HTML + CSS + JavaScript（无框架，加载飞快）
 - **部署**：GitHub Pages
-- **客户端**：[Karing](https://github.com/KaringX/karing)（开源 VPN 客户端）
+- **客户端**：[Karing](https://github.com/KaringX/karing)（开源网络客户端）
 - **节点订阅**：支持 ss:// 和 ssr:// 协议
 
 ---
@@ -80,7 +80,7 @@
 <details>
 <summary><strong>Q: 真的完全免费吗？</strong></summary>
 <br>
-A: 是的！本项目的所有节点和教程均免费提供，不收取任何费用。我们反对任何形式的付费 VPN 捆绑销售。
+A: 是的！本项目的所有节点和教程均免费提供，不收取任何费用。我们反对任何形式的付费工具捆绑销售。
 </details>
 
 <details>
@@ -130,13 +130,13 @@ A: Windows、macOS（Intel + Apple Silicon）、Android、Linux 均支持。
 
 ### 🎯 What is this?
 
-**VPN Free Choice** is a **100% FREE** VPN solution designed for **students in China** who need to access international academic resources.
+**Academic Free Choice** is a **100% FREE** network access solution designed for **students in China** who need to access international academic resources.
 
 | ❌ The Problem | ✅ Our Solution |
 |------------|------------|
 | Can't open Google Scholar | Free nodes, one-click import |
-| Paid VPNs are too expensive | **Permanent FREE** |
-| Afraid of VPN services running away | Open & transparent |
+| Paid tools are too expensive | **Permanent FREE** |
+| Afraid of services running away | Open & transparent |
 | Not tech-savvy? | **3-min video tutorial** |
 
 **No Payment · No Tech Skills Required · Download & Use**
