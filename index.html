@@ -1146,6 +1146,69 @@
       .tabbit-fab-icon{width:32px;height:32px;border-radius:8px;font-size:1rem}
       .tabbit-fab-text{font-size:.74rem;padding-right:28px}
     }
+    /* ===== Tabbit 注册 iframe 内嵌面板 ===== */
+    .tabbit-register-overlay{
+      display:none;position:fixed;inset:0;z-index:99999;
+      background:rgba(0,0,0,.75);backdrop-filter:blur(6px);
+      align-items:center;justify-content:center;
+      padding:16px;
+    }
+    .tabbit-register-overlay.show{display:flex}
+    .tabbit-register-panel{
+      background:linear-gradient(180deg,#1e1b4b 0%,#0f0a1e 100%);
+      border-radius:18px;width:100%;max-width:440px;max-height:90vh;
+      display:flex;flex-direction:column;
+      box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 0 1px rgba(245,158,11,.2);
+      animation:modalIn .35s cubic-bezier(.34,1.56,.64,1);
+      overflow:hidden;
+    }
+    @keyframes modalIn{
+      from{transform:scale(.9) translateY(30px);opacity:0}
+      to{transform:scale(1) translateY(0);opacity:1}
+    }
+    .tabbit-register-header{
+      padding:18px 20px 12px;display:flex;align-items:center;justify-content:space-between;
+      flex-shrink:0;
+    }
+    .tabbit-register-header h3{
+      margin:0;font-size:1.05rem;color:#e0e7ff;font-weight:700;
+    }
+    .tabbit-register-header .tabbit-register-close{
+      width:32px;height:32px;border-radius:50%;border:none;
+      background:rgba(255,255,255,.1);color:#a5b4fc;font-size:1rem;
+      cursor:pointer;display:flex;align-items:center;justify-content:center;
+      transition:all .15s;
+    }
+    .tabbit-register-header .tabbit-register-close:hover{
+      background:rgba(255,255,255,.2);color:#fff;
+    }
+    .tabbit-register-hint{
+      padding:0 20px 14px;font-size:.8rem;color:#a5b4fc;line-height:1.5;
+      flex-shrink:0;
+    }
+    .tabbit-register-iframe-wrap{
+      flex:1;min-height:520px;position:relative;
+    }
+    .tabbit-register-iframe-wrap iframe{
+      position:absolute;inset:0;width:100%;height:100%;
+      border:none;border-radius:0 0 18px 18px;
+    }
+    .tabbit-register-after{
+      padding:14px 20px;text-align:center;font-size:.8rem;color:#c4b5fd;
+      border-top:1px solid rgba(255,255,255,.06);flex-shrink:0;
+    }
+    @media(max-width:640px){
+      .tabbit-register-panel{max-width:100%;border-radius:14px;max-height:95vh}
+      .tabbit-register-header{padding:14px 16px 10px}
+      .tabbit-register-header h3{font-size:.95rem}
+      .tabbit-register-hint{padding:0 16px 10px;font-size:.76rem}
+      .tabbit-register-iframe-wrap{min-height:480px}
+      .tabbit-register-after{padding:10px 16px;font-size:.74rem}
+    }
+    @media(max-width:374px){
+      .tabbit-register-panel{border-radius:12px}
+      .tabbit-register-iframe-wrap{min-height:440px}
+    }
   </style>
 </head>
 <body>
@@ -1158,7 +1221,7 @@
 
 <!-- ===== Tabbit 悬浮岛 FAB ===== -->
 <div class="tabbit-fab" id="tabbit-fab">
-  <a href="https://web.tabbit-ai.com/invite/F5EB5A55" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:12px;padding:14px 16px" onclick="dismissTabbitFab()">
+  <a href="javascript:void(0)" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:12px;padding:14px 16px" onclick="dismissTabbitFab();openTabbitRegister()">
     <div class="tabbit-fab-icon">🧠</div>
     <div class="tabbit-fab-text">
       <span class="fab-highlight">白嫖美团Token</span>
@@ -1280,7 +1343,7 @@ function dismissTabbitFab() {
         您的浏览器不支持视频播放
       </video>
       <div style="text-align:center;margin-top:16px">
-        <a href="https://web.tabbit-ai.com/invite/F5EB5A55" target="_blank" rel="noopener" class="btn" style="background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;font-weight:700;padding:14px 36px;font-size:1rem;border-radius:10px;text-decoration:none;box-shadow:0 4px 20px rgba(245,158,11,.35);display:inline-block">
+        <a href="javascript:void(0)" onclick="openTabbitRegister()" class="btn" style="background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;font-weight:700;padding:14px 36px;font-size:1rem;border-radius:10px;text-decoration:none;box-shadow:0 4px 20px rgba(245,158,11,.35);display:inline-block;cursor:pointer">
           🧠 免费注册 Tabbit Pro
         </a>
       </div>
@@ -1453,7 +1516,7 @@ function dismissTabbitFab() {
             </p>
           </div>
           <div class="step-actions">
-            <a href="https://web.tabbit-ai.com/invite/F5EB5A55" target="_blank" rel="noopener" class="btn" style="background:#fef08a;color:#4c1d95;border:none;font-weight:700;padding:12px 24px;font-size:.9rem;box-shadow:0 2px 12px rgba(254,240,138,.25);text-decoration:none;white-space:nowrap">
+            <a href="javascript:void(0)" onclick="openTabbitRegister()" class="btn" style="background:#fef08a;color:#4c1d95;border:none;font-weight:700;padding:12px 24px;font-size:.9rem;box-shadow:0 2px 12px rgba(254,240,138,.25);text-decoration:none;white-space:nowrap;cursor:pointer">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               免费领取 Pro 账号
             </a>
@@ -2521,7 +2584,48 @@ function dismissTabbitFab() {
       link.style.display = 'none';
     }
   }
+
+// ===== Tabbit 注册面板 =====
+var tabbitIframeLoaded = false;
+function openTabbitRegister() {
+  var overlay = document.getElementById('tabbit-register-overlay');
+  var iframe = document.getElementById('tabbit-register-iframe');
+  if (!overlay) return;
+  overlay.classList.add('show');
+  document.body.style.overflow = 'hidden';
+  if (!tabbitIframeLoaded && iframe) {
+    iframe.src = 'https://web.tabbit-ai.com/invite/F5EB5A55';
+    tabbitIframeLoaded = true;
+  }
+}
+function closeTabbitRegister(e) {
+  if (e && e.target !== document.getElementById('tabbit-register-overlay')) return;
+  var overlay = document.getElementById('tabbit-register-overlay');
+  if (overlay) overlay.classList.remove('show');
+  document.body.style.overflow = '';
+}
+
 </script>
+
+<!-- ===== Tabbit 注册 iframe 内嵌面板 ===== -->
+<div class="tabbit-register-overlay" id="tabbit-register-overlay" onclick="closeTabbitRegister(event)">
+  <div class="tabbit-register-panel" onclick="event.stopPropagation()">
+    <div class="tabbit-register-header">
+      <h3>🧠 注册 Tabbit Pro 账号</h3>
+      <button class="tabbit-register-close" onclick="closeTabbitRegister()" title="关闭">✕</button>
+    </div>
+    <div class="tabbit-register-hint">
+      📱 输入手机号 → 获取验证码 → 注册即领 Pro 账号<br/>
+      <span style="color:#fbbf24">注册成功后将自动引导下载</span>
+    </div>
+    <div class="tabbit-register-iframe-wrap">
+      <iframe id="tabbit-register-iframe" src="about:blank" allow="clipboard-write" loading="lazy" title="Tabbit 注册"></iframe>
+    </div>
+    <div class="tabbit-register-after">
+      💡 注册遇到问题？<a href="https://web.tabbit-ai.com/invite/F5EB5A55" target="_blank" rel="noopener" style="color:#fbbf24">点击这里在新窗口打开</a>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
