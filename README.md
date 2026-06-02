@@ -27,7 +27,7 @@
 ## 🚀 快速开始（只需 3 步）
 
 ### 第一步：注册领取 Pro 会员（手机端即可）
-👉 [免费领取 AI 全自动浏览器 Pro 账号](https://web.tabbit-ai.com/invite/F5EB5A55)
+👉 [免费领取 AI 全自动浏览器 Pro 账号](https://web.tabbit-ai.com/activity/study-invite/F5EB5A55)
 - 限量 18 个名额，领完即止
 - 不用写代码，AI 自动帮你操作浏览器
 
